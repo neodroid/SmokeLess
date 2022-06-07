@@ -58,6 +58,11 @@
 		CB6832E3284F556000366004 /* SmokeLess */ = {
 			isa = PBXGroup;
 			children = (
+				CB6832FB284F5D3300366004 /* Model */,
+				CB6832FC284F5D3F00366004 /* View */,
+				CB6832FD284F5D4400366004 /* ViewModel */,
+				CB6832FE284F5D4900366004 /* Controller */,
+				CB6832FF284F5D4E00366004 /* Utils */,
 				CB6832E4284F556000366004 /* AppDelegate.swift */,
 				CB6832E6284F556000366004 /* SceneDelegate.swift */,
 				CB6832E8284F556000366004 /* ViewController.swift */,
@@ -68,6 +73,41 @@
 				CB6832ED284F556000366004 /* SmokeLess.xcdatamodeld */,
 			);
 			path = SmokeLess;
+			sourceTree = "<group>";
+		};
+		CB6832FB284F5D3300366004 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CB6832FC284F5D3F00366004 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CB6832FD284F5D4400366004 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CB6832FE284F5D4900366004 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CB6832FF284F5D4E00366004 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

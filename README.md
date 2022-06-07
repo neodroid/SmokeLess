@@ -40,3 +40,21 @@ Description harus bisa mendeskripsikan apa yang dikerjakan. Jika ada beberapa ha
 - Gunakan kata imperative, present tense: "change" bukan "changed" atau "changes"
 - Gunakan huruf kecil di semua description. Jangan berikan huruf besar di depan kalimat
 - Jangan tambahkan titik di akhir description
+
+### 2. Branch Naming Rules
+> **IMPORTANT:**  
+> - Agar Terintegrasi dengan JIRA maka gunakan format branch seperti contoh dibawah
+> - Jika ingin menyelesaikan lebih dari 1 backlog di jira bisa dengan contoh urutan kedua dibawah
+> - Gunakan lowercase dan ubah spasi backlog menjadi dash / '-'
+
+- SST-xx-lorem-ipsum-dolor-amit
+- SST-xx-SST-yy-SST-zz-lorem-ipsum
+
+### 3. Pull Request Title Naming Rules
+> **IMPORTANT:**  
+> - Agar Terintegrasi dengan JIRA maka gunakan format penamaan pull request seperti contoh dibawah
+> - Jika ingin menyelesaikan lebih dari 1 backlog di jira bisa dengan contoh urutan kedua dibawah
+> - Gunakan Squash & Merge dan mengganti commit sesuai aturan conventional commit pada poin #3 di README
+
+- SST-xx "lorem ipsum"
+- SST-xx SST-yy SST-zz "lorem-ipsum"

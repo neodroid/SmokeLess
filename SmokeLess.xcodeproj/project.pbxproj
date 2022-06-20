@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A60E0DF28606BA000505B9D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E0DE28606BA000505B9D /* Extension.swift */; };
 		CB6832E5284F556000366004 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E4284F556000366004 /* AppDelegate.swift */; };
 		CB6832E7284F556000366004 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E6284F556000366004 /* SceneDelegate.swift */; };
 		CB6832E9284F556000366004 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E8284F556000366004 /* ViewController.swift */; };
-		CB6832EC284F556000366004 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB6832EA284F556000366004 /* Main.storyboard */; };
 		CB6832EF284F556000366004 /* SmokeLess.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CB6832ED284F556000366004 /* SmokeLess.xcdatamodeld */; };
 		CB6832F1284F556200366004 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB6832F0284F556200366004 /* Assets.xcassets */; };
 		CB6832F4284F556200366004 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB6832F2284F556200366004 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6A60E0DE28606BA000505B9D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = SOURCE_ROOT; };
 		CB6832E1284F556000366004 /* SmokeLess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmokeLess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6832E4284F556000366004 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB6832E6284F556000366004 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CB6832E8284F556000366004 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CB6832EB284F556000366004 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CB6832EE284F556000366004 /* SmokeLess.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SmokeLess.xcdatamodel; sourceTree = "<group>"; };
 		CB6832F0284F556200366004 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB6832F3284F556200366004 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -65,7 +65,6 @@
 				CB6832E4284F556000366004 /* AppDelegate.swift */,
 				CB6832E6284F556000366004 /* SceneDelegate.swift */,
 				CB6832E8284F556000366004 /* ViewController.swift */,
-				CB6832EA284F556000366004 /* Main.storyboard */,
 				CB6832F0284F556200366004 /* Assets.xcassets */,
 				CB6832F2284F556200366004 /* LaunchScreen.storyboard */,
 				CB6832F5284F556200366004 /* Info.plist */,
@@ -98,6 +97,7 @@
 		CB6832FF284F5D4E00366004 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				6A60E0DE28606BA000505B9D /* Extension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -162,7 +162,6 @@
 			files = (
 				CB6832F4284F556200366004 /* LaunchScreen.storyboard in Resources */,
 				CB6832F1284F556200366004 /* Assets.xcassets in Resources */,
-				CB6832EC284F556000366004 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A60E0DF28606BA000505B9D /* Extension.swift in Sources */,
 				CB6832EF284F556000366004 /* SmokeLess.xcdatamodeld in Sources */,
 				CB6832E9284F556000366004 /* ViewController.swift in Sources */,
 				CB6832E5284F556000366004 /* AppDelegate.swift in Sources */,
@@ -183,14 +183,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CB6832EA284F556000366004 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CB6832EB284F556000366004 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CB6832F2284F556200366004 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -328,7 +320,6 @@
 				INFOPLIST_FILE = SmokeLess/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -356,7 +347,6 @@
 				INFOPLIST_FILE = SmokeLess/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6A60E0DF28606BA000505B9D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E0DE28606BA000505B9D /* Extension.swift */; };
+		C43DC15F286061C700F5F439 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC15E286061C700F5F439 /* StatisticViewController.swift */; };
 		CB6832E5284F556000366004 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E4284F556000366004 /* AppDelegate.swift */; };
 		CB6832E7284F556000366004 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E6284F556000366004 /* SceneDelegate.swift */; };
 		CB6832E9284F556000366004 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E8284F556000366004 /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		6A60E0DE28606BA000505B9D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = SOURCE_ROOT; };
+		C43DC15E286061C700F5F439 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		CB6832E1284F556000366004 /* SmokeLess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmokeLess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6832E4284F556000366004 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB6832E6284F556000366004 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C43DC15D286061B500F5F439 /* Statistic */ = {
+			isa = PBXGroup;
+			children = (
+				C43DC15E286061C700F5F439 /* StatisticViewController.swift */,
+			);
+			path = Statistic;
+			sourceTree = "<group>";
+		};
 		CB6832D8284F556000366004 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +100,7 @@
 		CB6832FE284F5D4900366004 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C43DC15D286061B500F5F439 /* Statistic */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -176,6 +187,7 @@
 				CB6832EF284F556000366004 /* SmokeLess.xcdatamodeld in Sources */,
 				CB6832E9284F556000366004 /* ViewController.swift in Sources */,
 				CB6832E5284F556000366004 /* AppDelegate.swift in Sources */,
+				C43DC15F286061C700F5F439 /* StatisticViewController.swift in Sources */,
 				CB6832E7284F556000366004 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

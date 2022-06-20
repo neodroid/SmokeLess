@@ -60,7 +60,6 @@
 			children = (
 				CB6832FB284F5D3300366004 /* Model */,
 				CB6832FC284F5D3F00366004 /* View */,
-				CB6832FD284F5D4400366004 /* ViewModel */,
 				CB6832FE284F5D4900366004 /* Controller */,
 				CB6832FF284F5D4E00366004 /* Utils */,
 				CB6832E4284F556000366004 /* AppDelegate.swift */,
@@ -87,13 +86,6 @@
 			children = (
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		CB6832FD284F5D4400366004 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		CB6832FE284F5D4900366004 /* Controller */ = {

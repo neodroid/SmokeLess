@@ -29,6 +29,7 @@ class StatisticViewController: UIViewController {
         let theButton = UIButton()
         theButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         theButton.tintColor = .black
+        theButton.addTarget(self, action: #selector(changeMonthPressed), for: .touchUpInside)
         return theButton
     }()
     
@@ -146,6 +147,10 @@ class StatisticViewController: UIViewController {
     }
     
     // MARK: - Helpers
+    
+    @objc func changeMonthPressed() {
+        print("Change Month")
+    }
     
     func configureUI() {
         // Setup Limit Counter View

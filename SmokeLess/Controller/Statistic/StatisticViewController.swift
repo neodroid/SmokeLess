@@ -214,3 +214,11 @@ public func addShadowToView(viewToAdd: UIView, shadowColor: CGColor, shadowRadiu
     viewToAdd.layer.shadowOffset = shadowOffset
     return viewToAdd
 }
+
+public func drawLineToView(viewToAdd: UIView, origin: CGPoint, destination: CGPoint) -> UIView {
+    let lineOnView = DrawLineOnView(frame: .zero, from: origin, to: destination)
+    lineOnView.backgroundColor = .clear
+    viewToAdd.addSubview(lineOnView)
+    lineOnView.anchor(top: viewToAdd.topAnchor, left: viewToAdd.leftAnchor, bottom: viewToAdd.bottomAnchor, right: viewToAdd.rightAnchor)
+    return viewToAdd
+}

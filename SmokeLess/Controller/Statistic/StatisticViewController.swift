@@ -132,6 +132,13 @@ class StatisticViewController: UIViewController {
         return theView
     }()
     
+    let collectionView: UICollectionView = {
+        let theCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        return theCollectionView
+    }()
+    
+    let grid = ChartGrid(frame: .zero, gridSpace: 40)
+    
     
     // MARK: - Lifecycle
     
@@ -145,7 +152,12 @@ class StatisticViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         drawLineToView(viewToAdd: cigarettesLimitConsumedView, origin: CGPoint(x: cigarettesLimitConsumedView.bounds.width / 2, y: 10), destination: CGPoint(x: cigarettesLimitConsumedView.bounds.width / 2, y: cigarettesLimitConsumedView.bounds.height - 10))
+        
+        createChartAxis()
+
+
     }
     
     
@@ -174,13 +186,15 @@ class StatisticViewController: UIViewController {
         // Wrap the hStack to UIView for shadow
         cigarettesLimitConsumedView.addSubview(hStack)
         hStack.anchor(top: cigarettesLimitConsumedView.topAnchor, left: cigarettesLimitConsumedView.leftAnchor, bottom: cigarettesLimitConsumedView.bottomAnchor, right: cigarettesLimitConsumedView.rightAnchor, paddingTop: 20, paddingLeft: 30, paddingBottom: 20)
-        
+
         view.addSubview(statisticLabel)
         view.addSubview(cigarreteSummaryLabel)
         view.addSubview(changeMonthButton)
         view.addSubview(changeMonthLabel)
         view.addSubview(dayStatusStack)
         view.addSubview(cigarettesLimitConsumedView)
+        setUpChart()
+
 
         statisticLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
@@ -191,16 +205,45 @@ class StatisticViewController: UIViewController {
         changeMonthButton.anchor(top: cigarreteSummaryLabel.topAnchor, left: changeMonthLabel.rightAnchor, right: statisticLabel.rightAnchor, paddingLeft: 5)
         
         
-        // Change this top anchor to bottom anchor of the chart later on
+         // Change this top anchor to bottom anchor of the chart later on
         
-        dayStatusStack.anchor(top: cigarreteSummaryLabel.bottomAnchor, left: statisticLabel.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingRight: 20)
+
+        dayStatusStack.anchor(top: collectionView.bottomAnchor, left: statisticLabel.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingRight: 20)
         
         cigarettesLimitConsumedView.anchor(top: dayStatusStack.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
     }
     
-
+    func setUpChart(){
+        view.addSubview(collectionView)
+        view.addSubview(grid)
+        
+        collectionView.anchor(top: cigarreteSummaryLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 40)
+        collectionView.heightAnchor.constraint(equalToConstant: grid.totalHeight).isActive = true
+        grid.anchor(top: cigarreteSummaryLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 40)
+        grid.heightAnchor.constraint(equalToConstant: grid.totalHeight).isActive = true
+        grid.backgroundColor = .clear
     
+    }
+    
+    func createChartAxis() {
+        
+        var axisPoint = collectionView.bounds.maxY
+        var space = collectionView.bounds.height / 4
+        var axisNumber = 0
+        var maxNumber = 40
+        var axisSpace = maxNumber / 4
+        
+        for i in 0...4 {
+            let axisLabel = UILabel()
+            axisLabel.text = String(axisNumber)
+            axisLabel.font = .systemFont(ofSize: 13)
+            view.addSubview(axisLabel)
+            axisLabel.anchor(left: collectionView.rightAnchor, bottom: collectionView.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingLeft: 10, paddingBottom: CGFloat(CGFloat(i) * space))
+            axisPoint += 40
+            axisNumber += axisSpace
+        }
+    }
     
 }
 

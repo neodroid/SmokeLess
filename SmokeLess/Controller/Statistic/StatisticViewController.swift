@@ -125,14 +125,12 @@ class StatisticViewController: UIViewController {
     }()
     
     let cigarettesLimitConsumedView: UIView = {
-        
         var theView = UIView()
         theView.backgroundColor = .white
-        theView.layer.cornerRadius = 20
         theView = addShadowToView(viewToAdd: theView, shadowColor: UIColor.black.cgColor, shadowRadius: 7, shadowOpacity: 0.2, shadowOffset: CGSize(width: 0, height: 4))
+        theView.layer.cornerRadius = 20
         return theView
     }()
-    
     
     
     // MARK: - Lifecycle
@@ -146,7 +144,13 @@ class StatisticViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let lineOnView = DrawLineOnView(frame: .zero, from: CGPoint(x: cigarettesLimitConsumedView.bounds.width / 2, y: 10), to: CGPoint(x: cigarettesLimitConsumedView.bounds.width / 2, y: cigarettesLimitConsumedView.bounds.height - 10))
+        lineOnView.backgroundColor = .clear
+        cigarettesLimitConsumedView.addSubview(lineOnView)
+        lineOnView.anchor(top: cigarettesLimitConsumedView.topAnchor, left: cigarettesLimitConsumedView.leftAnchor, bottom: cigarettesLimitConsumedView.bottomAnchor, right: cigarettesLimitConsumedView.rightAnchor)
     }
+    
     
     // MARK: - Helpers
     
@@ -180,9 +184,7 @@ class StatisticViewController: UIViewController {
         view.addSubview(changeMonthLabel)
         view.addSubview(dayStatusStack)
         view.addSubview(cigarettesLimitConsumedView)
-        
-        addLineToView()
-        
+
         statisticLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
         cigarreteSummaryLabel.anchor(top: statisticLabel.bottomAnchor, left: statisticLabel.leftAnchor, paddingTop: 20)
@@ -198,21 +200,11 @@ class StatisticViewController: UIViewController {
         
         cigarettesLimitConsumedView.anchor(top: dayStatusStack.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
-        
     }
-    
-    func addLineToView() {
-        let aPath = UIBezierPath()
-        aPath.move(to: CGPoint(x: 10, y: 10))
-        aPath.addLine(to: CGPoint(x: 20, y: 10))
-        aPath.close()
-        aPath.lineWidth = 1.0
-        aPath.stroke()
-    }
-    
-    
     
 
+    
+    
 }
 
 public func addShadowToView(viewToAdd: UIView, shadowColor: CGColor, shadowRadius: CGFloat, shadowOpacity: Float, shadowOffset: CGSize) -> UIView {

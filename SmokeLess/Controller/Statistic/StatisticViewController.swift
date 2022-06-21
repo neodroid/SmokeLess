@@ -39,6 +39,23 @@ class StatisticViewController: UIViewController {
         return theLabel
     }()
     
+    let dayStatusStack: UIStackView = {
+        let theStack = UIStackView()
+        let theLabel = UILabel()
+        let theImage = UIImageView(image: UIImage(systemName: "checkmark.seal.fill"))
+        
+        theImage.tintColor = .smokeLessGreen
+        theLabel.textColor = .smokeLessGreen
+        
+        theStack.axis = .horizontal
+        theLabel.text = "You did great!"
+        
+        theStack.addArrangedSubview(theImage)
+        theStack.addArrangedSubview(theLabel)
+        
+        return theStack
+    }()
+    
     
     
     // MARK: - Lifecycle
@@ -58,6 +75,7 @@ class StatisticViewController: UIViewController {
         view.addSubview(cigarreteSummaryLabel)
         view.addSubview(changeMonthButton)
         view.addSubview(changeMonthLabel)
+        view.addSubview(dayStatusStack)
         
         statisticLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
@@ -66,6 +84,11 @@ class StatisticViewController: UIViewController {
         changeMonthLabel.anchor(top: cigarreteSummaryLabel.topAnchor, left: cigarreteSummaryLabel.rightAnchor)
         
         changeMonthButton.anchor(top: cigarreteSummaryLabel.topAnchor, left: changeMonthLabel.rightAnchor, right: statisticLabel.rightAnchor, paddingLeft: 5)
+        
+        
+        // Change this top anchor to bottom anchor of the chart later on
+        
+        dayStatusStack.anchor(top: cigarreteSummaryLabel.bottomAnchor, left: statisticLabel.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingRight: 20)
         
     }
     

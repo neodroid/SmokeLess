@@ -145,10 +145,7 @@ class StatisticViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let lineOnView = DrawLineOnView(frame: .zero, from: CGPoint(x: cigarettesLimitConsumedView.bounds.width / 2, y: 10), to: CGPoint(x: cigarettesLimitConsumedView.bounds.width / 2, y: cigarettesLimitConsumedView.bounds.height - 10))
-        lineOnView.backgroundColor = .clear
-        cigarettesLimitConsumedView.addSubview(lineOnView)
-        lineOnView.anchor(top: cigarettesLimitConsumedView.topAnchor, left: cigarettesLimitConsumedView.leftAnchor, bottom: cigarettesLimitConsumedView.bottomAnchor, right: cigarettesLimitConsumedView.rightAnchor)
+        drawLineToView(viewToAdd: cigarettesLimitConsumedView, origin: CGPoint(x: cigarettesLimitConsumedView.bounds.width / 2, y: 10), destination: CGPoint(x: cigarettesLimitConsumedView.bounds.width / 2, y: cigarettesLimitConsumedView.bounds.height - 10))
     }
     
     
@@ -215,10 +212,9 @@ public func addShadowToView(viewToAdd: UIView, shadowColor: CGColor, shadowRadiu
     return viewToAdd
 }
 
-public func drawLineToView(viewToAdd: UIView, origin: CGPoint, destination: CGPoint) -> UIView {
+public func drawLineToView(viewToAdd: UIView, origin: CGPoint, destination: CGPoint) {
     let lineOnView = DrawLineOnView(frame: .zero, from: origin, to: destination)
     lineOnView.backgroundColor = .clear
     viewToAdd.addSubview(lineOnView)
     lineOnView.anchor(top: viewToAdd.topAnchor, left: viewToAdd.leftAnchor, bottom: viewToAdd.bottomAnchor, right: viewToAdd.rightAnchor)
-    return viewToAdd
 }

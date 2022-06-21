@@ -125,6 +125,7 @@ class StatisticViewController: UIViewController {
     }()
     
     let cigarettesLimitConsumedView: UIView = {
+        
         var theView = UIView()
         theView.backgroundColor = .white
         theView.layer.cornerRadius = 20
@@ -141,6 +142,7 @@ class StatisticViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
         configureUI()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -179,6 +181,8 @@ class StatisticViewController: UIViewController {
         view.addSubview(dayStatusStack)
         view.addSubview(cigarettesLimitConsumedView)
         
+        addLineToView()
+        
         statisticLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
         cigarreteSummaryLabel.anchor(top: statisticLabel.bottomAnchor, left: statisticLabel.leftAnchor, paddingTop: 20)
@@ -195,6 +199,15 @@ class StatisticViewController: UIViewController {
         cigarettesLimitConsumedView.anchor(top: dayStatusStack.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
         
+    }
+    
+    func addLineToView() {
+        let aPath = UIBezierPath()
+        aPath.move(to: CGPoint(x: 10, y: 10))
+        aPath.addLine(to: CGPoint(x: 20, y: 10))
+        aPath.close()
+        aPath.lineWidth = 1.0
+        aPath.stroke()
     }
     
     

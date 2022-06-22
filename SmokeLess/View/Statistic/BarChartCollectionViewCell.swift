@@ -11,15 +11,22 @@ class BarChartCollectionViewCell: UICollectionViewCell {
     
     let spacingBetweenBars: CGFloat = 5
     
+    let container: UIView = {
+        let theContainer = UIView()
+        return theContainer
+    }()
+    
     let limitBar: UIView = {
         let theView = UIView()
         theView.backgroundColor = .smokeLessGreen
+        theView.translatesAutoresizingMaskIntoConstraints = false
         return theView
     }()
     
     let consumedBar: UIView = {
         let theView = UIView()
         theView.backgroundColor = .smokeLessBlue
+        theView.translatesAutoresizingMaskIntoConstraints = false
         return theView
     }()
     
@@ -31,22 +38,22 @@ class BarChartCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-            
-        contentView.addSubview(limitBar)
-        contentView.addSubview(consumedBar)
-        contentView.addSubview(dateLabel)
         
-        limitBar.anchor(left: contentView.leftAnchor, bottom: contentView.bottomAnchor)
-        consumedBar.anchor(left: limitBar.rightAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, paddingLeft: spacingBetweenBars)
-        dateLabel.anchor(top: contentView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 20, paddingLeft: 5, paddingRight: 5)
+        contentView.addSubview(container)
+        container.addConstraintsToFillView(contentView)
         
-        // Height Constraint for Dynamic Bar
-        //limitBar.setDimensions(width: 20, height: contentView.bounds.height)
-        //consumedBar.setDimensions(width: 20, height: contentView.bounds.height)
+        container.addSubview(limitBar)
+        container.addSubview(consumedBar)
+//        container.backgroundColor = .lightGray
+        
+        limitBar.anchor(bottom: container.bottomAnchor, right: consumedBar.leftAnchor, paddingBottom: 0, paddingRight: 5)
+        consumedBar.anchor(bottom: container.bottomAnchor, right: container.rightAnchor, paddingBottom: 0)
+        
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
 
-        
-        // End
-        
     }
     
     required init?(coder: NSCoder) {

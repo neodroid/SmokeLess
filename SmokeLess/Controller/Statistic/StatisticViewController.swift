@@ -268,7 +268,11 @@ extension StatisticViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "barCell", for: indexPath) as! BarChartCollectionViewCell
-        cell.contentView.backgroundColor = .red
+        
+        // Set this constraints for dynamic bar height
+        cell.limitBar.setDimensions(width: cell.contentView.bounds.width / 4, height: 40)
+        cell.consumedBar.setDimensions(width: cell.contentView.bounds.width / 4, height: 80)
+        
         return cell
     }
     

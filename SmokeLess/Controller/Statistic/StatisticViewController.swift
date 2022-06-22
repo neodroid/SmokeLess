@@ -29,7 +29,7 @@ class StatisticViewController: UIViewController {
         let theButton = UIButton()
         theButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         theButton.tintColor = .black
-        theButton.addTarget(self, action: #selector(changeMonthPressed), for: .touchUpInside)
+        theButton.addTarget(StatisticViewController.self, action: #selector(changeMonthPressed), for: .touchUpInside)
         return theButton
     }()
     
@@ -133,7 +133,14 @@ class StatisticViewController: UIViewController {
     }()
     
     let collectionView: UICollectionView = {
-        let theCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        
+        let theCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        theCollectionView.register(BarChartCollectionViewCell.self, forCellWithReuseIdentifier: "barCell")
+        theCollectionView.backgroundColor = .clear
+        theCollectionView.isScrollEnabled = true
+        theCollectionView.showsHorizontalScrollIndicator = false
         return theCollectionView
     }()
     
@@ -200,7 +207,7 @@ class StatisticViewController: UIViewController {
         
         cigarreteSummaryLabel.anchor(top: statisticLabel.bottomAnchor, left: statisticLabel.leftAnchor, paddingTop: 20)
                 
-        changeMonthLabel.anchor(top: cigarreteSummaryLabel.topAnchor, left: cigarreteSummaryLabel.rightAnchor)
+        changeMonthLabel.anchor(top: cigarreteSummaryLabel.topAnchor)
         
         changeMonthButton.anchor(top: cigarreteSummaryLabel.topAnchor, left: changeMonthLabel.rightAnchor, right: statisticLabel.rightAnchor, paddingLeft: 5)
         
@@ -215,8 +222,9 @@ class StatisticViewController: UIViewController {
     }
     
     func setUpChart(){
-        view.addSubview(collectionView)
         view.addSubview(grid)
+        view.addSubview(collectionView)
+
         
         collectionView.anchor(top: cigarreteSummaryLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 40)
         collectionView.heightAnchor.constraint(equalToConstant: grid.totalHeight).isActive = true
@@ -255,15 +263,17 @@ class StatisticViewController: UIViewController {
 extension StatisticViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 6
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "barCell", for: indexPath) as! BarChartCollectionViewCell
+        cell.contentView.backgroundColor = .red
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 20, height: collectionView.bounds.height)
+        return CGSize(width: collectionView.bounds.width / 6, height: collectionView.bounds.height)
     }
     
     

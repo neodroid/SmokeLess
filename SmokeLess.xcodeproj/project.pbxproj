@@ -10,6 +10,8 @@
 		6A60E0DF28606BA000505B9D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E0DE28606BA000505B9D /* Extension.swift */; };
 		C43DC15F286061C700F5F439 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC15E286061C700F5F439 /* StatisticViewController.swift */; };
 		C43DC16228619FE700F5F439 /* DrawLineOnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC16128619FE700F5F439 /* DrawLineOnView.swift */; };
+		C43DC1642861B4EA00F5F439 /* ChartGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC1632861B4EA00F5F439 /* ChartGrid.swift */; };
+		C43DC1662862F57D00F5F439 /* BarChartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC1652862F57D00F5F439 /* BarChartCollectionViewCell.swift */; };
 		CB6832E5284F556000366004 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E4284F556000366004 /* AppDelegate.swift */; };
 		CB6832E7284F556000366004 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E6284F556000366004 /* SceneDelegate.swift */; };
 		CB6832E9284F556000366004 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E8284F556000366004 /* ViewController.swift */; };
@@ -22,6 +24,8 @@
 		6A60E0DE28606BA000505B9D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = SOURCE_ROOT; };
 		C43DC15E286061C700F5F439 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		C43DC16128619FE700F5F439 /* DrawLineOnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLineOnView.swift; sourceTree = "<group>"; };
+		C43DC1632861B4EA00F5F439 /* ChartGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGrid.swift; sourceTree = "<group>"; };
+		C43DC1652862F57D00F5F439 /* BarChartCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartCollectionViewCell.swift; sourceTree = "<group>"; };
 		CB6832E1284F556000366004 /* SmokeLess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmokeLess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6832E4284F556000366004 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB6832E6284F556000366004 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +59,8 @@
 			isa = PBXGroup;
 			children = (
 				C43DC16128619FE700F5F439 /* DrawLineOnView.swift */,
+				C43DC1632861B4EA00F5F439 /* ChartGrid.swift */,
+				C43DC1652862F57D00F5F439 /* BarChartCollectionViewCell.swift */,
 			);
 			path = Statistic;
 			sourceTree = "<group>";
@@ -196,6 +202,8 @@
 			files = (
 				6A60E0DF28606BA000505B9D /* Extension.swift in Sources */,
 				CB6832EF284F556000366004 /* SmokeLess.xcdatamodeld in Sources */,
+				C43DC1662862F57D00F5F439 /* BarChartCollectionViewCell.swift in Sources */,
+				C43DC1642861B4EA00F5F439 /* ChartGrid.swift in Sources */,
 				CB6832E9284F556000366004 /* ViewController.swift in Sources */,
 				CB6832E5284F556000366004 /* AppDelegate.swift in Sources */,
 				C43DC15F286061C700F5F439 /* StatisticViewController.swift in Sources */,
@@ -339,7 +347,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2CYTFH24FS;
+				DEVELOPMENT_TEAM = F3D69PH55A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SmokeLess/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -366,7 +374,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2CYTFH24FS;
+				DEVELOPMENT_TEAM = F3D69PH55A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SmokeLess/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

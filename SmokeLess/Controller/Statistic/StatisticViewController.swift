@@ -223,6 +223,9 @@ class StatisticViewController: UIViewController {
         grid.anchor(top: cigarreteSummaryLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 40)
         grid.heightAnchor.constraint(equalToConstant: grid.totalHeight).isActive = true
         grid.backgroundColor = .clear
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
     
     }
     
@@ -246,6 +249,32 @@ class StatisticViewController: UIViewController {
     }
     
 }
+
+// MARK: - Extension
+
+extension StatisticViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 20, height: collectionView.bounds.height)
+    }
+    
+    
+}
+
+
+
+
+
+
+// MARK: - Additional Func
 
 public func addShadowToView(viewToAdd: UIView, shadowColor: CGColor, shadowRadius: CGFloat, shadowOpacity: Float, shadowOffset: CGSize) -> UIView {
     viewToAdd.layer.shadowColor = shadowColor

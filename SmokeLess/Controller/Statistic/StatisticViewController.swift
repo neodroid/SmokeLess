@@ -151,6 +151,59 @@ class StatisticViewController: UIViewController {
         return theLabel
     }()
     
+    let chartLegendStack: UIStackView = {
+        let containerStack = UIStackView()
+        containerStack.axis = .horizontal
+        containerStack.spacing = 10
+        
+        let limitStack = UIStackView()
+        let limitLabel = UILabel()
+        let limitRect = UIView()
+        limitRect.translatesAutoresizingMaskIntoConstraints = false
+        limitRect.setDimensions(width: 10, height: 10)
+        limitRect.backgroundColor = .smokeLessBlue
+        limitLabel.text = "Limit"
+        limitLabel.font = .systemFont(ofSize: 13)
+        limitStack.addArrangedSubview(limitRect)
+        limitStack.addArrangedSubview(limitLabel)
+        limitStack.axis = .horizontal
+        //limitStack.distribution = .fillEqually
+        limitStack.spacing = 5
+        
+        let notExceedStack = UIStackView()
+        let notExceedLabel = UILabel()
+        let notExceedRect = UIView()
+        notExceedRect.translatesAutoresizingMaskIntoConstraints = false
+        notExceedRect.setDimensions(width: 10, height: 10)
+        notExceedRect.backgroundColor = .smokeLessGreen
+        notExceedLabel.text = "Not exceed"
+        notExceedLabel.font = .systemFont(ofSize: 13)
+        notExceedStack.addArrangedSubview(notExceedRect)
+        notExceedStack.addArrangedSubview(notExceedLabel)
+        notExceedStack.axis = .horizontal
+        notExceedStack.spacing = 5
+        
+        let exceedStack = UIStackView()
+        let exceedLabel = UILabel()
+        let exceedRect = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        exceedRect.translatesAutoresizingMaskIntoConstraints = false
+        exceedRect.setDimensions(width: 10, height: 10)
+        exceedRect.backgroundColor = UIColor(red: 235/255, green: 100/255, blue: 104/255, alpha: 100) // .smokelessRed
+        exceedLabel.text = "Exceed"
+        exceedLabel.font = .systemFont(ofSize: 13)
+        exceedStack.addArrangedSubview(exceedRect)
+        exceedStack.addArrangedSubview(exceedLabel)
+        exceedStack.axis = .horizontal
+        exceedStack.spacing = 5
+        
+        containerStack.addArrangedSubview(limitStack)
+        containerStack.addArrangedSubview(notExceedStack)
+        containerStack.addArrangedSubview(exceedStack)
+        
+        
+        return containerStack
+    }()
+    
     let grid = ChartGrid(frame: .zero, gridSpace: 40)
     
     
@@ -171,11 +224,12 @@ class StatisticViewController: UIViewController {
         
         createChartAxis()
 
-
     }
     
     
     // MARK: - Helpers
+    
+    var selectedDateChart: IndexPath?
     
     @objc func changeMonthPressed() {
         print("Change Month")
@@ -208,6 +262,7 @@ class StatisticViewController: UIViewController {
         view.addSubview(dayStatusStack)
         view.addSubview(cigarettesLimitConsumedView)
         view.addSubview(fullDateOfChart)
+        view.addSubview(chartLegendStack)
         view.addSubview(grid)
         view.addSubview(collectionView)
         setUpChart()
@@ -221,11 +276,14 @@ class StatisticViewController: UIViewController {
         
         changeMonthButton.anchor(top: cigarreteSummaryLabel.topAnchor, left: changeMonthLabel.rightAnchor, right: statisticLabel.rightAnchor, paddingLeft: 5)
         
-        fullDateOfChart.anchor(top: cigarreteSummaryLabel.bottomAnchor, left: cigarreteSummaryLabel.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingRight: 20)
+        fullDateOfChart.anchor(top: cigarreteSummaryLabel.bottomAnchor, left: cigarreteSummaryLabel.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 10, paddingRight: 20)
         
-        collectionView.anchor(top: fullDateOfChart.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 40)
+        chartLegendStack.anchor(top: fullDateOfChart.bottomAnchor, left: fullDateOfChart.leftAnchor, paddingTop: 25)
+        
+        collectionView.anchor(top: chartLegendStack.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingRight: 40)
         collectionView.heightAnchor.constraint(equalToConstant: grid.totalHeight).isActive = true
-        grid.anchor(top: collectionView.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingLeft: 20, paddingRight: 40)
+        
+        grid.anchor(top: collectionView.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: -20, paddingLeft: 20, paddingRight: 40)
         grid.heightAnchor.constraint(equalToConstant: grid.totalHeight).isActive = true
                 
         dayStatusStack.anchor(top: collectionView.bottomAnchor, left: statisticLabel.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 40, paddingRight: 20)
@@ -257,7 +315,7 @@ class StatisticViewController: UIViewController {
             axisLabel.text = String(axisNumber)
             axisLabel.font = .systemFont(ofSize: 13)
             view.addSubview(axisLabel)
-            axisLabel.anchor(left: collectionView.rightAnchor, bottom: collectionView.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingLeft: 10, paddingBottom: CGFloat(CGFloat(i) * space))
+            axisLabel.anchor(left: grid.rightAnchor, bottom: grid.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingLeft: 10, paddingBottom: CGFloat(CGFloat(i) * space))
             axisPoint += 40
             axisNumber += axisSpace
         }
@@ -280,12 +338,33 @@ extension StatisticViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.limitBar.setDimensions(width: cell.contentView.bounds.width / 4, height: 40)
         cell.consumedBar.setDimensions(width: cell.contentView.bounds.width / 4, height: 80)
         
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width / 6, height: collectionView.bounds.height)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? BarChartCollectionViewCell else {return}
+        
+        if indexPath.row == selectedDateChart?.row {
+            return
+        } else {
+            cell.dateLabel.textColor = .white
+            cell.circleLabelBg.backgroundColor = .smokeLessBlue
+            if let previousIndexPath = selectedDateChart {
+                let previousCell = collectionView.cellForItem(at: previousIndexPath) as? BarChartCollectionViewCell
+                previousCell?.dateLabel.textColor = .black
+                previousCell?.circleLabelBg.backgroundColor = .clear
+            }
+            selectedDateChart = indexPath
+
+        }
+    }
+    
+    
     
     
 }

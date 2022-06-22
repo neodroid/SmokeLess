@@ -33,7 +33,14 @@ class BarChartCollectionViewCell: UICollectionViewCell {
     let dateLabel: UILabel = {
         let theLabel = UILabel()
         theLabel.text = "1" // Dynamic
+        theLabel.textAlignment = .center
+        theLabel.font = .systemFont(ofSize: 13)
         return theLabel
+    }()
+    
+    let circleLabelBg: UIView = {
+        let circleBG = UIView()
+        return circleBG
     }()
     
     override init(frame: CGRect) {
@@ -44,12 +51,19 @@ class BarChartCollectionViewCell: UICollectionViewCell {
         
         container.addSubview(limitBar)
         container.addSubview(consumedBar)
+        circleLabelBg.addSubview(dateLabel)
+        container.addSubview(circleLabelBg)
 //        container.backgroundColor = .lightGray
         
-        limitBar.anchor(bottom: container.bottomAnchor, right: consumedBar.leftAnchor, paddingBottom: 0, paddingRight: 5)
-        consumedBar.anchor(bottom: container.bottomAnchor, right: container.rightAnchor, paddingBottom: 0)
+        limitBar.anchor(bottom: container.bottomAnchor, right: consumedBar.leftAnchor, paddingBottom: 20, paddingRight: 5)
+        consumedBar.anchor(bottom: container.bottomAnchor, right: container.rightAnchor, paddingBottom: 20)
+        circleLabelBg.anchor(bottom: container.bottomAnchor, right: container.rightAnchor, paddingRight: 13.75)
+        dateLabel.addConstraintsToFillView(circleLabelBg)
+        circleLabelBg.setDimensions(width: 15, height: 15)
+        circleLabelBg.layer.cornerRadius = 15 / 2
         
     }
+    
     
     override func layoutSubviews() {
         super.layoutSubviews()

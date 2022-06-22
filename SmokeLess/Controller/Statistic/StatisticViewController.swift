@@ -144,6 +144,13 @@ class StatisticViewController: UIViewController {
         return theCollectionView
     }()
     
+    let fullDateOfChart: UILabel = {
+        let theLabel = UILabel()
+        theLabel.text = "1 June 2022"
+        theLabel.font = .systemFont(ofSize: 20)
+        return theLabel
+    }()
+    
     let grid = ChartGrid(frame: .zero, gridSpace: 40)
     
     
@@ -200,6 +207,9 @@ class StatisticViewController: UIViewController {
         view.addSubview(changeMonthLabel)
         view.addSubview(dayStatusStack)
         view.addSubview(cigarettesLimitConsumedView)
+        view.addSubview(fullDateOfChart)
+        view.addSubview(grid)
+        view.addSubview(collectionView)
         setUpChart()
 
 
@@ -211,25 +221,21 @@ class StatisticViewController: UIViewController {
         
         changeMonthButton.anchor(top: cigarreteSummaryLabel.topAnchor, left: changeMonthLabel.rightAnchor, right: statisticLabel.rightAnchor, paddingLeft: 5)
         
+        fullDateOfChart.anchor(top: cigarreteSummaryLabel.bottomAnchor, left: cigarreteSummaryLabel.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingRight: 20)
         
-         // Change this top anchor to bottom anchor of the chart later on
-        
-
-        dayStatusStack.anchor(top: collectionView.bottomAnchor, left: statisticLabel.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingRight: 20)
+        collectionView.anchor(top: fullDateOfChart.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 40)
+        collectionView.heightAnchor.constraint(equalToConstant: grid.totalHeight).isActive = true
+        grid.anchor(top: collectionView.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingLeft: 20, paddingRight: 40)
+        grid.heightAnchor.constraint(equalToConstant: grid.totalHeight).isActive = true
+                
+        dayStatusStack.anchor(top: collectionView.bottomAnchor, left: statisticLabel.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 40, paddingRight: 20)
         
         cigarettesLimitConsumedView.anchor(top: dayStatusStack.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
     }
     
     func setUpChart(){
-        view.addSubview(grid)
-        view.addSubview(collectionView)
 
-        
-        collectionView.anchor(top: cigarreteSummaryLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 40)
-        collectionView.heightAnchor.constraint(equalToConstant: grid.totalHeight).isActive = true
-        grid.anchor(top: cigarreteSummaryLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 40)
-        grid.heightAnchor.constraint(equalToConstant: grid.totalHeight).isActive = true
         grid.backgroundColor = .clear
         
         collectionView.delegate = self
@@ -239,6 +245,7 @@ class StatisticViewController: UIViewController {
     
     func createChartAxis() {
         
+        // For dynamic chart axis
         var axisPoint = collectionView.bounds.maxY
         var space = collectionView.bounds.height / 4
         var axisNumber = 0

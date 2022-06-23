@@ -29,7 +29,7 @@ class StatisticViewController: UIViewController {
         let theButton = UIButton()
         theButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         theButton.tintColor = .black
-        theButton.addTarget(StatisticViewController.self, action: #selector(changeMonthPressed), for: .touchUpInside)
+        theButton.addTarget(self, action: #selector(changeMonthPressed), for: .touchUpInside)
         return theButton
     }()
     

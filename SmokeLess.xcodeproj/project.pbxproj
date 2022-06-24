@@ -12,6 +12,7 @@
 		C43DC16228619FE700F5F439 /* DrawLineOnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC16128619FE700F5F439 /* DrawLineOnView.swift */; };
 		C43DC1642861B4EA00F5F439 /* ChartGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC1632861B4EA00F5F439 /* ChartGrid.swift */; };
 		C43DC1662862F57D00F5F439 /* BarChartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC1652862F57D00F5F439 /* BarChartCollectionViewCell.swift */; };
+		C45152AB2865ACA0002E9FFD /* ChangeMonthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45152AA2865ACA0002E9FFD /* ChangeMonthController.swift */; };
 		CB6832E5284F556000366004 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E4284F556000366004 /* AppDelegate.swift */; };
 		CB6832E7284F556000366004 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E6284F556000366004 /* SceneDelegate.swift */; };
 		CB6832E9284F556000366004 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E8284F556000366004 /* ViewController.swift */; };
@@ -26,6 +27,7 @@
 		C43DC16128619FE700F5F439 /* DrawLineOnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLineOnView.swift; sourceTree = "<group>"; };
 		C43DC1632861B4EA00F5F439 /* ChartGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGrid.swift; sourceTree = "<group>"; };
 		C43DC1652862F57D00F5F439 /* BarChartCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartCollectionViewCell.swift; sourceTree = "<group>"; };
+		C45152AA2865ACA0002E9FFD /* ChangeMonthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMonthController.swift; sourceTree = "<group>"; };
 		CB6832E1284F556000366004 /* SmokeLess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmokeLess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6832E4284F556000366004 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB6832E6284F556000366004 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				C43DC15E286061C700F5F439 /* StatisticViewController.swift */,
+				C45152AA2865ACA0002E9FFD /* ChangeMonthController.swift */,
 			);
 			path = Statistic;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				C43DC15F286061C700F5F439 /* StatisticViewController.swift in Sources */,
 				C43DC16228619FE700F5F439 /* DrawLineOnView.swift in Sources */,
 				CB6832E7284F556000366004 /* SceneDelegate.swift in Sources */,
+				C45152AB2865ACA0002E9FFD /* ChangeMonthController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

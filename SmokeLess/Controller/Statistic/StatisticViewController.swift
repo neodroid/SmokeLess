@@ -232,7 +232,15 @@ class StatisticViewController: UIViewController {
     var selectedDateChart: IndexPath?
     
     @objc func changeMonthPressed() {
-        print("Change Month")
+        let VC = ChangeMonthController()
+        VC.delegate = self
+        if let sheet = VC.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        
+        VC.currPickedMonth = calendarLogic.getPickedMonth()
+        VC.currPickedYear = calendarLogic.getPickedYear()
+        self.present(VC, animated: true, completion: nil)
     }
     
     func configureUI() {
@@ -369,6 +377,16 @@ extension StatisticViewController: UICollectionViewDelegate, UICollectionViewDat
     
 }
 
+extension StatisticViewController: MonthChangeDelegate {
+    func userEnterMonthAndYear(month: String, year: String) {
+        calendarLogic.updateDay()
+        calendarLogic.monthString = "\(month)/\(year)"
+        collectionView.reloadData()
+        configureUI()
+        scrollToDate()
+    }
+
+}
 
 
 

@@ -230,7 +230,8 @@ class StatisticViewController: UIViewController {
     // MARK: - Helpers
     
     var selectedDateChart: IndexPath?
-    
+    var calendarLogic = HomscreenCalendarLogic()
+
     @objc func changeMonthPressed() {
         let VC = ChangeMonthController()
         VC.delegate = self
@@ -383,7 +384,6 @@ extension StatisticViewController: MonthChangeDelegate {
         calendarLogic.monthString = "\(month)/\(year)"
         collectionView.reloadData()
         configureUI()
-        scrollToDate()
     }
 
 }

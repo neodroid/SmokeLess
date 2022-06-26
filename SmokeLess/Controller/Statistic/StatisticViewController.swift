@@ -230,7 +230,7 @@ class StatisticViewController: UIViewController {
     // MARK: - Helpers
     
     var selectedDateChart: IndexPath?
-    var calendarLogic = HomscreenCalendarLogic()
+    var calendarLogic = ProgressCalendarLogic()
 
     @objc func changeMonthPressed() {
         let VC = ChangeMonthController()

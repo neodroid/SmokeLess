@@ -27,6 +27,7 @@
 		CB4A25D728683E9200CB916C /* LayoutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A25D628683E9200CB916C /* LayoutBuilder.swift */; };
 		CB4A25D928683EA600CB916C /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A25D828683EA600CB916C /* ProgressViewController.swift */; };
 		CB4A25DD286879C400CB916C /* ProgressChangeMonthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A25DC286879C400CB916C /* ProgressChangeMonthController.swift */; };
+		CB4A25E12868C74400CB916C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A25E02868C74400CB916C /* TabBarController.swift */; };
 		CB6832E5284F556000366004 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E4284F556000366004 /* AppDelegate.swift */; };
 		CB6832E7284F556000366004 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E6284F556000366004 /* SceneDelegate.swift */; };
 		CB6832E9284F556000366004 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E8284F556000366004 /* ViewController.swift */; };
@@ -56,6 +57,7 @@
 		CB4A25D628683E9200CB916C /* LayoutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutBuilder.swift; sourceTree = "<group>"; };
 		CB4A25D828683EA600CB916C /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		CB4A25DC286879C400CB916C /* ProgressChangeMonthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressChangeMonthController.swift; sourceTree = "<group>"; };
+		CB4A25E02868C74400CB916C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		CB6832E1284F556000366004 /* SmokeLess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmokeLess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6832E4284F556000366004 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB6832E6284F556000366004 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +140,23 @@
 			path = Builder;
 			sourceTree = "<group>";
 		};
+		CB4A25DE2868C5F600CB916C /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CB4A25D228683E5800CB916C /* Progress */,
+				C43DC15D286061B500F5F439 /* Statistic */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		CB4A25DF2868C60300CB916C /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				CB4A25E02868C74400CB916C /* TabBarController.swift */,
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
 		CB6832D8284F556000366004 = {
 			isa = PBXGroup;
 			children = (
@@ -193,8 +212,8 @@
 		CB6832FE284F5D4900366004 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				CB4A25D228683E5800CB916C /* Progress */,
-				C43DC15D286061B500F5F439 /* Statistic */,
+				CB4A25DF2868C60300CB916C /* TabBarController */,
+				CB4A25DE2868C5F600CB916C /* ViewController */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -295,6 +314,7 @@
 				CB4A25C928683DB700CB916C /* TopHeaderCell.swift in Sources */,
 				C43DC16228619FE700F5F439 /* DrawLineOnView.swift in Sources */,
 				CB6832E7284F556000366004 /* SceneDelegate.swift in Sources */,
+				CB4A25E12868C74400CB916C /* TabBarController.swift in Sources */,
 				CB4A25CD28683E0400CB916C /* TodayLimitCell.swift in Sources */,
 				C45152AB2865ACA0002E9FFD /* ChangeMonthController.swift in Sources */,
 				CB4A25C12868396200CB916C /* ProgressCalendarLogic.swift in Sources */,

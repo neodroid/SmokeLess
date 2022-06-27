@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A8C0EFD2862D1EF0051F828 /* NicotineMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0EFC2862D1EF0051F828 /* NicotineMenuViewController.swift */; };
-		2A8C0F0328631AC60051F828 /* OthersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0F0228631AC60051F828 /* OthersTableViewCell.swift */; };
 		6A60E0DF28606BA000505B9D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E0DE28606BA000505B9D /* Extension.swift */; };
 		C43DC15F286061C700F5F439 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC15E286061C700F5F439 /* StatisticViewController.swift */; };
 		C43DC16228619FE700F5F439 /* DrawLineOnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC16128619FE700F5F439 /* DrawLineOnView.swift */; };
 		C43DC1642861B4EA00F5F439 /* ChartGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC1632861B4EA00F5F439 /* ChartGrid.swift */; };
 		C43DC1662862F57D00F5F439 /* BarChartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC1652862F57D00F5F439 /* BarChartCollectionViewCell.swift */; };
 		C45152AB2865ACA0002E9FFD /* ChangeMonthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45152AA2865ACA0002E9FFD /* ChangeMonthController.swift */; };
+		C47776E6286992C50075C6CF /* NicotineMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47776E5286992C50075C6CF /* NicotineMenuViewController.swift */; };
+		C47776E8286992CE0075C6CF /* OthersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47776E7286992CE0075C6CF /* OthersTableViewCell.swift */; };
 		CB4A25BD2868392900CB916C /* MonthMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A25BC2868392900CB916C /* MonthMetadata.swift */; };
 		CB4A25BF2868393F00CB916C /* MonthTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A25BE2868393F00CB916C /* MonthTemplate.swift */; };
 		CB4A25C12868396200CB916C /* ProgressCalendarLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A25C02868396200CB916C /* ProgressCalendarLogic.swift */; };
@@ -39,7 +39,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2A8C0EFC2862D1EF0051F828 /* NicotineMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicotineMenuViewController.swift; sourceTree = "<group>"; };
 		2A8C0F0228631AC60051F828 /* OthersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		6A60E0DE28606BA000505B9D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = SOURCE_ROOT; };
 		C43DC15E286061C700F5F439 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +46,8 @@
 		C43DC1632861B4EA00F5F439 /* ChartGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGrid.swift; sourceTree = "<group>"; };
 		C43DC1652862F57D00F5F439 /* BarChartCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartCollectionViewCell.swift; sourceTree = "<group>"; };
 		C45152AA2865ACA0002E9FFD /* ChangeMonthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMonthController.swift; sourceTree = "<group>"; };
+		C47776E5286992C50075C6CF /* NicotineMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NicotineMenuViewController.swift; sourceTree = "<group>"; };
+		C47776E7286992CE0075C6CF /* OthersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OthersTableViewCell.swift; sourceTree = "<group>"; };
 		CB4A25BC2868392900CB916C /* MonthMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthMetadata.swift; sourceTree = "<group>"; };
 		CB4A25BE2868393F00CB916C /* MonthTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthTemplate.swift; sourceTree = "<group>"; };
 		CB4A25C02868396200CB916C /* ProgressCalendarLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCalendarLogic.swift; sourceTree = "<group>"; };
@@ -102,6 +103,30 @@
 			path = Statistic;
 			sourceTree = "<group>";
 		};
+		C4A2FD66286990D000472BF7 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				2A8C0F0228631AC60051F828 /* OthersTableViewCell.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		C4A2FD672869911900472BF7 /* NicotineCravings */ = {
+			isa = PBXGroup;
+			children = (
+				C47776E5286992C50075C6CF /* NicotineMenuViewController.swift */,
+			);
+			path = NicotineCravings;
+			sourceTree = "<group>";
+		};
+		C4A2FD6C2869914000472BF7 /* NicotineCravings */ = {
+			isa = PBXGroup;
+			children = (
+				C47776E7286992CE0075C6CF /* OthersTableViewCell.swift */,
+			);
+			path = NicotineCravings;
+			sourceTree = "<group>";
+		};
 		CB4A25C42868399900CB916C /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +172,7 @@
 		CB4A25DE2868C5F600CB916C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				C4A2FD672869911900472BF7 /* NicotineCravings */,
 				CB4A25D228683E5800CB916C /* Progress */,
 				C43DC15D286061B500F5F439 /* Statistic */,
 			);
@@ -166,6 +192,7 @@
 			children = (
 				CB6832E3284F556000366004 /* SmokeLess */,
 				CB6832E2284F556000366004 /* Products */,
+				C4A2FD66286990D000472BF7 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -207,6 +234,7 @@
 		CB6832FC284F5D3F00366004 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C4A2FD6C2869914000472BF7 /* NicotineCravings */,
 				CB4A25C528683D8300CB916C /* Progress */,
 				C43DC16028619FCB00F5F439 /* Statistic */,
 			);
@@ -303,6 +331,7 @@
 				CB4A25D928683EA600CB916C /* ProgressViewController.swift in Sources */,
 				CB4A25D128683E4100CB916C /* GoalsCell.swift in Sources */,
 				CB4A25BF2868393F00CB916C /* MonthTemplate.swift in Sources */,
+				C47776E8286992CE0075C6CF /* OthersTableViewCell.swift in Sources */,
 				CB4A25C728683D9100CB916C /* DateCell.swift in Sources */,
 				CB4A25D728683E9200CB916C /* LayoutBuilder.swift in Sources */,
 				6A60E0DF28606BA000505B9D /* Extension.swift in Sources */,
@@ -312,7 +341,6 @@
 				CB4A25C32868398C00CB916C /* DailyData.swift in Sources */,
 				CB4A25CF28683E2000CB916C /* TodayConsumedCell.swift in Sources */,
 				CB6832E9284F556000366004 /* ViewController.swift in Sources */,
-				2A8C0F0328631AC60051F828 /* OthersTableViewCell.swift in Sources */,
 				CB6832E5284F556000366004 /* AppDelegate.swift in Sources */,
 				C43DC15F286061C700F5F439 /* StatisticViewController.swift in Sources */,
 				CB4A25D528683E8100CB916C /* CellBuilder.swift in Sources */,
@@ -325,6 +353,7 @@
 				CB4A25C12868396200CB916C /* ProgressCalendarLogic.swift in Sources */,
 				CB4A25BD2868392900CB916C /* MonthMetadata.swift in Sources */,
 				CB4A25CB28683DE800CB916C /* TittleCell.swift in Sources */,
+				C47776E6286992C50075C6CF /* NicotineMenuViewController.swift in Sources */,
 				CB4A25DD286879C400CB916C /* ProgressChangeMonthController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

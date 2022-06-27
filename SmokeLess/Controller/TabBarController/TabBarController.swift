@@ -24,7 +24,7 @@ class TabBarController: UITabBarController {
     func configureViewControllers() {
         let progress = ProgressViewController()
         let nav1 = navigationController(image: UIImage(systemName: "calendar.badge.minus"),title: "Progress", rootViewController: progress)
-        let nicotine = StatisticViewController()
+        let nicotine = NicotineMenuViewController()
         let nav2 = navigationController(image: UIImage(systemName: "cross.fill"), title: "Nicotine Cravings", rootViewController: nicotine)
         let statistic = StatisticViewController()
         let nav3 = navigationController(image: UIImage(systemName: "chart.bar.fill"), title: "Statistic", rootViewController: statistic)

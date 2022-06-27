@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A8C0EFD2862D1EF0051F828 /* NicotineMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0EFC2862D1EF0051F828 /* NicotineMenuViewController.swift */; };
+		2A8C0F0328631AC60051F828 /* OthersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0F0228631AC60051F828 /* OthersTableViewCell.swift */; };
 		6A60E0DF28606BA000505B9D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E0DE28606BA000505B9D /* Extension.swift */; };
 		C43DC15F286061C700F5F439 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC15E286061C700F5F439 /* StatisticViewController.swift */; };
 		C43DC16228619FE700F5F439 /* DrawLineOnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC16128619FE700F5F439 /* DrawLineOnView.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A8C0EFC2862D1EF0051F828 /* NicotineMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicotineMenuViewController.swift; sourceTree = "<group>"; };
+		2A8C0F0228631AC60051F828 /* OthersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		6A60E0DE28606BA000505B9D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = SOURCE_ROOT; };
 		C43DC15E286061C700F5F439 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		C43DC16128619FE700F5F439 /* DrawLineOnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLineOnView.swift; sourceTree = "<group>"; };
@@ -308,6 +312,7 @@
 				CB4A25C32868398C00CB916C /* DailyData.swift in Sources */,
 				CB4A25CF28683E2000CB916C /* TodayConsumedCell.swift in Sources */,
 				CB6832E9284F556000366004 /* ViewController.swift in Sources */,
+				2A8C0F0328631AC60051F828 /* OthersTableViewCell.swift in Sources */,
 				CB6832E5284F556000366004 /* AppDelegate.swift in Sources */,
 				C43DC15F286061C700F5F439 /* StatisticViewController.swift in Sources */,
 				CB4A25D528683E8100CB916C /* CellBuilder.swift in Sources */,

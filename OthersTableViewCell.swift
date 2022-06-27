@@ -13,7 +13,6 @@ class OthersTableViewCell: UITableViewCell {
     
     private var tableImage: UIImageView = {
         let image = UIImageView()
-//        image.image = UIImage(named: "yoga.png")
         image.contentMode = .scaleToFill
         return image
     }()

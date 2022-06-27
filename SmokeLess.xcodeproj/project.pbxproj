@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2ADA050A2866180300EED3D6 /* StartBreathViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADA05092866180300EED3D6 /* StartBreathViewController.swift */; };
 		2ADA050C2866189C00EED3D6 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADA050B2866189C00EED3D6 /* TimerViewController.swift */; };
+		2AE09C5C2868C82500A793B2 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE09C5B2868C82500A793B2 /* FeedbackViewController.swift */; };
 		6A60E0DF28606BA000505B9D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E0DE28606BA000505B9D /* Extension.swift */; };
 		CB6832E5284F556000366004 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E4284F556000366004 /* AppDelegate.swift */; };
 		CB6832E7284F556000366004 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6832E6284F556000366004 /* SceneDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		2ADA05092866180300EED3D6 /* StartBreathViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBreathViewController.swift; sourceTree = "<group>"; };
 		2ADA050B2866189C00EED3D6 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		2AE09C5B2868C82500A793B2 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		6A60E0DE28606BA000505B9D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = SOURCE_ROOT; };
 		CB6832E1284F556000366004 /* SmokeLess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmokeLess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6832E4284F556000366004 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +50,7 @@
 			children = (
 				2ADA05092866180300EED3D6 /* StartBreathViewController.swift */,
 				2ADA050B2866189C00EED3D6 /* TimerViewController.swift */,
+				2AE09C5B2868C82500A793B2 /* FeedbackViewController.swift */,
 			);
 			path = Breath;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				6A60E0DF28606BA000505B9D /* Extension.swift in Sources */,
 				2ADA050A2866180300EED3D6 /* StartBreathViewController.swift in Sources */,
 				CB6832EF284F556000366004 /* SmokeLess.xcdatamodeld in Sources */,
+				2AE09C5C2868C82500A793B2 /* FeedbackViewController.swift in Sources */,
 				2ADA050C2866189C00EED3D6 /* TimerViewController.swift in Sources */,
 				CB6832E9284F556000366004 /* ViewController.swift in Sources */,
 				CB6832E5284F556000366004 /* AppDelegate.swift in Sources */,

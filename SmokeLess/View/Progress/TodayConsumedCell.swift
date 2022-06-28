@@ -87,14 +87,12 @@ public class TodayConsumedCell: UICollectionViewCell {
     // MARK: - Selectors
     
     @objc func plusButtonPressed() {
-        delegate?.incrementConsumed(with: <#T##String#>)
-        reloadCoreData()
+        delegate?.incrementConsumed()
     }
     
     
     @objc func minButtonPressed () {
         delegate?.decrementConsumed()
-        reloadCoreData()
     }
     
     //MARK: - Helpers
@@ -123,9 +121,4 @@ public class TodayConsumedCell: UICollectionViewCell {
         self.container.backgroundColor = .smokeLessBlue
     }
     
-    func reloadCoreData() {
-        if let fetchedData = TabBarController().data {
-            data = fetchedData
-        }
-    }
 }

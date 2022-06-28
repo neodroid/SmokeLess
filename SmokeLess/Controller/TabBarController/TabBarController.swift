@@ -10,13 +10,13 @@ import UIKit
 import CoreData
 
 class TabBarController: UITabBarController {
-
+    
     // MARK: - Properties
     
     var container: NSPersistentContainer!
-    var data: [DailyCoreData]?
+    var data = [DailyCoreData]()
     
-
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class TabBarController: UITabBarController {
         configureViewControllers()
     }
     //MARK: - Helpers
-
+    
     func configureViewControllers() {
         let progress = ProgressViewController()
         progress.delegate = self
@@ -41,12 +41,12 @@ class TabBarController: UITabBarController {
     }
     
     func navigationController(image: UIImage?,title: String, rootViewController: UIViewController) ->
-        UINavigationController{
-            let nav = UINavigationController(rootViewController: rootViewController)
-            nav.tabBarItem.image = image
-            nav.tabBarItem.title = title
-            nav.navigationBar.barTintColor = .white
-            return nav
+    UINavigationController{
+        let nav = UINavigationController(rootViewController: rootViewController)
+        nav.tabBarItem.image = image
+        nav.tabBarItem.title = title
+        nav.navigationBar.barTintColor = .white
+        return nav
     }
     
     func fetchRequest() {
@@ -56,54 +56,68 @@ class TabBarController: UITabBarController {
             fatalError("Couldn't fetch User Data!!!")
         }
     }
- 
+    
 }
 
 extension TabBarController: ProgressToTabBarDelegate {
+    
+    func loadSelectedDateData(with date: String) {
+        do {
+            let fetchRequest : NSFetchRequest<DailyCoreData> = DailyCoreData.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "date == %@", date)
+            data = try container.viewContext.fetch(fetchRequest)
+            print(data, date)
+        } catch {
+            print(error)
+        }
+        
+    }
+    
     func editData(with date: String, increment: Bool) {
-        print("start edit")
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        print(urls[urls.count-1] as URL)
+        //print(urls[urls.count-1] as URL)
         // cek keberadaan data (ada ato ga)
         
         let newData: DailyCoreData?
-
+        
         do {
-            print("do")
+            //print("do")
             let fetchRequest : NSFetchRequest<DailyCoreData> = DailyCoreData.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "date == %@", date)
-            let fetchedResults = try container.viewContext.fetch(fetchRequest)
-            if let fetchedData = fetchedResults.first {
+            data = try container.viewContext.fetch(fetchRequest)
+            if let fetchedData = data.first {
                 if increment {
                     // objek.consumed += 1
                     fetchedData.consumed += 1
                     fetchedData.date = date
-                    print("add", date)
+                    //print("add", date)
                 }
                 else {
                     // Cek kalo 0 jangan mau
-                    fetchedData.consumed -= 1
-                    print("decrement", date)
+                    if  fetchedData.consumed > 0 {
+                        fetchedData.consumed -= 1
+                        //print("decrement", date)
+                    }
+                    
                 }
-                print("user data")
-                print(fetchedData.consumed)
+                //print("user data")
             }else {
-                print("DEBUG: ga nemu data")
-                newData = DailyCoreData(context: container.viewContext)
-                newData?.consumed += 1
-                newData?.date = date
-                print("new data")
-                print(newData?.consumed)
+                //print("DEBUG: ga nemu data")
+                if increment {
+                    newData = DailyCoreData(context: container.viewContext)
+                    newData?.consumed += 1
+                    newData?.date = date
+                    data = try container.viewContext.fetch(fetchRequest)
+                    //print(data)
+                }
+                
             }
         }
         catch {
-            print("catch")
             print ("fetch task failed", error)
-            
         }
-
+        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         appDelegate.saveContext()
-        
     }
 }

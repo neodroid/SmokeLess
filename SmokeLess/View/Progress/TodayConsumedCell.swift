@@ -8,11 +8,18 @@
 
 import UIKit
 
+protocol ConsumedDelegate {
+    func incrementConsumed()
+    func decrementConsumed()
+}
+
 public class TodayConsumedCell: UICollectionViewCell {
     
     //MARK: - Properties
     
     let dateFormatter = DateFormatter()
+    var data = [DailyCoreData]()
+    var delegate: ConsumedDelegate?
     
     var container: UIView = {
         let view = UIView()
@@ -51,6 +58,7 @@ public class TodayConsumedCell: UICollectionViewCell {
         button.backgroundColor = .white
         button.layer.cornerRadius = 10
         button.setImage(UIImage(named: "plusSign"), for: .normal)
+        button.addTarget(self, action: #selector(plusButtonPressed), for: .touchUpInside)
         button.imageView?.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
         return button
     }()
@@ -60,6 +68,7 @@ public class TodayConsumedCell: UICollectionViewCell {
         button.backgroundColor = .white
         button.layer.cornerRadius = 10
         button.setImage(UIImage(named: "minSign"), for: .normal)
+        button.addTarget(self, action: #selector(minButtonPressed), for: .touchUpInside)
         button.imageView?.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
         return button
     }()
@@ -73,6 +82,19 @@ public class TodayConsumedCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Selectors
+    
+    @objc func plusButtonPressed() {
+        delegate?.incrementConsumed()
+        reloadCoreData()
+    }
+    
+    
+    @objc func minButtonPressed () {
+        delegate?.decrementConsumed()
+        reloadCoreData()
     }
     
     //MARK: - Helpers
@@ -99,5 +121,11 @@ public class TodayConsumedCell: UICollectionViewCell {
     
     public func setup(title: Int, subtitle: String) {
         self.container.backgroundColor = .smokeLessBlue
+    }
+    
+    func reloadCoreData() {
+        if let fetchedData = TabBarController().data {
+            data = fetchedData
+        }
     }
 }

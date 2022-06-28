@@ -8,12 +8,18 @@
 
 import UIKit
 
+protocol ProgressToTabBarDelegate {
+    func editData(with date: String, increment: Bool)
+}
+
 class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
     
     //MARK: - Properties
     
     let dailyData = [DailyData]()
+    var data = [DailyCoreData]()
     var calendarLogic = ProgressCalendarLogic()
+    var delegate: ProgressToTabBarDelegate?
     
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: makeLayout())
@@ -32,7 +38,11 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         calendarLogic.updateDay()
+//<<<<<<< HEAD
         calendarLogic.getMonthStringToday()
+//=======
+        calendarLogic.updateDateString()
+//>>>>>>> e5fef28 (feat: add core data entity and fetched request in TabBarViewController)
         configureUI()
         // TODO: bug at the end of month
 //        scrollToDate()
@@ -117,8 +127,8 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
             sheet.detents = [.medium()]
         }
         self.present(VC, animated: true, completion: nil)
-        
     }
+    
 }
 
 // MARK: - Extensions
@@ -144,6 +154,7 @@ extension ProgressViewController: UICollectionViewDelegate, UICollectionViewData
             return cell
         }else {
             let cell = CellBuilder.getConsumedCell(collectionView: collectionView, indexPath: indexPath)
+            cell.delegate = self
             return cell
         }
     }
@@ -167,6 +178,19 @@ extension ProgressViewController: UICollectionViewDelegate, UICollectionViewData
             configureUI()
         }
     }
+}
+
+extension ProgressViewController: ConsumedDelegate {
+    
+    func incrementConsumed() {
+        delegate?.editData(with: calendarLogic.dateString, increment: true)
+    }
+    
+    func decrementConsumed() {
+        delegate?.editData(with: calendarLogic.dateString, increment: false)
+    }
+    
+    
 }
 
 // MARK: - Day Generation

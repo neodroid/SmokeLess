@@ -23,7 +23,7 @@ class TabBarController: UITabBarController {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         container = appDelegate.persistentContainer
-        appDelegate.emptyDataStore()
+//        appDelegate.emptyDataStore()
         fetchRequest()
         configureViewControllers()
     }

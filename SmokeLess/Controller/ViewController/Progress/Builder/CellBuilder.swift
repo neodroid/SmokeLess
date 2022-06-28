@@ -54,9 +54,9 @@ public class CellBuilder {
         
     }
     
-    public static func getConsumedCell(collectionView: UICollectionView, indexPath: IndexPath) -> TodayConsumedCell {
+    public static func getConsumedCell(collectionView: UICollectionView, indexPath: IndexPath, cellAtDate: String) -> TodayConsumedCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayConsumedCell", for: indexPath) as! TodayConsumedCell
-        cell.setup(title: (indexPath.row ), subtitle: "\(indexPath.row)")
+        cell.setup(title: (indexPath.row ), subtitle: cellAtDate)
         return cell
         
     }

@@ -49,6 +49,9 @@ class StartBreathViewController: UIViewController {
     }
     @objc func buttonClicked() {
         print("Button Clicked")
+        let vc = TimerViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -79,6 +82,7 @@ class StartBreathViewController: UIViewController {
         button.configuration = createButton()
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.center = view.center
+        button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
         
         view.addSubview(titleLabel)
         view.addSubview(subtitleLabel)
@@ -112,5 +116,4 @@ private extension UILabel {
         
         attributedText = attributedString
     }
-    
 }

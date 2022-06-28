@@ -13,6 +13,7 @@
 		06FF274F286B0F9E006B5FB9 /* SecondUserPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF274E286B0F9E006B5FB9 /* SecondUserPlanViewController.swift */; };
 		06FF2751286B0FA9006B5FB9 /* ThirdUserPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF2750286B0FA9006B5FB9 /* ThirdUserPlanViewController.swift */; };
 		6A0850BD286AFE97002C4429 /* MoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0850BC286AFE97002C4429 /* MoviesCollectionViewCell.swift */; };
+		2A097DF62869A05E0082CF87 /* DoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A097DF52869A05E0082CF87 /* DoneViewController.swift */; };
 		2ADA050A2866180300EED3D6 /* StartBreathViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADA05092866180300EED3D6 /* StartBreathViewController.swift */; };
 		2ADA050C2866189C00EED3D6 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADA050B2866189C00EED3D6 /* TimerViewController.swift */; };
 		2AE09C5C2868C82500A793B2 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE09C5B2868C82500A793B2 /* FeedbackViewController.swift */; };
@@ -66,6 +67,7 @@
 		06FF2761286B5202006B5FB9 /* DoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneViewController.swift; sourceTree = "<group>"; };
 		2A8C0F0228631AC60051F828 /* OthersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		6A0850BC286AFE97002C4429 /* MoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewCell.swift; sourceTree = "<group>"; };
+		2A097DF52869A05E0082CF87 /* DoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneViewController.swift; sourceTree = "<group>"; };
 		2ADA05092866180300EED3D6 /* StartBreathViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBreathViewController.swift; sourceTree = "<group>"; };
 		2ADA050B2866189C00EED3D6 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		2AE09C5B2868C82500A793B2 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				2ADA05092866180300EED3D6 /* StartBreathViewController.swift */,
 				2ADA050B2866189C00EED3D6 /* TimerViewController.swift */,
 				2AE09C5B2868C82500A793B2 /* FeedbackViewController.swift */,
+				2A097DF52869A05E0082CF87 /* DoneViewController.swift */,
 			);
 			path = Breath;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				CB4A25C928683DB700CB916C /* TopHeaderCell.swift in Sources */,
 				6AF730A2286C1D20005F1100 /* TalkWithFriendsOrCommunityViewController.swift in Sources */,
 				C43DC16228619FE700F5F439 /* DrawLineOnView.swift in Sources */,
+				2A097DF62869A05E0082CF87 /* DoneViewController.swift in Sources */,
 				CB6832E7284F556000366004 /* SceneDelegate.swift in Sources */,
 				CB4A25E12868C74400CB916C /* TabBarController.swift in Sources */,
 				CB4A25CD28683E0400CB916C /* TodayLimitCell.swift in Sources */,

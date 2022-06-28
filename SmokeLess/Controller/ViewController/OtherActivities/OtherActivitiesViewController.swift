@@ -14,8 +14,11 @@ class OtherActivitiesViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "secondCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "thirdCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "fourthCell")
         return tableView
     }()
+    
+    var collectionView: UICollectionView?
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -27,6 +30,8 @@ class OtherActivitiesViewController: UIViewController {
         super.viewDidLayoutSubviews()
         tableView.frame = CGRect(x: tableView.frame.origin.x, y: tableView.frame.origin.y, width: tableView.frame.size.width, height: tableView.frame.size.height)
         tableView.reloadData()
+        
+        collectionView?.frame = CGRect(x: 0, y: 60, width: tableView.frame.size.width, height: 150)
     }
     
     // MARK: - Helpers
@@ -46,10 +51,20 @@ class OtherActivitiesViewController: UIViewController {
 }
 
 // MARK: - Extension
-extension OtherActivitiesViewController: UITableViewDelegate, UITableViewDataSource {
+extension OtherActivitiesViewController: UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesCollectionViewCell.identifier, for: indexPath) as! MoviesCollectionViewCell
+        cell.configure(with: "littleForest", moviesTitle: "Little Forest")
+        return cell
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,8 +78,11 @@ extension OtherActivitiesViewController: UITableViewDelegate, UITableViewDataSou
         else if (indexPath.section == 1) {
             return 125
         }
-        else {
+        else if (indexPath.section == 2) {
             return 150
+        }
+        else {
+            return 250
         }
     }
     
@@ -98,7 +116,7 @@ extension OtherActivitiesViewController: UITableViewDelegate, UITableViewDataSou
             
             return cell
         }
-        else {
+        else if(indexPath.section == 2) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "thirdCell", for: indexPath)
             let titleLabel = UILabel()
             
@@ -143,6 +161,36 @@ extension OtherActivitiesViewController: UITableViewDelegate, UITableViewDataSou
                                 
                 stackView.addArrangedSubview(itemStackView)
             }
+            
+            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "fourthCell", for: indexPath)
+            let titleLabel = UILabel()
+            
+            titleLabel.text = "Movies Recommendation"
+            titleLabel.numberOfLines = 0
+            titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
+            cell.addSubview(titleLabel)
+            titleLabel.anchor(top: cell.topAnchor, left: cell.leftAnchor, right: cell.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
+            
+            let layout = UICollectionViewFlowLayout()
+            
+            layout.scrollDirection = .horizontal
+            layout.itemSize = CGSize(width: 90, height: 150)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            
+            collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+            collectionView?.showsHorizontalScrollIndicator = false
+            collectionView?.register(MoviesCollectionViewCell.self, forCellWithReuseIdentifier: MoviesCollectionViewCell.identifier)
+            collectionView?.delegate = self
+            collectionView?.dataSource = self
+            
+            guard let myCollection = collectionView else {
+                return cell
+            }
+            
+            cell.addSubview(myCollection)
             
             return cell
         }

@@ -26,9 +26,19 @@ struct ProgressCalendarLogic {
         //contoh return (20)
         return Int(todayDay) ?? 1
     }
-    
     mutating func updateDay(){
         self.dayString = String(getTodayDay())
+    }
+    
+    func getTodayDate() -> String {
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let todayDate = dateFormatter.string(from: Date())
+        //contoh return (20)
+        return String(todayDate)
+    }
+    
+    mutating func updateDateString(){
+        self.dateString = getTodayDate()
     }
     
     func getPickedMonth() -> Int {

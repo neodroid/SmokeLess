@@ -119,6 +119,18 @@ public class TodayConsumedCell: UICollectionViewCell {
     
     public func setup(title: Int, subtitle: String) {
         self.container.backgroundColor = .smokeLessBlue
+        dateFormatter.dateFormat = "dd/M/yyyy"
+        let todayDateString = dateFormatter.string(from: Date())
+        if dateFormatter.date(from: subtitle)! > dateFormatter.date(from: todayDateString)!{
+            container.backgroundColor = .smokeLessLightGray
+            addButton.isHidden = true
+            minButton.isHidden = true
+        }else {
+            addButton.isHidden = false
+            minButton.isHidden = false
+        }
+        
+        
     }
     
 }

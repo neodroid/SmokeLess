@@ -152,15 +152,17 @@ extension ProgressViewController: UICollectionViewDelegate, UICollectionViewData
             let cell = CellBuilder.getLimitCell(collectionView: collectionView, indexPath: indexPath)
             return cell
         }else {
-            let cell = CellBuilder.getConsumedCell(collectionView: collectionView, indexPath: indexPath)
+            let cell = CellBuilder.getConsumedCell(collectionView: collectionView, indexPath: indexPath, cellAtDate: calendarLogic.dateString)
             cell.delegate = self
             dailyCoreData = tabBar?.data ?? dailyCoreData
             if let data = dailyCoreData.first {
                 //print("here")
                 //print(data)
                 cell.subtitleLabel.text = String(data.consumed)
+//                cell.subtitleLabel.text = calendarLogic.dateString
             } else {
                 cell.subtitleLabel.text = "0"
+//                cell.subtitleLabel.text = calendarLogic.dateString
             }
             //cell.subtitleLabel.text = String(dailyCoreData.first?.consumed)
             //cell.subtitleLabel.text = String(consumedData)

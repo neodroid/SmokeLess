@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		6A0850BD286AFE97002C4429 /* MoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0850BC286AFE97002C4429 /* MoviesCollectionViewCell.swift */; };
+		06FF2749286B0F72006B5FB9 /* FirstOnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF2748286B0F72006B5FB9 /* FirstOnBoardingViewController.swift */; };
+		06FF274B286B0F81006B5FB9 /* SecondOnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF274A286B0F81006B5FB9 /* SecondOnBoardingViewController.swift */; };
+		06FF274D286B0F91006B5FB9 /* FirstUserPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF274C286B0F91006B5FB9 /* FirstUserPlanViewController.swift */; };
+		06FF274F286B0F9E006B5FB9 /* SecondUserPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF274E286B0F9E006B5FB9 /* SecondUserPlanViewController.swift */; };
+		06FF2751286B0FA9006B5FB9 /* ThirdUserPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF2750286B0FA9006B5FB9 /* ThirdUserPlanViewController.swift */; };
+		06FF275C286B51AF006B5FB9 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF275B286B51AF006B5FB9 /* TimerViewController.swift */; };
+		06FF275E286B51D3006B5FB9 /* StartBreathViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF275D286B51D3006B5FB9 /* StartBreathViewController.swift */; };
+		06FF2760286B51E9006B5FB9 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF275F286B51E9006B5FB9 /* FeedbackViewController.swift */; };
+		06FF2762286B5202006B5FB9 /* DoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF2761286B5202006B5FB9 /* DoneViewController.swift */; };
 		6A60E0DF28606BA000505B9D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E0DE28606BA000505B9D /* Extension.swift */; };
 		6AF73096286C1784005F1100 /* PlayGamesOrWatchMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF73095286C1784005F1100 /* PlayGamesOrWatchMoviesViewController.swift */; };
 		6AF73099286C1853005F1100 /* YogaExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF73098286C1853005F1100 /* YogaExerciseViewController.swift */; };
@@ -46,6 +55,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06FF2748286B0F72006B5FB9 /* FirstOnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnBoardingViewController.swift; sourceTree = "<group>"; };
+		06FF274A286B0F81006B5FB9 /* SecondOnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnBoardingViewController.swift; sourceTree = "<group>"; };
+		06FF274C286B0F91006B5FB9 /* FirstUserPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstUserPlanViewController.swift; sourceTree = "<group>"; };
+		06FF274E286B0F9E006B5FB9 /* SecondUserPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondUserPlanViewController.swift; sourceTree = "<group>"; };
+		06FF2750286B0FA9006B5FB9 /* ThirdUserPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdUserPlanViewController.swift; sourceTree = "<group>"; };
+		06FF275B286B51AF006B5FB9 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		06FF275D286B51D3006B5FB9 /* StartBreathViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBreathViewController.swift; sourceTree = "<group>"; };
+		06FF275F286B51E9006B5FB9 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		06FF2761286B5202006B5FB9 /* DoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneViewController.swift; sourceTree = "<group>"; };
 		2A8C0F0228631AC60051F828 /* OthersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		6A0850BC286AFE97002C4429 /* MoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A60E0DE28606BA000505B9D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = SOURCE_ROOT; };
@@ -159,6 +177,36 @@
 			path = TalkWithFriendsOrCommunity;
 			sourceTree = "<group>";
 		};
+		06FF2746286B0F54006B5FB9 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				06FF2748286B0F72006B5FB9 /* FirstOnBoardingViewController.swift */,
+				06FF274A286B0F81006B5FB9 /* SecondOnBoardingViewController.swift */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		06FF2747286B0F5C006B5FB9 /* UserPlan */ = {
+			isa = PBXGroup;
+			children = (
+				06FF274C286B0F91006B5FB9 /* FirstUserPlanViewController.swift */,
+				06FF274E286B0F9E006B5FB9 /* SecondUserPlanViewController.swift */,
+				06FF2750286B0FA9006B5FB9 /* ThirdUserPlanViewController.swift */,
+			);
+			path = UserPlan;
+			sourceTree = "<group>";
+		};
+		06FF2752286B5147006B5FB9 /* DeepBreath */ = {
+			isa = PBXGroup;
+			children = (
+				06FF275B286B51AF006B5FB9 /* TimerViewController.swift */,
+				06FF275D286B51D3006B5FB9 /* StartBreathViewController.swift */,
+				06FF275F286B51E9006B5FB9 /* FeedbackViewController.swift */,
+				06FF2761286B5202006B5FB9 /* DoneViewController.swift */,
+			);
+			path = DeepBreath;
+			sourceTree = "<group>";
+		};
 		C43DC15D286061B500F5F439 /* Statistic */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,6 +296,9 @@
 			isa = PBXGroup;
 			children = (
 				6A0850B82869ADAA002C4429 /* OtherActivities */,
+				06FF2752286B5147006B5FB9 /* DeepBreath */,
+				06FF2746286B0F54006B5FB9 /* OnBoarding */,
+				06FF2747286B0F5C006B5FB9 /* UserPlan */,
 				C4A2FD672869911900472BF7 /* NicotineCravings */,
 				CB4A25D228683E5800CB916C /* Progress */,
 				C43DC15D286061B500F5F439 /* Statistic */,
@@ -405,18 +456,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06FF2751286B0FA9006B5FB9 /* ThirdUserPlanViewController.swift in Sources */,
 				CB4A25D928683EA600CB916C /* ProgressViewController.swift in Sources */,
 				CB4A25D128683E4100CB916C /* GoalsCell.swift in Sources */,
+				06FF2760286B51E9006B5FB9 /* FeedbackViewController.swift in Sources */,
 				CB4A25BF2868393F00CB916C /* MonthTemplate.swift in Sources */,
 				C47776E8286992CE0075C6CF /* OthersTableViewCell.swift in Sources */,
+				06FF2749286B0F72006B5FB9 /* FirstOnBoardingViewController.swift in Sources */,
 				CB4A25C728683D9100CB916C /* DateCell.swift in Sources */,
 				6AF73096286C1784005F1100 /* PlayGamesOrWatchMoviesViewController.swift in Sources */,
 				CB4A25D728683E9200CB916C /* LayoutBuilder.swift in Sources */,
 				6A60E0DF28606BA000505B9D /* Extension.swift in Sources */,
 				CB6832EF284F556000366004 /* SmokeLess.xcdatamodeld in Sources */,
+				06FF274D286B0F91006B5FB9 /* FirstUserPlanViewController.swift in Sources */,
+				06FF275E286B51D3006B5FB9 /* StartBreathViewController.swift in Sources */,
 				C43DC1662862F57D00F5F439 /* BarChartCollectionViewCell.swift in Sources */,
 				C43DC1642861B4EA00F5F439 /* ChartGrid.swift in Sources */,
 				CB4A25C32868398C00CB916C /* DailyData.swift in Sources */,
+				06FF2762286B5202006B5FB9 /* DoneViewController.swift in Sources */,
 				CB4A25CF28683E2000CB916C /* TodayConsumedCell.swift in Sources */,
 				6A0850BD286AFE97002C4429 /* MoviesCollectionViewCell.swift in Sources */,
 				CB6832E9284F556000366004 /* ViewController.swift in Sources */,
@@ -436,8 +493,11 @@
 				CB4A25C12868396200CB916C /* ProgressCalendarLogic.swift in Sources */,
 				CB4A25BD2868392900CB916C /* MonthMetadata.swift in Sources */,
 				6AF7309C286C1A86005F1100 /* DrinkingWaterViewController.swift in Sources */,
+				06FF274B286B0F81006B5FB9 /* SecondOnBoardingViewController.swift in Sources */,
 				CB4A25CB28683DE800CB916C /* TittleCell.swift in Sources */,
+				06FF274F286B0F9E006B5FB9 /* SecondUserPlanViewController.swift in Sources */,
 				C47776E6286992C50075C6CF /* NicotineMenuViewController.swift in Sources */,
+				06FF275C286B51AF006B5FB9 /* TimerViewController.swift in Sources */,
 				CB4A25DD286879C400CB916C /* ProgressChangeMonthController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

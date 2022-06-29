@@ -14,6 +14,7 @@
 		6AF7309C286C1A86005F1100 /* DrinkingWaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF7309B286C1A86005F1100 /* DrinkingWaterViewController.swift */; };
 		6AF7309F286C1C03005F1100 /* DoGardeningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF7309E286C1C03005F1100 /* DoGardeningViewController.swift */; };
 		6AF730A2286C1D20005F1100 /* TalkWithFriendsOrCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF730A1286C1D20005F1100 /* TalkWithFriendsOrCommunityViewController.swift */; };
+		6AF730A4286C1FAF005F1100 /* YoutubeRecommendationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF730A3286C1FAF005F1100 /* YoutubeRecommendationCollectionViewCell.swift */; };
 		C43DC15F286061C700F5F439 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC15E286061C700F5F439 /* StatisticViewController.swift */; };
 		C43DC16228619FE700F5F439 /* DrawLineOnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC16128619FE700F5F439 /* DrawLineOnView.swift */; };
 		C43DC1642861B4EA00F5F439 /* ChartGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DC1632861B4EA00F5F439 /* ChartGrid.swift */; };
@@ -53,6 +54,7 @@
 		6AF7309B286C1A86005F1100 /* DrinkingWaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkingWaterViewController.swift; sourceTree = "<group>"; };
 		6AF7309E286C1C03005F1100 /* DoGardeningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoGardeningViewController.swift; sourceTree = "<group>"; };
 		6AF730A1286C1D20005F1100 /* TalkWithFriendsOrCommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkWithFriendsOrCommunityViewController.swift; sourceTree = "<group>"; };
+		6AF730A3286C1FAF005F1100 /* YoutubeRecommendationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeRecommendationCollectionViewCell.swift; sourceTree = "<group>"; };
 		C43DC15E286061C700F5F439 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		C43DC16128619FE700F5F439 /* DrawLineOnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLineOnView.swift; sourceTree = "<group>"; };
 		C43DC1632861B4EA00F5F439 /* ChartGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGrid.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				6A0850BC286AFE97002C4429 /* MoviesCollectionViewCell.swift */,
+				6AF730A3286C1FAF005F1100 /* YoutubeRecommendationCollectionViewCell.swift */,
 			);
 			path = OtherActivities;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				CB6832E7284F556000366004 /* SceneDelegate.swift in Sources */,
 				CB4A25E12868C74400CB916C /* TabBarController.swift in Sources */,
 				CB4A25CD28683E0400CB916C /* TodayLimitCell.swift in Sources */,
+				6AF730A4286C1FAF005F1100 /* YoutubeRecommendationCollectionViewCell.swift in Sources */,
 				C45152AB2865ACA0002E9FFD /* ChangeMonthController.swift in Sources */,
 				6AF7309F286C1C03005F1100 /* DoGardeningViewController.swift in Sources */,
 				CB4A25C12868396200CB916C /* ProgressCalendarLogic.swift in Sources */,

@@ -14,8 +14,11 @@ class DoGardeningViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "secondCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "thirdCell")
         return tableView
     }()
+    
+    var collectionView: UICollectionView?
         
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -27,6 +30,7 @@ class DoGardeningViewController: UIViewController {
         super.viewDidLayoutSubviews()
         tableView.frame = CGRect(x: tableView.frame.origin.x, y: tableView.frame.origin.y, width: tableView.frame.size.width, height: tableView.frame.size.height)
         tableView.reloadData()
+        collectionView?.frame = CGRect(x: 0, y: 60, width: tableView.frame.size.width, height: 400)
     }
     
     // MARK: - Helpers
@@ -47,10 +51,28 @@ class DoGardeningViewController: UIViewController {
 }
 
 // MARK: - Extension
-extension DoGardeningViewController: UITableViewDelegate, UITableViewDataSource {
+extension DoGardeningViewController: UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: YoutubeRecommendationCollectionViewCell.identifier, for: indexPath) as! YoutubeRecommendationCollectionViewCell
+        cell.configure(with: "gardeningRecommendationOne")
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,8 +83,11 @@ extension DoGardeningViewController: UITableViewDelegate, UITableViewDataSource 
         if (indexPath.section == 0) {
             return 350
         }
-        else {
+        else if (indexPath.section == 1) {
             return 125
+        }
+        else {
+            return 400
         }
     }
     
@@ -77,7 +102,7 @@ extension DoGardeningViewController: UITableViewDelegate, UITableViewDataSource 
             
             return cell
         }
-        else {
+        else if (indexPath.section == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "secondCell", for: indexPath)
             let titleLabel = UILabel()
             let descriptionLabel = UILabel()
@@ -93,6 +118,34 @@ extension DoGardeningViewController: UITableViewDelegate, UITableViewDataSource 
             descriptionLabel.font = UIFont.systemFont(ofSize: 16)
             cell.addSubview(descriptionLabel)
             descriptionLabel.anchor(top: titleLabel.bottomAnchor, left: cell.leftAnchor, right: cell.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingRight: 20)
+            
+            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "thirdCell", for: indexPath)
+            let titleLabel = UILabel()
+            
+            titleLabel.text = "Recommendation"
+            titleLabel.numberOfLines = 0
+            titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
+            cell.addSubview(titleLabel)
+            titleLabel.anchor(top: cell.topAnchor, left: cell.leftAnchor, right: cell.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
+            
+            let layout = UICollectionViewFlowLayout()
+            
+            layout.itemSize = CGSize(width: 167, height: 162)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+            
+            collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+            collectionView?.register(YoutubeRecommendationCollectionViewCell.self, forCellWithReuseIdentifier: YoutubeRecommendationCollectionViewCell.identifier)
+            collectionView?.delegate = self
+            collectionView?.dataSource = self
+            
+            guard let myCollection = collectionView else {
+                return cell
+            }
+            
+            cell.addSubview(myCollection)
             
             return cell
         }

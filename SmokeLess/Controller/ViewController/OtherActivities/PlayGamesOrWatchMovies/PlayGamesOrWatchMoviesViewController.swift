@@ -1,13 +1,14 @@
 //
-//  OtherActivitiesViewController.swift
+//  PlayGamesOrWatchMoviesViewController.swift
 //  SmokeLess
 //
-//  Created by Ishaq Adheltyo on 27/06/22.
+//  Created by Ishaq Adheltyo on 29/06/22.
 //
 
 import UIKit
 
-class OtherActivitiesViewController: UIViewController {
+class PlayGamesOrWatchMoviesViewController: UIViewController {
+
     // MARK: - Properties
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -48,10 +49,11 @@ class OtherActivitiesViewController: UIViewController {
         tableView.dataSource = self
         tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor)
     }
+
 }
 
 // MARK: - Extension
-extension OtherActivitiesViewController: UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension PlayGamesOrWatchMoviesViewController: UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5

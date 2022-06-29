@@ -76,19 +76,23 @@ class FirstOnBoardingViewController: UIPageViewController {
         pageControl.addTarget(self, action: #selector(pageControlDidChange(_:)), for: .valueChanged)
         
         configureUI()
-//        scrollView.delegate = self
+        scrollView.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height - 100)
+        configureScrollView()
     }
     
     //MARK: - Selectors
     
     @objc func buttonClicked() {
+        print("worked")
         let controller = SecondOnBoardingViewController()
-        navigationController?.pushViewController(controller, animated: true)
+//        navigationController?.pushViewController(controller, animated: true)
+        controller.modalPresentationStyle = .fullScreen
+        self.present(controller, animated: true, completion: nil)
     }
     
     @objc private func pageControlDidChange(_ sender: UIPageControl) {
@@ -97,6 +101,20 @@ class FirstOnBoardingViewController: UIPageViewController {
     }
 
     //MARK: - Helpers
+    
+    func configureScrollView() {
+        scrollView.contentSize = CGSize(width: view.frame.size.width * 5, height: view.frame.size.height - pageControl.frame.size.height - 70)
+        scrollView.delegate = self
+        scrollView.isPagingEnabled = true
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        
+        for x in 0..<2 {
+            let page = UIView(frame: CGRect(x: CGFloat(x), y: 0, width: view.frame.width, height: scrollView.frame.height))
+            scrollView.addSubview(page)
+            page.addSubview(<#T##view: UIView##UIView#>)
+        }
+    }
     
     func configureUI() {
 
@@ -148,8 +166,8 @@ class FirstOnBoardingViewController: UIPageViewController {
         
     }
 
-//extension FirstOnBoardingViewController: UIScrollViewDelegate {
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        pageControl.currentPage = Int(floorf(Float(scrollView.contentOffset.x) / Float(scrollView.frame.size.width)))
-//    }
-//}
+extension FirstOnBoardingViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        pageControl.currentPage = Int(floorf(Float(scrollView.contentOffset.x) / Float(scrollView.frame.size.width)))
+    }
+}

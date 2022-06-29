@@ -77,8 +77,11 @@ class SecondOnBoardingViewController: UIPageViewController {
     //MARK: - Selectors
     
     @objc func buttonClicked() {
+        print("worked")
         let controller = FirstUserPlanViewController()
-        navigationController?.pushViewController(controller, animated: true)
+        //navigationController?.pushViewController(controller, animated: true)
+        controller.modalPresentationStyle = .fullScreen
+        self.present(controller, animated: true, completion: nil)
     }
 
     //MARK: - Helpers

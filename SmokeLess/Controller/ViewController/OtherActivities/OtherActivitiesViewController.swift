@@ -173,12 +173,12 @@ extension OtherActivitiesViewController: UITableViewDelegate, UITableViewDataSou
             titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
             cell.addSubview(titleLabel)
             titleLabel.anchor(top: cell.topAnchor, left: cell.leftAnchor, right: cell.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
-            
+     
             let layout = UICollectionViewFlowLayout()
             
             layout.scrollDirection = .horizontal
             layout.itemSize = CGSize(width: 90, height: 150)
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
             
             collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
             collectionView?.showsHorizontalScrollIndicator = false

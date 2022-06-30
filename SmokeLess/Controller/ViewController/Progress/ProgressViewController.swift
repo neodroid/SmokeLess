@@ -33,12 +33,14 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
         super.viewDidLoad()
         calendarLogic.updateDay()
         configureUI()
-        scrollToDate()
+        // TODO: bug at the end of month
+//        scrollToDate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        scrollToDate()
+        // TODO: bug at the end of month
+//        scrollToDate()
     }
     
     //MARK: - Selectors

@@ -109,11 +109,11 @@ class FirstOnBoardingViewController: UIPageViewController {
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
         
-        for x in 0..<2 {
-            let page = UIView(frame: CGRect(x: CGFloat(x), y: 0, width: view.frame.width, height: scrollView.frame.height))
-            scrollView.addSubview(page)
-            page.addSubview(<#T##view: UIView##UIView#>)
-        }
+//        for x in 0..<2 {
+//            let page = UIView(frame: CGRect(x: CGFloat(x), y: 0, width: view.frame.width, height: scrollView.frame.height))
+//            scrollView.addSubview(page)
+//            page.addSubview(<#T##view: UIView##UIView#>)
+//        }
     }
     
     func configureUI() {

@@ -163,7 +163,9 @@ extension ProgressViewController: UICollectionViewDelegate, UICollectionViewData
             return cell
         }else if indexPath.section == 2{
             let cell = CellBuilder.getLimitCell(collectionView: collectionView, indexPath: indexPath)
+//            cell.delegate = self
             dailyCoreData = tabBar?.data ?? dailyCoreData
+//            cell.delegate = self
             if let data = dailyCoreData.first {
                 cell.subtitleLabel.text = String(data.limit)
             } else {

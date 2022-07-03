@@ -11,6 +11,7 @@ class StatisticViewController: UIViewController {
     
     // MARK: - Properties
     
+    let monthTemplate = MonthTemplate()
     let statisticLabel: UILabel = {
         let theLabel = UILabel()
         theLabel.text = "Statistic"
@@ -35,7 +36,7 @@ class StatisticViewController: UIViewController {
     
     let changeMonthLabel: UILabel = {
         let theLabel = UILabel()
-        theLabel.text = "June 2022"
+        theLabel.text = "Jun 2022"
         theLabel.font = .systemFont(ofSize: 16, weight: .bold)
         return theLabel
     }()
@@ -213,7 +214,11 @@ class StatisticViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        calendarLogic.getMonthStringToday()
+        calendarLogic.updateDateString()
         configureUI()
+        setupMonthLabel()
         
     }
     
@@ -245,6 +250,11 @@ class StatisticViewController: UIViewController {
     }
     
     func configureUI() {
+        calendarLogic.selectedMonth = calendarLogic.getMonthYearFormat().date(from: calendarLogic.monthString) ?? Date()
+        
+        if let metadata = try? monthMetadata(for: calendarLogic.selectedMonth) {
+            calendarLogic.monthData = metadata
+        }
         // Setup Limit Counter View
         vStackLimit.addArrangedSubview(limitLabel)
         vStackLimit.addArrangedSubview(limitNumber)
@@ -302,12 +312,16 @@ class StatisticViewController: UIViewController {
     }
     
     func setUpChart(){
-
         grid.backgroundColor = .clear
-        
         collectionView.delegate = self
         collectionView.dataSource = self
     
+    }
+    
+    func setupMonthLabel(){
+        
+        let fullString =  "\(monthTemplate.shortName[calendarLogic.getPickedMonth() - 1]) , \(calendarLogic.getPickedYear()) "
+        changeMonthLabel.text = fullString
     }
     
     func createChartAxis() {
@@ -337,7 +351,7 @@ class StatisticViewController: UIViewController {
 extension StatisticViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return calendarLogic.monthData?.numberOfDays ?? 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -346,7 +360,7 @@ extension StatisticViewController: UICollectionViewDelegate, UICollectionViewDat
         // Set this constraints for dynamic bar height
         cell.limitBar.setDimensions(width: cell.contentView.bounds.width / 4, height: 40)
         cell.consumedBar.setDimensions(width: cell.contentView.bounds.width / 4, height: 80)
-        
+        cell.dateLabel.text = String(indexPath.row + 1)
         
         return cell
     }
@@ -372,25 +386,19 @@ extension StatisticViewController: UICollectionViewDelegate, UICollectionViewDat
 
         }
     }
-    
-    
-    
-    
 }
 
 extension StatisticViewController: MonthChangeDelegate {
     func userEnterMonthAndYear(month: String, year: String) {
         calendarLogic.updateDay()
         calendarLogic.monthString = "\(month)/\(year)"
+        let fullString =  "\(monthTemplate.shortName[Int(month)! - 1]) , \(year) "
+        changeMonthLabel.text = fullString
         collectionView.reloadData()
         configureUI()
     }
 
 }
-
-
-
-
 
 // MARK: - Additional Func
 
@@ -407,4 +415,26 @@ public func drawLineToView(viewToAdd: UIView, origin: CGPoint, destination: CGPo
     lineOnView.backgroundColor = .clear
     viewToAdd.addSubview(lineOnView)
     lineOnView.anchor(top: viewToAdd.topAnchor, left: viewToAdd.leftAnchor, bottom: viewToAdd.bottomAnchor, right: viewToAdd.rightAnchor)
+}
+
+extension StatisticViewController {
+    func monthMetadata(for baseDate: Date) throws -> MonthMetadata {
+        let calendar = Calendar(identifier: .gregorian)
+        guard
+            let numberOfDaysInMonth = calendar.range(
+                of: .day,
+                in: .month,
+                for: baseDate)?.count,
+            let firstDayOfMonth = calendar.date(
+                from: calendar.dateComponents([.year, .month], from: baseDate))
+        else {
+            fatalError()
+        }
+        let firstDayWeekday = calendar.component(.weekday, from: firstDayOfMonth)
+        
+        return MonthMetadata(
+            numberOfDays: numberOfDaysInMonth,
+            firstDay: firstDayOfMonth,
+            firstDayWeekday: firstDayWeekday)
+    }
 }

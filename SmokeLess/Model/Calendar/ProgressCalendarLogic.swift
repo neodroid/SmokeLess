@@ -19,6 +19,12 @@ struct ProgressCalendarLogic {
     var dayString = "01"
     var dateString = "01/06/2022"
     
+    mutating func getMonthStringToday() {
+        dateFormatter.dateFormat = "M/yyyy"
+        let todayMonthString = dateFormatter.string(from: Date())
+        //contoh return (20)
+        self.monthString = todayMonthString
+    }
     
     func getTodayDay() -> Int {
         dateFormatter.dateFormat = "dd"

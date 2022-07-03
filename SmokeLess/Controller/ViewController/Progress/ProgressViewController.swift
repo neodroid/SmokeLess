@@ -32,6 +32,7 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         calendarLogic.updateDay()
+        calendarLogic.getMonthStringToday()
         configureUI()
         // TODO: bug at the end of month
 //        scrollToDate()

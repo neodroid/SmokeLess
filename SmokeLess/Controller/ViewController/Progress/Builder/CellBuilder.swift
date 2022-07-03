@@ -43,15 +43,10 @@ public class CellBuilder {
     }
     
     
-    public static func getLimitCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell{
-        
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayLimitCell", for: indexPath) as? TodayLimitCell {
+    public static func getLimitCell(collectionView: UICollectionView, indexPath: IndexPath) -> TodayLimitCell{
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayLimitCell", for: indexPath) as! TodayLimitCell
             cell.setup(title: (indexPath.row ), subtitle: "\(indexPath.row)")
             return cell
-        }else {
-            return UICollectionViewCell()
-        }
-        
     }
     
     public static func getConsumedCell(collectionView: UICollectionView, indexPath: IndexPath, cellAtDate: String) -> TodayConsumedCell {

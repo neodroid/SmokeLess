@@ -6,14 +6,16 @@
 //
 
 import UIKit
+import CoreData
 
 public class DateCell: UICollectionViewCell {
     
     //MARK: - Properties
-    
+    var containerCore: NSPersistentContainer!
     let dateFormatter = DateFormatter()
     var dayLabel = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
     var currDay = 0
+    var data = [DailyCoreData]()
     
     var container: UIView = {
         let view = UIView()
@@ -53,11 +55,22 @@ public class DateCell: UICollectionViewCell {
         return view
     }()
     
+    var checkImage: UIImageView = {
+        let imageView = UIImageView()
+        let image = UIImage(named: "check")
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = image
+        imageView.setDimensions(width: 25, height: 25)
+        return imageView
+    }()
+    
     //MARK: - Lifecycle
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        containerCore = appDelegate.persistentContainer
     }
     
     required init?(coder: NSCoder) {
@@ -81,18 +94,32 @@ public class DateCell: UICollectionViewCell {
         blueDot.anchor(top: container.bottomAnchor, paddingTop: 10)
         blueDot.centerX(inView: self)
         
+        contentView.addSubview(checkImage)
+        checkImage.anchor(top: container.bottomAnchor, paddingTop: 10)
+        checkImage.centerX(inView: self)
+        
     }
     
     public func setup(title: Int, subtitle: String, monthYear: String, pickedDay: String) {
         
         
+        
             self.currDay = title
             self.titleLabel.text = dayLabel[title]
             self.subtitleLabel.text = subtitle
-            dateFormatter.dateFormat = "dd/MM/yyyy"
+            dateFormatter.dateFormat = "d/M/yyyy"
             let today = dateFormatter.string(from: Date())
             let uiToday = dateFormatter.date(from: "\(subtitle)/\(monthYear)")
             let stringUiToday = dateFormatter.string(from: uiToday ?? Date())
+        
+        do {
+            let fetchRequest : NSFetchRequest<DailyCoreData> = DailyCoreData.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "date == %@", stringUiToday)
+            data = try containerCore.viewContext.fetch(fetchRequest)
+//            print(data, date)
+        } catch {
+            print(error)
+        }
         
         if pickedDay == subtitle {
             
@@ -104,14 +131,33 @@ public class DateCell: UICollectionViewCell {
             container.layer.shadowRadius = 0
         }
             
-            if today == stringUiToday {
+        if today == stringUiToday {
                 titleLabel.textColor = .smokeLessBlue
                 subtitleLabel.textColor = .smokeLessBlue
                 
-            }else {
+        }else {
                 titleLabel.textColor = .black
                 subtitleLabel.textColor = .black
-                
+        }
+        
+        if let dayData = data.first{
+            if dayData.limit >= dayData.consumed {
+                blueDot.isHidden = true
+                checkImage.isHidden = false
+                checkImage.image = UIImage(named: "check")
+            }else {
+                blueDot.isHidden = true
+                checkImage.isHidden = false
+                checkImage.image = UIImage(named: "uncheck")
             }
+        }else {
+            blueDot.isHidden = false
+            checkImage.isHidden = true
+        }
+        if dateFormatter.date(from: stringUiToday)! > Date() {
+            blueDot.isHidden = false
+            checkImage.isHidden = true
+        }
+        
     }
 }

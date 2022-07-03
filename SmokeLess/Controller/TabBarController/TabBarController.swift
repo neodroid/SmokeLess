@@ -15,17 +15,19 @@ class TabBarController: UITabBarController {
     
     var container: NSPersistentContainer!
     var data = [DailyCoreData]()
-    
+    var dataYesterday = [DailyCoreData]()
+    let taperingLogic = TaperingLogic()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        taperingLogic.updateCigLimit(startDate: "1/7/2022", startLimit: 5)
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         container = appDelegate.persistentContainer
 //        appDelegate.emptyDataStore()
         fetchRequest()
         configureViewControllers()
+        
     }
     //MARK: - Helpers
     
@@ -66,7 +68,7 @@ extension TabBarController: ProgressToTabBarDelegate {
             let fetchRequest : NSFetchRequest<DailyCoreData> = DailyCoreData.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "date == %@", date)
             data = try container.viewContext.fetch(fetchRequest)
-            print(data, date)
+//            print(data, date)
         } catch {
             print(error)
         }
@@ -74,7 +76,7 @@ extension TabBarController: ProgressToTabBarDelegate {
     }
     
     func editData(with date: String, increment: Bool) {
-        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+//        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         //print(urls[urls.count-1] as URL)
         // cek keberadaan data (ada ato ga)
         
@@ -85,22 +87,36 @@ extension TabBarController: ProgressToTabBarDelegate {
             let fetchRequest : NSFetchRequest<DailyCoreData> = DailyCoreData.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "date == %@", date)
             data = try container.viewContext.fetch(fetchRequest)
+            
+            
             if let fetchedData = data.first {
                 if increment {
                     // objek.consumed += 1
                     fetchedData.consumed += 1
                     fetchedData.date = date
-                    //print("add", date)
+                    if fetchedData.consumed > fetchedData.limit {
+                        print("DEBUG MOREE")
+                        taperingLogic.updateCigLimit(startDate: taperingLogic.nextDay(date), startLimit: Int(fetchedData.limit))
+                    }
                 }
                 else {
                     // Cek kalo 0 jangan mau
                     if  fetchedData.consumed > 0 {
                         fetchedData.consumed -= 1
-                        //print("decrement", date)
+                        fetchRequest.predicate = NSPredicate(format: "date == %@", taperingLogic.dayBefore(date))
+                        dataYesterday = try container.viewContext.fetch(fetchRequest)
+                        guard let fetchDataYesterday = dataYesterday.first else {return}
+                        if fetchedData.consumed <= fetchedData.limit {
+                            if fetchDataYesterday.consumed <= fetchDataYesterday.limit && fetchDataYesterday.limit == fetchedData.limit{
+                                taperingLogic.updateCigLimit(startDate: taperingLogic.dayBefore(date), startLimit: Int(fetchedData.limit))
+                            }else {
+                                taperingLogic.updateCigLimit(startDate: date, startLimit: Int(fetchedData.limit))
+                            }
+                            
+                        }
                     }
                     
                 }
-                //print("user data")
             }else {
                 //print("DEBUG: ga nemu data")
                 if increment {

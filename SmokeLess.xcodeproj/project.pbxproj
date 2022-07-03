@@ -48,6 +48,7 @@
 		CB6832EF284F556000366004 /* SmokeLess.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CB6832ED284F556000366004 /* SmokeLess.xcdatamodeld */; };
 		CB6832F1284F556200366004 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB6832F0284F556200366004 /* Assets.xcassets */; };
 		CB6832F4284F556200366004 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB6832F2284F556200366004 /* LaunchScreen.storyboard */; };
+		CBBE7C552871CD6B00F14B08 /* TaperingLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBE7C542871CD6B00F14B08 /* TaperingLogic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,7 @@
 		CB6832F0284F556200366004 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB6832F3284F556200366004 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB6832F5284F556200366004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CBBE7C542871CD6B00F14B08 /* TaperingLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaperingLogic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -348,6 +350,7 @@
 		CB6832FB284F5D3300366004 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CBBE7C532871CD6000F14B08 /* TaperingLogic */,
 				CB4A25C42868399900CB916C /* Calendar */,
 				CB4A25C22868398C00CB916C /* DailyData.swift */,
 			);
@@ -380,6 +383,14 @@
 				6A60E0DE28606BA000505B9D /* Extension.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		CBBE7C532871CD6000F14B08 /* TaperingLogic */ = {
+			isa = PBXGroup;
+			children = (
+				CBBE7C542871CD6B00F14B08 /* TaperingLogic.swift */,
+			);
+			path = TaperingLogic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -482,6 +493,7 @@
 				CB4A25CD28683E0400CB916C /* TodayLimitCell.swift in Sources */,
 				6AF730A4286C1FAF005F1100 /* YoutubeRecommendationCollectionViewCell.swift in Sources */,
 				C45152AB2865ACA0002E9FFD /* ChangeMonthController.swift in Sources */,
+				CBBE7C552871CD6B00F14B08 /* TaperingLogic.swift in Sources */,
 				6AF7309F286C1C03005F1100 /* DoGardeningViewController.swift in Sources */,
 				CB4A25C12868396200CB916C /* ProgressCalendarLogic.swift in Sources */,
 				CB4A25BD2868392900CB916C /* MonthMetadata.swift in Sources */,

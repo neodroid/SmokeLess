@@ -5,9 +5,10 @@
 //  Created by Kevin ahmad on 17/06/22.
 //
 
-import Foundation
+import UIKit
+import CoreData
 
-struct DailyData{
+struct DailyData {
     var date: String
     var limit: Int
     var consumed: Int

@@ -16,8 +16,8 @@ struct ProgressCalendarLogic {
     var monthData: MonthMetadata?
     
     var monthString = "6/2022"
-    var dayString = "01"
-    var dateString = "01/06/2022"
+    var dayString = "1"
+    var dateString = "1/6/2022"
     
     mutating func getMonthStringToday() {
         dateFormatter.dateFormat = "M/yyyy"
@@ -27,7 +27,7 @@ struct ProgressCalendarLogic {
     }
     
     func getTodayDay() -> Int {
-        dateFormatter.dateFormat = "dd"
+        dateFormatter.dateFormat = "d"
         let todayDay = dateFormatter.string(from: Date())
         //contoh return (20)
         return Int(todayDay) ?? 1

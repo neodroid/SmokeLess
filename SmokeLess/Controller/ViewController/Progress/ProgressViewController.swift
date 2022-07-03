@@ -150,10 +150,19 @@ extension ProgressViewController: UICollectionViewDelegate, UICollectionViewData
             let cell = CellBuilder.getTopHeaderCell(collectionView: collectionView, indexPath: indexPath, month: calendarLogic.getPickedMonth(), year: calendarLogic.getPickedYear())
             return cell
         }else if indexPath.section == 1{
+
             let cell = CellBuilder.getDateCell(collectionView: collectionView, indexPath: indexPath, startDay: calendarLogic.monthData?.firstDayWeekday ?? 0, monthYear: calendarLogic.getPickedMonthAndYear(), pickedDay: calendarLogic.dayString)
             return cell
         }else if indexPath.section == 2{
             let cell = CellBuilder.getLimitCell(collectionView: collectionView, indexPath: indexPath)
+//            cell.delegate = self
+            dailyCoreData = tabBar?.data ?? dailyCoreData
+//            cell.delegate = self
+            if let data = dailyCoreData.first {
+                cell.subtitleLabel.text = String(data.limit)
+            } else {
+                cell.subtitleLabel.text = "0"
+            }
             return cell
         }else {
             let cell = CellBuilder.getConsumedCell(collectionView: collectionView, indexPath: indexPath, cellAtDate: calendarLogic.dateString)

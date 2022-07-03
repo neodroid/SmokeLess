@@ -15,17 +15,18 @@ class TabBarController: UITabBarController {
     
     var container: NSPersistentContainer!
     var data = [DailyCoreData]()
-    
+    let taperingLogic = TaperingLogic()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        taperingLogic.updateCigLimit(startDate: "1/7/2022", startLimit: 5)
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         container = appDelegate.persistentContainer
 //        appDelegate.emptyDataStore()
         fetchRequest()
         configureViewControllers()
+        
     }
     //MARK: - Helpers
     
@@ -66,7 +67,7 @@ extension TabBarController: ProgressToTabBarDelegate {
             let fetchRequest : NSFetchRequest<DailyCoreData> = DailyCoreData.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "date == %@", date)
             data = try container.viewContext.fetch(fetchRequest)
-            print(data, date)
+//            print(data, date)
         } catch {
             print(error)
         }
@@ -74,7 +75,7 @@ extension TabBarController: ProgressToTabBarDelegate {
     }
     
     func editData(with date: String, increment: Bool) {
-        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+//        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         //print(urls[urls.count-1] as URL)
         // cek keberadaan data (ada ato ga)
         
@@ -90,17 +91,14 @@ extension TabBarController: ProgressToTabBarDelegate {
                     // objek.consumed += 1
                     fetchedData.consumed += 1
                     fetchedData.date = date
-                    //print("add", date)
                 }
                 else {
                     // Cek kalo 0 jangan mau
                     if  fetchedData.consumed > 0 {
                         fetchedData.consumed -= 1
-                        //print("decrement", date)
                     }
                     
                 }
-                //print("user data")
             }else {
                 //print("DEBUG: ga nemu data")
                 if increment {

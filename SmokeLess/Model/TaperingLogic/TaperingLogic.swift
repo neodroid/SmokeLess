@@ -38,6 +38,14 @@ struct TaperingLogic {
         return modDate
     }
     
+    func dayBefore(_ today: String) -> String {
+        dateFormatter.dateFormat = "d/M/yyyy"
+        guard let todayDate = dateFormatter.date(from: today) else { return ""}
+        let modifiedDate = Calendar.current.date(byAdding: .day, value: -1, to: todayDate)!
+        let modDate = dateFormatter.string(from: modifiedDate)
+        return modDate
+    }
+    
     func saveLimit(date: String, limit: Int){
         let newData: DailyCoreData?
         var container: NSPersistentContainer!

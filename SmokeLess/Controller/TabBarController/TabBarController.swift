@@ -15,6 +15,7 @@ class TabBarController: UITabBarController {
     
     var container: NSPersistentContainer!
     var data = [DailyCoreData]()
+    var dataYesterday = [DailyCoreData]()
     let taperingLogic = TaperingLogic()
     
     // MARK: - Lifecycle
@@ -86,16 +87,33 @@ extension TabBarController: ProgressToTabBarDelegate {
             let fetchRequest : NSFetchRequest<DailyCoreData> = DailyCoreData.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "date == %@", date)
             data = try container.viewContext.fetch(fetchRequest)
+            
+            
             if let fetchedData = data.first {
                 if increment {
                     // objek.consumed += 1
                     fetchedData.consumed += 1
                     fetchedData.date = date
+                    if fetchedData.consumed > fetchedData.limit {
+                        print("DEBUG MOREE")
+                        taperingLogic.updateCigLimit(startDate: taperingLogic.nextDay(date), startLimit: Int(fetchedData.limit))
+                    }
                 }
                 else {
                     // Cek kalo 0 jangan mau
                     if  fetchedData.consumed > 0 {
                         fetchedData.consumed -= 1
+                        fetchRequest.predicate = NSPredicate(format: "date == %@", taperingLogic.dayBefore(date))
+                        dataYesterday = try container.viewContext.fetch(fetchRequest)
+                        guard let fetchDataYesterday = dataYesterday.first else {return}
+                        if fetchedData.consumed <= fetchedData.limit {
+                            if fetchDataYesterday.consumed <= fetchDataYesterday.limit && fetchDataYesterday.limit == fetchedData.limit{
+                                taperingLogic.updateCigLimit(startDate: taperingLogic.dayBefore(date), startLimit: Int(fetchedData.limit))
+                            }else {
+                                taperingLogic.updateCigLimit(startDate: date, startLimit: Int(fetchedData.limit))
+                            }
+                            
+                        }
                     }
                     
                 }

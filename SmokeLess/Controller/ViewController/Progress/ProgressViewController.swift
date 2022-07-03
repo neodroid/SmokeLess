@@ -40,21 +40,15 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         calendarLogic.updateDay()
-//<<<<<<< HEAD
         calendarLogic.getMonthStringToday()
-//=======
         calendarLogic.updateDateString()
-//>>>>>>> e5fef28 (feat: add core data entity and fetched request in TabBarViewController)
         configureUI()
-//<<<<<<< HEAD
         // TODO: bug at the end of month
 //        scrollToDate()
-//=======
-//        scrollToDate()
+
         tabBar = tabBarController as! TabBarController
         dailyCoreData = tabBar?.data ?? dailyCoreData
-        //print(dailyCoreData)
-//>>>>>>> ae90609 (feat: add logic for progress controller and persist the consumed data)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {

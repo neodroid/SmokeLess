@@ -50,7 +50,7 @@ struct ProgressCalendarLogic {
         let pickedMonthAndYear = Calendar.current.dateComponents([.year, .month], from: selectedMonth)
         let pickedMonth = pickedMonthAndYear.month
         // contoh return (03)
-        return pickedMonth ?? 01
+        return pickedMonth ?? 1
     }
     
     func getPickedYear() -> Int {

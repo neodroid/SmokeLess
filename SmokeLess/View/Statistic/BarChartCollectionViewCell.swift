@@ -18,14 +18,14 @@ class BarChartCollectionViewCell: UICollectionViewCell {
     
     let limitBar: UIView = {
         let theView = UIView()
-        theView.backgroundColor = .smokeLessGreen
+        theView.backgroundColor = .smokeLessBlue
         theView.translatesAutoresizingMaskIntoConstraints = false
         return theView
     }()
     
     let consumedBar: UIView = {
         let theView = UIView()
-        theView.backgroundColor = .smokeLessBlue
+        theView.backgroundColor = .smokeLessGreen
         theView.translatesAutoresizingMaskIntoConstraints = false
         return theView
     }()
@@ -34,7 +34,8 @@ class BarChartCollectionViewCell: UICollectionViewCell {
         let theLabel = UILabel()
         theLabel.text = "1" // Dynamic
         theLabel.textAlignment = .center
-        theLabel.font = .systemFont(ofSize: 13)
+        theLabel.font = .systemFont(ofSize: 11)
+        theLabel.textAlignment = .center
         return theLabel
     }()
     
@@ -57,6 +58,7 @@ class BarChartCollectionViewCell: UICollectionViewCell {
         
         limitBar.anchor(bottom: container.bottomAnchor, right: consumedBar.leftAnchor, paddingBottom: 20, paddingRight: 5)
         consumedBar.anchor(bottom: container.bottomAnchor, right: container.rightAnchor, paddingBottom: 20)
+        
         circleLabelBg.anchor(bottom: container.bottomAnchor, right: container.rightAnchor, paddingRight: 13.75)
         dateLabel.addConstraintsToFillView(circleLabelBg)
         circleLabelBg.setDimensions(width: 15, height: 15)

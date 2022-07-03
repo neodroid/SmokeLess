@@ -88,10 +88,6 @@ public class TodayConsumedCell: UICollectionViewCell {
     
     @objc func plusButtonPressed() {
         delegate?.incrementConsumed()
-//<<<<<<< HEAD
-//        reloadCoreData()
-//=======
-//>>>>>>> ae90609 (feat: add logic for progress controller and persist the consumed data)
     }
     
     

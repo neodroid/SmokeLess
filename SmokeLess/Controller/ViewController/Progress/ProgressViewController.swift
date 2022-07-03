@@ -8,12 +8,20 @@
 
 import UIKit
 
+protocol ProgressToTabBarDelegate {
+    func editData(with date: String, increment: Bool)
+    func loadSelectedDateData(with date: String)
+}
+
 class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
     
     //MARK: - Properties
     
     let dailyData = [DailyData]()
+    var dailyCoreData = [DailyCoreData]()
     var calendarLogic = ProgressCalendarLogic()
+    var delegate: ProgressToTabBarDelegate?
+    var tabBar: TabBarController?
     
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: makeLayout())
@@ -33,9 +41,14 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
         super.viewDidLoad()
         calendarLogic.updateDay()
         calendarLogic.getMonthStringToday()
+        calendarLogic.updateDateString()
         configureUI()
         // TODO: bug at the end of month
 //        scrollToDate()
+
+        tabBar = tabBarController as! TabBarController
+        dailyCoreData = tabBar?.data ?? dailyCoreData
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -117,8 +130,8 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
             sheet.detents = [.medium()]
         }
         self.present(VC, animated: true, completion: nil)
-        
     }
+    
 }
 
 // MARK: - Extensions
@@ -143,7 +156,21 @@ extension ProgressViewController: UICollectionViewDelegate, UICollectionViewData
             let cell = CellBuilder.getLimitCell(collectionView: collectionView, indexPath: indexPath)
             return cell
         }else {
-            let cell = CellBuilder.getConsumedCell(collectionView: collectionView, indexPath: indexPath)
+            let cell = CellBuilder.getConsumedCell(collectionView: collectionView, indexPath: indexPath, cellAtDate: calendarLogic.dateString)
+            cell.delegate = self
+            dailyCoreData = tabBar?.data ?? dailyCoreData
+            if let data = dailyCoreData.first {
+                //print("here")
+                //print(data)
+                cell.subtitleLabel.text = String(data.consumed)
+//                cell.subtitleLabel.text = calendarLogic.dateString
+            } else {
+                cell.subtitleLabel.text = "0"
+//                cell.subtitleLabel.text = calendarLogic.dateString
+            }
+            //cell.subtitleLabel.text = String(dailyCoreData.first?.consumed)
+            //cell.subtitleLabel.text = String(consumedData)
+            
             return cell
         }
     }
@@ -162,11 +189,29 @@ extension ProgressViewController: UICollectionViewDelegate, UICollectionViewData
             let pickedDate = "\(indexPath.row + 1)/\(currData.month ?? 01)/\(currData.year ?? 2022)"
             calendarLogic.dayString = String(indexPath.row + 1)
             calendarLogic.dateString = pickedDate
+            delegate?.loadSelectedDateData(with: pickedDate)
+            dailyCoreData = tabBar?.data ?? dailyCoreData
+            //print(dailyCoreData)
             collectionView.reloadData()
-            print(calendarLogic.dateString)
+            //print(calendarLogic.dateString)
             configureUI()
         }
     }
+}
+
+extension ProgressViewController: ConsumedDelegate {
+    func incrementConsumed() {
+        delegate?.editData(with: calendarLogic.dateString, increment: true)
+        collectionView.reloadData()
+    }
+    
+    func decrementConsumed() {
+        delegate?.editData(with: calendarLogic.dateString, increment: false)
+        dailyCoreData = tabBar?.data ?? dailyCoreData
+        collectionView.reloadData()
+    }
+    
+    
 }
 
 // MARK: - Day Generation

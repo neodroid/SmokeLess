@@ -54,13 +54,10 @@ public class CellBuilder {
         
     }
     
-    public static func getConsumedCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell{
+    public static func getConsumedCell(collectionView: UICollectionView, indexPath: IndexPath, cellAtDate: String) -> TodayConsumedCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayConsumedCell", for: indexPath) as! TodayConsumedCell
+        cell.setup(title: (indexPath.row ), subtitle: cellAtDate)
+        return cell
         
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayConsumedCell", for: indexPath) as? TodayConsumedCell {
-            cell.setup(title: (indexPath.row ), subtitle: "\(indexPath.row)")
-            return cell
-        }else {
-            return UICollectionViewCell()
-        }
     }
 }

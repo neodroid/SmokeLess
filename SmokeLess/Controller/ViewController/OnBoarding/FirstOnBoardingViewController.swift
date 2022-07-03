@@ -76,23 +76,19 @@ class FirstOnBoardingViewController: UIPageViewController {
         pageControl.addTarget(self, action: #selector(pageControlDidChange(_:)), for: .valueChanged)
         
         configureUI()
-        scrollView.delegate = self
+//        scrollView.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height - 100)
-        configureScrollView()
     }
     
     //MARK: - Selectors
     
     @objc func buttonClicked() {
-        print("worked")
         let controller = SecondOnBoardingViewController()
-//        navigationController?.pushViewController(controller, animated: true)
-        controller.modalPresentationStyle = .fullScreen
-        self.present(controller, animated: true, completion: nil)
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc private func pageControlDidChange(_ sender: UIPageControl) {
@@ -101,20 +97,6 @@ class FirstOnBoardingViewController: UIPageViewController {
     }
 
     //MARK: - Helpers
-    
-    func configureScrollView() {
-        scrollView.contentSize = CGSize(width: view.frame.size.width * 5, height: view.frame.size.height - pageControl.frame.size.height - 70)
-        scrollView.delegate = self
-        scrollView.isPagingEnabled = true
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.showsHorizontalScrollIndicator = false
-        
-//        for x in 0..<2 {
-//            let page = UIView(frame: CGRect(x: CGFloat(x), y: 0, width: view.frame.width, height: scrollView.frame.height))
-//            scrollView.addSubview(page)
-//            page.addSubview(<#T##view: UIView##UIView#>)
-//        }
-    }
     
     func configureUI() {
 
@@ -126,6 +108,9 @@ class FirstOnBoardingViewController: UIPageViewController {
         view.addSubview(image)
         view.addSubview(pageControl)
         view.addSubview(button)
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
 
         image.anchor(top: view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 150, paddingLeft: 40, paddingRight: 40, width: view.frame.size.width - 100, height: view.frame.size.width - 100)
         
@@ -163,8 +148,8 @@ class FirstOnBoardingViewController: UIPageViewController {
         
     }
 
-extension FirstOnBoardingViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        pageControl.currentPage = Int(floorf(Float(scrollView.contentOffset.x) / Float(scrollView.frame.size.width)))
-    }
-}
+//extension FirstOnBoardingViewController: UIScrollViewDelegate {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        pageControl.currentPage = Int(floorf(Float(scrollView.contentOffset.x) / Float(scrollView.frame.size.width)))
+//    }
+//}

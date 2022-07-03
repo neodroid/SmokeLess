@@ -89,11 +89,7 @@ class ThirdUserPlanViewController: UIPageViewController {
     //MARK: - Selectors
     
     @objc func buttonClicked() {
-        print("worked")
-        let controller = ViewController()
-        //navigationController?.pushViewController(controller, animated: true)
-        controller.modalPresentationStyle = .fullScreen
-        self.present(controller, animated: true, completion: nil)
+        print("kele")
     }
 
     //MARK: - Helpers

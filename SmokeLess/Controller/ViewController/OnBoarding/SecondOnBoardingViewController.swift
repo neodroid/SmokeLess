@@ -46,6 +46,7 @@ class SecondOnBoardingViewController: UIPageViewController {
         pageControl.currentPageIndicatorTintColor = .black
         pageControl.pageIndicatorTintColor = .systemGray
         pageControl.numberOfPages = 2
+        pageControl.currentPage = 1
         return pageControl
     }()
     
@@ -76,11 +77,8 @@ class SecondOnBoardingViewController: UIPageViewController {
     //MARK: - Selectors
     
     @objc func buttonClicked() {
-        print("worked")
         let controller = FirstUserPlanViewController()
-        //navigationController?.pushViewController(controller, animated: true)
-        controller.modalPresentationStyle = .fullScreen
-        self.present(controller, animated: true, completion: nil)
+        navigationController?.pushViewController(controller, animated: true)
     }
 
     //MARK: - Helpers

@@ -64,11 +64,8 @@ class SecondUserPlanViewController: UIPageViewController, UIPickerViewDelegate {
     //MARK: - Selectors
     
     @objc func buttonClicked() {
-        print("worked")
         let controller = ThirdUserPlanViewController()
-        //navigationController?.pushViewController(controller, animated: true)
-        controller.modalPresentationStyle = .fullScreen
-        self.present(controller, animated: true, completion: nil)
+        navigationController?.pushViewController(controller, animated: true)
     }
 
     //MARK: - Helpers

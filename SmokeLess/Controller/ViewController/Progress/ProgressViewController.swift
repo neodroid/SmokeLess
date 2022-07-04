@@ -72,6 +72,15 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
         self.present(VC, animated: true, completion: nil)
     }
     
+//    @objc func showEdit() {
+//        let VC = EditGoalViewController()
+//        VC.delegate = self
+//        if let sheet = VC.sheetPresentationController {
+//            sheet.detents = [.medium()]
+//        }
+//
+//        self.present(VC, animated: true, completion: nil)
+//    }
     
     //MARK: - Helpers
     
@@ -199,6 +208,10 @@ extension ProgressViewController: UICollectionViewDelegate, UICollectionViewData
             collectionView.reloadData()
             //print(calendarLogic.dateString)
             configureUI()
+        }else if indexPath.section == 4 {
+            let VC = EditGoalViewController()
+            VC.delegate = self
+            self.present(VC, animated: true, completion: nil)
         }
     }
 }
@@ -216,6 +229,12 @@ extension ProgressViewController: ConsumedDelegate {
     }
     
     
+}
+
+extension ProgressViewController: editGoalDelegate {
+    func saveAndReload() {
+        collectionView.reloadData()
+    }
 }
 
 // MARK: - Day Generation

@@ -11,6 +11,10 @@ class SecondUserPlanViewController: UIPageViewController, UIPickerViewDelegate {
     
     //MARK: - Properties
     
+    let userDefaults = UserDefaults.standard
+    var startDate: Date = Date.now
+    var cigaretteUse: Int = 1
+    
     var titleLabel: UILabel = {
         var label: UILabel = UILabel()
         label.text = "How many cigarette do you consume per day?"
@@ -61,14 +65,17 @@ class SecondUserPlanViewController: UIPageViewController, UIPickerViewDelegate {
         super.viewDidLayoutSubviews()
     }
     
+    convenience init( startDate: Date ) {
+        self.init()
+
+        self.startDate = startDate
+    }
+    
     //MARK: - Selectors
     
     @objc func buttonClicked() {
-        print("worked")
-        let controller = ThirdUserPlanViewController()
-        //navigationController?.pushViewController(controller, animated: true)
-        controller.modalPresentationStyle = .fullScreen
-        self.present(controller, animated: true, completion: nil)
+        let controller = ThirdUserPlanViewController(startDate: self.startDate, cigaretteUse: self.cigaretteUse)
+        navigationController?.pushViewController(controller, animated: true)
     }
 
     //MARK: - Helpers
@@ -125,5 +132,9 @@ extension SecondUserPlanViewController: UIPickerViewDataSource {
     
     internal func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return String(row + 1)
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        cigaretteUse = (row + 1)
     }
 }

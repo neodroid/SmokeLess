@@ -11,6 +11,11 @@ class TimerViewController: UIViewController {
     
     // MARK: - Properties
     
+    var index: Int = 0
+    var counter: Int = 300
+    var timer = Timer()
+    var isTimerRunning = false
+    
     var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -147,7 +152,12 @@ class TimerViewController: UIViewController {
         self.view.bringSubviewToFront(button)
         button.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
+        if isTimerRunning == false {
+            createTimer()
+        }
+        
         view.addSubview(scrollView)
+        
         view.addSubview(labelTimer)
         view.addSubview(pageControl)
     }
@@ -173,6 +183,11 @@ class TimerViewController: UIViewController {
         config.attributedTitle = AttributedString("Done", attributes: container)
         config.baseForegroundColor = .white
         return config
+    }
+    
+    func createTimer() {
+        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(runTimer), userInfo: nil, repeats: true)
+        isTimerRunning = true
     }
     
     private func configureScrollView() {
@@ -257,6 +272,46 @@ class TimerViewController: UIViewController {
         let vc = DoneViewController()
         vc.modalPresentationStyle = .fullScreen
         vc.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func runTimer() {
+        if counter > 0 {
+            counter -= 1
+            labelTimer.text = timeString(time: TimeInterval(counter))
+            
+            if counter == 295 {
+                updateScroll()
+            }
+            
+            if counter == 290 {
+                updateScroll()
+            }
+            
+            if counter == 285 {
+                updateScroll()
+            }
+            
+            if counter == 280 {
+                updateScroll()
+            }
+        }
+        
+        else {
+            labelTimer.text = "00:00"
+        }
+    }
+    
+    func timeString(time: TimeInterval) -> String {
+        let mins = counter / 60 % 60
+        let secs = counter % 60
+        
+        return String(format: "%02d:%02d", mins, secs)
+    }
+    
+    func updateScroll() {
+        index = index + 1
+        let x = CGFloat(index) * scrollView.frame.size.width
+        scrollView.setContentOffset(CGPoint(x:x, y:0), animated: true)
     }
 }
 

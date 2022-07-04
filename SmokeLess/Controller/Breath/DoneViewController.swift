@@ -11,9 +11,12 @@ class DoneViewController: UIViewController {
     
     // MARK: - Properties
     
+    var getIndex: Int = 0
+    
+    var setImage = UIImage()
+    
     var image: UIImageView = {
         let image = UIImageView()
-//        image.image = UIImage(named: "good.png")
         image.contentMode = .scaleToFill
         return image
     }()
@@ -43,11 +46,33 @@ class DoneViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        let defaults = UserDefaults.standard
+        getIndex = defaults.object(forKey: "feedback") as! Int
         configureUI()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+    }
+    
+    @objc func doneClicked() {
+        print("Button Clicked")
+        
+        // MARK: - KE PROGRESS SCREEN
+        
+//        let vc = TimerViewController()
+//        vc.modalPresentationStyle = .fullScreen
+//        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func distractClicked() {
+        print("Button Clicked")
+        
+        // MARK: - KE NICOTINE CRAVINGS SCREEN
+        
+//        let vc = TimerViewController()
+//        vc.modalPresentationStyle = .fullScreen
+//        self.present(vc, animated: true, completion: nil)
     }
     
     // MARK: - Helpers
@@ -84,6 +109,7 @@ class DoneViewController: UIViewController {
         let button1 = UIButton(frame: CGRect(x: 0, y: 0, width: 350, height: 50))
         button1.configuration = createButton1()
         button1.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button1.addTarget(self, action: #selector((doneClicked)), for: .touchUpInside)
         button1.center = view.center
         
         let button2 = UIButton(frame: CGRect(x: 0, y: 0, width: 350, height: 50))
@@ -92,6 +118,7 @@ class DoneViewController: UIViewController {
         button2.layer.borderWidth = 2
         button2.layer.cornerRadius = 28
         button2.layer.borderColor = UIColor.rgb(red: 61, green: 127, blue: 240).cgColor
+        button2.addTarget(self, action: #selector((distractClicked)), for: .touchUpInside)
         button2.center = view.center
         
         view.addSubview(titleLabel)
@@ -99,29 +126,29 @@ class DoneViewController: UIViewController {
         view.addSubview(image)
         view.addSubview(button1)
         
-        // if relaxed:
-        let setImage: UIImage = UIImage(named: "good.png")!
-        image.image = setImage
-        titleLabel.text = "Good to hear that!"
-        subtitleLabel.text = "You’re getting closer to your goal. Deep breathing slows your nervous system and lowers your stress levels. It also improves your mood and gives you an energy boost."
-        let ratio = setImage.size.width / setImage.size.height
+        if getIndex == 1 {
+            setImage = UIImage(named: "good.png")!
+            image.image = setImage
+            titleLabel.text = "Good to hear that!"
+            subtitleLabel.text = "You’re getting closer to your goal. Deep breathing slows your nervous system and lowers your stress levels. It also improves your mood and gives you an energy boost."
+        }
         
+        else if getIndex == 2 {
+            setImage = UIImage(named: "fail.png")!
+            image.image = setImage
+            titleLabel.text = "It’s okay, let’s try another way!"
+            subtitleLabel.text = "Be patient with yourself and you will get through this phase, just as others have. Check out the activity recommendations we provided to divert you from nicotine cravings."
+            
+            view.addSubview(button2)
+            button2.anchor(left: view.safeAreaLayoutGuide.leftAnchor, bottom: button1.topAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
+        }
         
-        // if not relaxed
-//        let setImage: UIImage = UIImage(named: "fail.png")!
-//        image.image = setImage
-//        titleLabel.text = "It’s okay, let’s try another way!"
-//        subtitleLabel.text = "Be patient with yourself and you will get through this phase, just as others have. Check out the activity recommendations we provided to divert you from nicotine cravings."
-//        let ratio = setImage.size.width / setImage.size.height
-        view.addSubview(button2)
-        
-        let width = view.frame.size.width - 150
         image.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 50, paddingLeft: 60, paddingRight: 60, width: (setImage.size.width / 3), height: (setImage.size.height / 2))
-        titleLabel.anchor(top: image.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 50, paddingLeft: 20, paddingRight: 20)
-        subtitleLabel.anchor(top:titleLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
+        titleLabel.anchor(top: image.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 50, paddingLeft: 25, paddingRight: 25)
+        subtitleLabel.anchor(top:titleLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 25, paddingRight: 25)
         
         button1.anchor(left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
-        button2.anchor(left: view.safeAreaLayoutGuide.leftAnchor, bottom: button1.topAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
+        
     }
     
 }

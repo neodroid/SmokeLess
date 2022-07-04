@@ -47,6 +47,7 @@ class StartBreathViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
     }
+    
     @objc func buttonClicked() {
         print("Button Clicked")
         let vc = TimerViewController()
@@ -66,7 +67,6 @@ class StartBreathViewController: UIViewController {
         var container = AttributeContainer()
         container.font = UIFont.boldSystemFont(ofSize: 20)
         config.attributedTitle = AttributedString("Start", attributes: container)
-        //        config.title = "Start"
         config.cornerStyle = .capsule
         config.contentInsets = .init(top: 15, leading: 20, bottom: 15, trailing: 20)
         config.baseBackgroundColor = .smokeLessBlue

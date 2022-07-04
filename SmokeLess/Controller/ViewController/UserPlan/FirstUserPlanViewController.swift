@@ -11,6 +11,9 @@ class FirstUserPlanViewController: UIPageViewController {
     
     //MARK: - Properties
     
+    let userDefaults = UserDefaults.standard
+    var startDate: Date = Date.now
+    
     var titleLabel: UILabel = {
         var label: UILabel = UILabel()
         label.text = "When do you want to start your journey?"
@@ -48,6 +51,8 @@ class FirstUserPlanViewController: UIPageViewController {
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.tintColor = .systemBlue
+        
+        datePicker.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         return datePicker
     }()
     
@@ -66,11 +71,14 @@ class FirstUserPlanViewController: UIPageViewController {
     //MARK: - Selectors
     
     @objc func buttonClicked() {
-        print("worked")
-        let controller = SecondUserPlanViewController()
-        //navigationController?.pushViewController(controller, animated: true)
-        controller.modalPresentationStyle = .fullScreen
-        self.present(controller, animated: true, completion: nil)
+        let controller = SecondUserPlanViewController(startDate: self.startDate)
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc func valueChanged(sender: UIDatePicker)
+    {
+        startDate = sender.date
+        print(startDate)
     }
 
     //MARK: - Helpers

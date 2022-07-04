@@ -17,8 +17,23 @@ class TabBarController: UITabBarController {
     var data = [DailyCoreData]()
     var dataYesterday = [DailyCoreData]()
     let taperingLogic = TaperingLogic()
+
+    let userDefaults = UserDefaults.standard
+    var startDate: String? = ""
+    var cigaretteUse: Int? = 0
+    var goals: String? = ""
     
     // MARK: - Lifecycle
+    
+    override func viewWillLayoutSubviews() {
+        startDate = userDefaults.string(forKey: "startDate")
+        cigaretteUse = userDefaults.integer(forKey: "cigaretteUse")
+        goals = userDefaults.string(forKey: "goals")
+        if (startDate == nil || cigaretteUse == nil || goals == nil) {
+            segueToOnBoarding()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         taperingLogic.updateCigLimit(startDate: "1/7/2022", startLimit: 5)
@@ -29,6 +44,7 @@ class TabBarController: UITabBarController {
         configureViewControllers()
         
     }
+    
     //MARK: - Helpers
     
     func configureViewControllers() {
@@ -57,6 +73,13 @@ class TabBarController: UITabBarController {
         } catch {
             fatalError("Couldn't fetch User Data!!!")
         }
+    }
+    
+    private func segueToOnBoarding() {
+        let controller = FirstOnBoardingViewController()
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
     
 }

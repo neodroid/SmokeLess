@@ -17,7 +17,7 @@ class TabBarController: UITabBarController {
     var data = [DailyCoreData]()
     var dataYesterday = [DailyCoreData]()
     let taperingLogic = TaperingLogic()
-
+    let dateFormatter = DateFormatter()
     let userDefaults = UserDefaults.standard
     var startDate: String? = ""
     var cigaretteUse: Int? = 0
@@ -31,12 +31,17 @@ class TabBarController: UITabBarController {
         goals = userDefaults.string(forKey: "goals")
         if (startDate == nil || cigaretteUse == nil || goals == nil) {
             segueToOnBoarding()
+        }else {
+            dateFormatter.dateFormat = "d/M/yyyy"
+            let startDateDate = dateFormatter.date(from: startDate ?? "")
+            let startDateString = dateFormatter.string(from: startDateDate ?? Date())
+            taperingLogic.updateCigLimit(startDate: startDateString, startLimit: cigaretteUse ?? 5)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        taperingLogic.updateCigLimit(startDate: "1/7/2022", startLimit: 5)
+        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         container = appDelegate.persistentContainer
 //        appDelegate.emptyDataStore()

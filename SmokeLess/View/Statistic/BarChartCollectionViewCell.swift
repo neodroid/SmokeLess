@@ -63,8 +63,6 @@ class BarChartCollectionViewCell: UICollectionViewCell {
         circleLabelBg.layer.cornerRadius = 15 / 2
         
     }
-    
-    
     override func layoutSubviews() {
         super.layoutSubviews()
 

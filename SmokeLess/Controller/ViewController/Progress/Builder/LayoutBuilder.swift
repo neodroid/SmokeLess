@@ -59,4 +59,14 @@ public class LayoutBuilder {
         return section
     }
     
+    public static func buildGoalsSectionLayout(size: NSCollectionLayoutSize, itemInset:NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 9.0, bottom: 0.0, trailing: 9.0), sectionInset: NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 50.0, leading: 0.0, bottom: 9.0, trailing: 0.0)) -> NSCollectionLayoutSection {
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100)))
+        item.contentInsets = itemInset
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: size, subitem: item, count: 1)
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = sectionInset
+        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        return section
+    }
+    
 }

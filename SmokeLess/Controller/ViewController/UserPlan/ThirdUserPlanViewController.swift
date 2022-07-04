@@ -11,6 +11,11 @@ class ThirdUserPlanViewController: UIPageViewController {
     
     //MARK: - Properties
     
+    let userDefaults = UserDefaults.standard
+    var startDate: Date = Date.now
+    var cigaretteUse: Int? = 1
+    var goals: String? = ""
+    
     var titleLabel: UILabel = {
         var label: UILabel = UILabel()
         label.text = "What is your goals to stop smoking?"
@@ -86,10 +91,35 @@ class ThirdUserPlanViewController: UIPageViewController {
         super.viewDidLayoutSubviews()
     }
     
+    convenience init( startDate: Date, cigaretteUse: Int ) {
+        self.init()
+
+        self.startDate = startDate
+        self.cigaretteUse = cigaretteUse
+    }
+    
     //MARK: - Selectors
     
     @objc func buttonClicked() {
-        print("kele")
+        if(textField.hasText) {
+            self.goals = textField.text
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "YYYY/MM/dd"
+            let actualDate = dateFormatter.string(from: startDate)
+                        
+            userDefaults.set(actualDate, forKey: "startDate")
+            userDefaults.set(cigaretteUse, forKey: "cigaretteUse")
+            userDefaults.set(goals, forKey: "goals")
+            segueToTabBar()
+            
+        }
+        else {
+            let alert = UIAlertController(title: "Goals Empty", message: "Please add your goals", preferredStyle: .alert)
+            let okayButton = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            alert.addAction(okayButton)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 
     //MARK: - Helpers
@@ -111,6 +141,14 @@ class ThirdUserPlanViewController: UIPageViewController {
         textField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         button.anchor(left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
+    }
+    
+    func segueToTabBar() {
+        let controller = TabBarController()
+//        let nav = UINavigationController(rootViewController: controller)
+//        nav.modalPresentationStyle = .fullScreen
+        controller.modalPresentationStyle = .fullScreen
+        self.present(controller, animated: true, completion: nil)
     }
 }
 

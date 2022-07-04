@@ -71,7 +71,7 @@ class FirstUserPlanViewController: UIPageViewController {
     //MARK: - Selectors
     
     @objc func buttonClicked() {
-        let controller = SecondUserPlanViewController()
+        let controller = SecondUserPlanViewController(startDate: self.startDate)
         navigationController?.pushViewController(controller, animated: true)
     }
     

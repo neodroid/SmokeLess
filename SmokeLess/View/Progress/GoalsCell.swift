@@ -10,6 +10,8 @@ import UIKit
 public class GoalsCell: UICollectionViewCell {
     
     //MARK: - Properties
+    
+    let userDefaults = UserDefaults.standard
     var container: UIView = {
         let view = UIView()
         view.layer.shadowColor = UIColor.black.cgColor
@@ -71,13 +73,12 @@ public class GoalsCell: UICollectionViewCell {
     
     var subtitleLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "“Quit smoking to get healthy asds dasd sad asdas fqwadsada sdasd”"
+        label.text = "“Quit smoking to get healthy”"
         label.font = UIFont.systemFont(ofSize: 15)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.textAlignment = .left
-        label.textAlignment = .center
         return label
     }()
     
@@ -85,6 +86,7 @@ public class GoalsCell: UICollectionViewCell {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        
         configureUI()
     }
     
@@ -123,5 +125,8 @@ public class GoalsCell: UICollectionViewCell {
     
     public func setup(title: Int, subtitle: String) {
         self.container.backgroundColor = .white
+        var textGoal = (userDefaults.string(forKey: "goals") ?? "")
+        textGoal = textGoal.components(separatedBy: .newlines).joined(separator: " ")
+        subtitleLabel.text = ("“" + textGoal + "“")
     }
 }

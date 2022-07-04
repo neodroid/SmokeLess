@@ -55,4 +55,11 @@ public class CellBuilder {
         return cell
         
     }
+    public static func getGoalsCell(collectionView: UICollectionView, indexPath: IndexPath) -> GoalsCell{
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GoalsCell", for: indexPath) as! GoalsCell
+            cell.setup(title: (indexPath.row ), subtitle: "\(indexPath.row)")
+            return cell
+    }
 }
+
+

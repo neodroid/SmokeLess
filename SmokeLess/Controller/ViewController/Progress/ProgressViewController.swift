@@ -31,6 +31,7 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
         collectionView.register(TittleCell.self, forCellWithReuseIdentifier: "TittleCell")
         collectionView.register(TodayLimitCell.self, forCellWithReuseIdentifier: "TodayLimitCell")
         collectionView.register(TodayConsumedCell.self, forCellWithReuseIdentifier: "TodayConsumedCell")
+        collectionView.register(GoalsCell.self, forCellWithReuseIdentifier: "GoalsCell")
         return collectionView
     }()
     
@@ -115,8 +116,10 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
                 return LayoutBuilder.buildGallerySectionLayout(size: NSCollectionLayoutSize(widthDimension: .absolute(80), heightDimension: .absolute(90)))
             }else if section == 2{
                 return LayoutBuilder.buildTodayLimitSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100)))
-            }else {
+            }else if section == 3{
                 return LayoutBuilder.buildTodayProgressSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(150)))
+            }else {
+                return LayoutBuilder.buildGoalsSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100)))
             }
         }
         return layout
@@ -155,38 +158,30 @@ extension ProgressViewController: UICollectionViewDelegate, UICollectionViewData
             return cell
         }else if indexPath.section == 2{
             let cell = CellBuilder.getLimitCell(collectionView: collectionView, indexPath: indexPath)
-//            cell.delegate = self
             dailyCoreData = tabBar?.data ?? dailyCoreData
-//            cell.delegate = self
             if let data = dailyCoreData.first {
                 cell.subtitleLabel.text = String(data.limit)
             } else {
                 cell.subtitleLabel.text = "0"
             }
             return cell
-        }else {
+        }else if indexPath.section == 3{
             let cell = CellBuilder.getConsumedCell(collectionView: collectionView, indexPath: indexPath, cellAtDate: calendarLogic.dateString)
             cell.delegate = self
             dailyCoreData = tabBar?.data ?? dailyCoreData
             if let data = dailyCoreData.first {
-                //print("here")
-                //print(data)
                 cell.subtitleLabel.text = String(data.consumed)
-//                cell.subtitleLabel.text = calendarLogic.dateString
             } else {
                 cell.subtitleLabel.text = "0"
-//                cell.subtitleLabel.text = calendarLogic.dateString
             }
-            //cell.subtitleLabel.text = String(dailyCoreData.first?.consumed)
-            //cell.subtitleLabel.text = String(consumedData)
-            
+            return cell
+        }else {
+            let cell = CellBuilder.getGoalsCell(collectionView: collectionView, indexPath: indexPath)
             return cell
         }
     }
-    
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

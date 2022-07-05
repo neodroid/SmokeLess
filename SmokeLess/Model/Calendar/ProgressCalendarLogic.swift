@@ -29,7 +29,6 @@ struct ProgressCalendarLogic {
     func getTodayDay() -> Int {
         dateFormatter.dateFormat = "d"
         let todayDay = dateFormatter.string(from: Date())
-        //contoh return (20)
         return Int(todayDay) ?? 1
     }
     mutating func updateDay(){

@@ -16,7 +16,7 @@ protocol ProgressToTabBarDelegate {
 class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
     
     //MARK: - Properties
-    
+    let dateFormatter = DateFormatter()
     let dailyData = [DailyData]()
     var dailyCoreData = [DailyCoreData]()
     var calendarLogic = ProgressCalendarLogic()
@@ -176,8 +176,20 @@ extension ProgressViewController: UICollectionViewDelegate, UICollectionViewData
             dailyCoreData = tabBar?.data ?? dailyCoreData
             if let data = dailyCoreData.first {
                 cell.subtitleLabel.text = String(data.consumed)
+                dateFormatter.dateFormat = "dd/M/yyyy"
+                let todayDateString = dateFormatter.string(from: Date())
+                if dateFormatter.date(from: calendarLogic.dateString)! > dateFormatter.date(from: todayDateString)!{
+                    cell.container.backgroundColor = .smokeLessLightGray
+                }else if data.consumed != 0 && data.consumed <= data.limit{
+                    cell.container.backgroundColor = .smokeLessGreen
+                }else if data.consumed != 0 && data.consumed > data.limit {
+                    cell.container.backgroundColor = .smokelessRed
+                }else {
+                    cell.container.backgroundColor = .smokeLessBlue
+                }
             } else {
                 cell.subtitleLabel.text = "0"
+                cell.container.backgroundColor = .smokeLessLightGray
             }
             return cell
         }else {

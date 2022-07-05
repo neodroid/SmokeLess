@@ -44,9 +44,6 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
         calendarLogic.getMonthStringToday()
         calendarLogic.updateDateString()
         configureUI()
-        // TODO: bug at the end of month
-//        scrollToDate()
-
         tabBar = tabBarController as! TabBarController
         dailyCoreData = tabBar?.data ?? dailyCoreData
 
@@ -54,8 +51,7 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // TODO: bug at the end of month
-//        scrollToDate()
+        scrollToDate()
     }
     
     //MARK: - Selectors
@@ -87,7 +83,7 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
     // scroll UI ke hari ini
     func scrollToDate() {
         if calendarLogic.getTodayDay() > 4 {
-            collectionView.scrollToItem(at: (NSIndexPath(item: calendarLogic.getTodayDay(), section: 1) as IndexPath), at: [], animated: true)
+            collectionView.scrollToItem(at: (NSIndexPath(item: calendarLogic.getTodayDay() - 1, section: 1) as IndexPath), at: [], animated: true)
         }
     }
     //fungsi untuk enter bulan dan tahun di ChangeMonthAndYearController

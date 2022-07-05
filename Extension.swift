@@ -93,6 +93,7 @@ extension UIColor {
     static let smokeLessBlue = UIColor.rgb(red: 61, green: 127, blue: 240)
     static let smokeLessGreen = UIColor.rgb(red: 127, green: 199, blue: 135)
     static let smokeLessLightGray = UIColor.rgb(red: 207, green: 207, blue: 207)
+    static let smokelessRed = UIColor.rgb(red: 235, green: 100, blue: 104)
 }
 
 extension UIViewController {

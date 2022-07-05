@@ -29,18 +29,14 @@ class StatisticViewController: UIViewController {
     let changeMonthButton: UIButton = {
         let theButton = UIButton()
         theButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        theButton.setTitle("Jun 2022 ", for: .normal)
+        theButton.setTitleColor(UIColor.black, for: .normal)
+        theButton.semanticContentAttribute = .forceRightToLeft
         theButton.tintColor = .black
         theButton.addTarget(self, action: #selector(changeMonthPressed), for: .touchUpInside)
         return theButton
     }()
-    
-    let changeMonthLabel: UILabel = {
-        let theLabel = UILabel()
-        theLabel.text = "Jun 2022"
-        theLabel.font = .systemFont(ofSize: 16, weight: .bold)
-        return theLabel
-    }()
-    
+
     let dayStatusStack: UIStackView = {
         let theStack = UIStackView()
         let theLabel = UILabel()
@@ -206,8 +202,9 @@ class StatisticViewController: UIViewController {
     }()
     
     let grid = ChartGrid(frame: .zero, gridSpace: 40)
-    
-    
+    var coreDataFetch = [DailyCoreData]()
+    var tabBar: TabBarController?
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -219,6 +216,14 @@ class StatisticViewController: UIViewController {
         calendarLogic.updateDateString()
         configureUI()
         setupMonthLabel()
+        
+        selectedDateChart = IndexPath(row: calendarLogic.getTodayDay() - 1, section: 0)
+        
+        tabBar = tabBarController as! TabBarController
+        tabBar?.fetchRequest()
+        if let data = tabBar?.data {
+            coreDataFetch = data
+        }
         
     }
     
@@ -236,6 +241,8 @@ class StatisticViewController: UIViewController {
     
     var selectedDateChart: IndexPath?
     var calendarLogic = ProgressCalendarLogic()
+    var displayedMonth = ""
+    var displayedYear = ""
 
     @objc func changeMonthPressed() {
         let VC = ChangeMonthController()
@@ -277,7 +284,6 @@ class StatisticViewController: UIViewController {
         view.addSubview(statisticLabel)
         view.addSubview(cigarreteSummaryLabel)
         view.addSubview(changeMonthButton)
-        view.addSubview(changeMonthLabel)
         view.addSubview(dayStatusStack)
         view.addSubview(cigarettesLimitConsumedView)
         view.addSubview(fullDateOfChart)
@@ -290,10 +296,8 @@ class StatisticViewController: UIViewController {
         statisticLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
         cigarreteSummaryLabel.anchor(top: statisticLabel.bottomAnchor, left: statisticLabel.leftAnchor, paddingTop: 20)
-                
-        changeMonthLabel.anchor(top: cigarreteSummaryLabel.topAnchor)
-        
-        changeMonthButton.anchor(top: cigarreteSummaryLabel.topAnchor, left: changeMonthLabel.rightAnchor, right: statisticLabel.rightAnchor, paddingLeft: 5)
+                        
+        changeMonthButton.anchor(top: cigarreteSummaryLabel.topAnchor, left: cigarreteSummaryLabel.rightAnchor, right: statisticLabel.rightAnchor, paddingLeft: 5)
         
         fullDateOfChart.anchor(top: cigarreteSummaryLabel.bottomAnchor, left: cigarreteSummaryLabel.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 10, paddingRight: 20)
         
@@ -315,13 +319,14 @@ class StatisticViewController: UIViewController {
         grid.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
-    
     }
     
     func setupMonthLabel(){
-        
-        let fullString =  "\(monthTemplate.shortName[calendarLogic.getPickedMonth() - 1]) , \(calendarLogic.getPickedYear()) "
-        changeMonthLabel.text = fullString
+        let fullString =  "\(monthTemplate.shortName[calendarLogic.getPickedMonth() - 1]) , \(calendarLogic.getPickedYear())"
+        displayedYear = String(calendarLogic.getPickedYear())
+        displayedMonth = monthTemplate.shortName[calendarLogic.getPickedMonth() - 1]
+        changeMonthButton.setTitle(fullString, for: .normal)
+        fullDateOfChart.text = "\(calendarLogic.getTodayDay()) \(monthTemplate.shortName[calendarLogic.getPickedMonth() - 1]) \(calendarLogic.getPickedYear())"
     }
     
     func createChartAxis() {
@@ -330,7 +335,7 @@ class StatisticViewController: UIViewController {
         var axisPoint = collectionView.bounds.maxY
         var space = collectionView.bounds.height / 4
         var axisNumber = 0
-        var maxNumber = 40
+        var maxNumber = 12
         var axisSpace = maxNumber / 4
         
         for i in 0...4 {
@@ -351,17 +356,31 @@ class StatisticViewController: UIViewController {
 extension StatisticViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return calendarLogic.monthData?.numberOfDays ?? 1
+        return coreDataFetch.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "barCell", for: indexPath) as! BarChartCollectionViewCell
-        
+
+        // Date format 3/7/2022
         // Set this constraints for dynamic bar height
-        cell.limitBar.setDimensions(width: cell.contentView.bounds.width / 4, height: 40)
-        cell.consumedBar.setDimensions(width: cell.contentView.bounds.width / 4, height: 80)
+        let data = coreDataFetch[indexPath.row]
+        let collectionViewHeight = collectionView.bounds.height
+        let maxNumber: Float = 12
+        let consumedHeight = CGFloat(Float(data.consumed) / maxNumber) * collectionViewHeight
+        let limitHeight = CGFloat(Float(data.limit) / maxNumber) * collectionViewHeight
+
+        cell.limitBar.setDimensions(width: cell.contentView.bounds.width / 4, height: limitHeight)
+        cell.consumedBar.setDimensions(width: cell.contentView.bounds.width / 4, height: consumedHeight)
         cell.dateLabel.text = String(indexPath.row + 1)
         
+        if indexPath == selectedDateChart {
+            cell.dateLabel.textColor = .white
+            cell.circleLabelBg.backgroundColor = .smokeLessBlue
+        } else {
+            cell.dateLabel.textColor = .black
+            cell.circleLabelBg.backgroundColor = .clear
+        }
         return cell
     }
     
@@ -370,21 +389,20 @@ extension StatisticViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? BarChartCollectionViewCell else {return}
+        let selectedData = coreDataFetch[indexPath.row]
+        let monthInt = Int(monthTemplate.shortName.firstIndex(of: displayedMonth)!)
+        let fullString = "\(indexPath.row + 1) \(calendarLogic.dateFormatter.monthSymbols[monthInt]) \(displayedYear)"
+        fullDateOfChart.text = fullString
+        consumedNumber.text = String(selectedData.consumed)
+        limitNumber.text = String(selectedData.limit)
         
         if indexPath.row == selectedDateChart?.row {
             return
         } else {
-            cell.dateLabel.textColor = .white
-            cell.circleLabelBg.backgroundColor = .smokeLessBlue
-            if let previousIndexPath = selectedDateChart {
-                let previousCell = collectionView.cellForItem(at: previousIndexPath) as? BarChartCollectionViewCell
-                previousCell?.dateLabel.textColor = .black
-                previousCell?.circleLabelBg.backgroundColor = .clear
-            }
             selectedDateChart = indexPath
-
         }
+
+        collectionView.reloadData()
     }
 }
 
@@ -393,7 +411,27 @@ extension StatisticViewController: MonthChangeDelegate {
         calendarLogic.updateDay()
         calendarLogic.monthString = "\(month)/\(year)"
         let fullString =  "\(monthTemplate.shortName[Int(month)! - 1]) , \(year) "
-        changeMonthLabel.text = fullString
+        displayedMonth = monthTemplate.shortName[Int(month)! - 1]
+        displayedYear = year
+                
+        // if selected month dan year nya sama kaya skrng, default date jadi today
+        calendarLogic.dateFormatter.dateFormat = "MMMM"
+        let todayMonth = calendarLogic.dateFormatter.string(from: Date.now)
+        let monthToString = calendarLogic.dateFormatter.monthSymbols[Int(month)! - 1]
+        
+        calendarLogic.dateFormatter.dateFormat = "YYYY"
+        let todayYear = calendarLogic.dateFormatter.string(from: Date.now)
+
+        print(monthToString, todayMonth, year, todayYear)
+        if monthToString == todayMonth && year == todayYear {
+            let todayDay = calendarLogic.getTodayDay()
+            fullDateOfChart.text = "\(todayDay) \(calendarLogic.dateFormatter.monthSymbols[Int(month)! - 1]) \(year)"
+            selectedDateChart = IndexPath(row: todayDay - 1, section: 0)
+        } else {
+            fullDateOfChart.text = "1 \(calendarLogic.dateFormatter.monthSymbols[Int(month)! - 1]) \(year)"
+            selectedDateChart = IndexPath(row: 0, section: 0)
+        }
+        changeMonthButton.setTitle(fullString, for: .normal)
         collectionView.reloadData()
         configureUI()
     }

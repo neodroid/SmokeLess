@@ -204,6 +204,10 @@ class StatisticViewController: UIViewController {
     let grid = ChartGrid(frame: .zero, gridSpace: 40)
     var coreDataFetch = [DailyCoreData]()
     var tabBar: TabBarController?
+    var selectedDateChart: IndexPath?
+    var calendarLogic = ProgressCalendarLogic()
+    var displayedMonth = ""
+    var displayedYear = ""
 
     // MARK: - Lifecycle
     
@@ -212,19 +216,20 @@ class StatisticViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
         navigationController?.setNavigationBarHidden(true, animated: false)
+        tabBar = tabBarController as! TabBarController
+        selectedDateChart = IndexPath(row: calendarLogic.getTodayDay() - 1, section: 0)
+        
         calendarLogic.getMonthStringToday()
         calendarLogic.updateDateString()
         configureUI()
         setupMonthLabel()
+        setUpConsumedAndLimitLabel()
+
         
-        selectedDateChart = IndexPath(row: calendarLogic.getTodayDay() - 1, section: 0)
-        
-        tabBar = tabBarController as! TabBarController
         tabBar?.fetchRequest()
         if let data = tabBar?.data {
             coreDataFetch = data
         }
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -238,12 +243,6 @@ class StatisticViewController: UIViewController {
     
     
     // MARK: - Helpers
-    
-    var selectedDateChart: IndexPath?
-    var calendarLogic = ProgressCalendarLogic()
-    var displayedMonth = ""
-    var displayedYear = ""
-
     @objc func changeMonthPressed() {
         let VC = ChangeMonthController()
         VC.delegate = self
@@ -321,12 +320,23 @@ class StatisticViewController: UIViewController {
         collectionView.dataSource = self
     }
     
+    func setUpConsumedAndLimitLabel() {
+        let todayDataDate = dateStringForIndexPath(dayInt: calendarLogic.getTodayDay() - 1)
+        tabBar?.loadSelectedDateData(with: todayDataDate)
+        print(tabBar?.data)
+        if let data = tabBar?.data.first {
+            limitNumber.text = String(data.limit)
+            consumedNumber.text = String(data.consumed)
+        }
+        
+    }
+    
     func setupMonthLabel(){
         let fullString =  "\(monthTemplate.shortName[calendarLogic.getPickedMonth() - 1]) , \(calendarLogic.getPickedYear())"
         displayedYear = String(calendarLogic.getPickedYear())
-        displayedMonth = monthTemplate.shortName[calendarLogic.getPickedMonth() - 1]
+        displayedMonth = calendarLogic.dateFormatter.monthSymbols[calendarLogic.getPickedMonth() - 1]
         changeMonthButton.setTitle(fullString, for: .normal)
-        fullDateOfChart.text = "\(calendarLogic.getTodayDay()) \(monthTemplate.shortName[calendarLogic.getPickedMonth() - 1]) \(calendarLogic.getPickedYear())"
+        fullDateOfChart.text = "\(calendarLogic.getTodayDay()) \(displayedMonth) \(displayedYear)"
     }
     
     func createChartAxis() {
@@ -349,6 +359,16 @@ class StatisticViewController: UIViewController {
         }
     }
     
+    func dateStringForIndexPath(dayInt: Int) -> String {
+        let day = dayInt + 1
+        let month = calendarLogic.dateFormatter.monthSymbols.firstIndex { dateMonth in
+            dateMonth == displayedMonth
+        }! + 1
+        let year = Int(displayedYear)!
+        let date = "\(day)/\(Int(month))/\(year)"
+        return date
+    }
+    
 }
 
 // MARK: - Extension
@@ -356,7 +376,7 @@ class StatisticViewController: UIViewController {
 extension StatisticViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return coreDataFetch.count
+        return calendarLogic.monthData?.numberOfDays ?? 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -364,22 +384,34 @@ extension StatisticViewController: UICollectionViewDelegate, UICollectionViewDat
 
         // Date format 3/7/2022
         // Set this constraints for dynamic bar height
-        let data = coreDataFetch[indexPath.row]
-        let collectionViewHeight = collectionView.bounds.height
-        let maxNumber: Float = 12
-        let consumedHeight = CGFloat(Float(data.consumed) / maxNumber) * collectionViewHeight
-        let limitHeight = CGFloat(Float(data.limit) / maxNumber) * collectionViewHeight
-
-        cell.limitBar.setDimensions(width: cell.contentView.bounds.width / 4, height: limitHeight)
-        cell.consumedBar.setDimensions(width: cell.contentView.bounds.width / 4, height: consumedHeight)
+        let date = dateStringForIndexPath(dayInt: indexPath.row)
+        tabBar?.loadSelectedDateData(with: date)
         cell.dateLabel.text = String(indexPath.row + 1)
-        
         if indexPath == selectedDateChart {
             cell.dateLabel.textColor = .white
             cell.circleLabelBg.backgroundColor = .smokeLessBlue
         } else {
             cell.dateLabel.textColor = .black
             cell.circleLabelBg.backgroundColor = .clear
+        }
+
+        if let data = tabBar?.data.first {
+            let collectionViewHeight = collectionView.bounds.height
+            let maxNumber: Float = 12
+            let consumedHeight = CGFloat(Float(data.consumed) / maxNumber) * collectionViewHeight
+            let limitHeight = CGFloat(Float(data.limit) / maxNumber) * collectionViewHeight
+
+            cell.limitHeightConstraint.constant = limitHeight
+            cell.consumedHeightConstraint.constant = consumedHeight
+    
+            if data.consumed > data.limit {
+                cell.consumedBar.backgroundColor = .red
+            } else {
+                cell.consumedBar.backgroundColor = .smokeLessGreen
+            }
+        } else {
+            cell.limitHeightConstraint.constant = 0
+            cell.consumedHeightConstraint.constant = 0
         }
         return cell
     }
@@ -389,20 +421,24 @@ extension StatisticViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedData = coreDataFetch[indexPath.row]
-        let monthInt = Int(monthTemplate.shortName.firstIndex(of: displayedMonth)!)
-        let fullString = "\(indexPath.row + 1) \(calendarLogic.dateFormatter.monthSymbols[monthInt]) \(displayedYear)"
-        fullDateOfChart.text = fullString
-        consumedNumber.text = String(selectedData.consumed)
-        limitNumber.text = String(selectedData.limit)
-        
-        if indexPath.row == selectedDateChart?.row {
-            return
-        } else {
-            selectedDateChart = indexPath
+        let dateSelected = dateStringForIndexPath(dayInt: indexPath.row)
+        tabBar?.loadSelectedDateData(with: dateSelected)
+        print("Selected Data: ")
+        print(tabBar?.data.first)
+        if let selectedData = tabBar?.data.first {
+            let fullString = "\(indexPath.row + 1) \(displayedMonth) \(displayedYear)"
+            fullDateOfChart.text = fullString
+            consumedNumber.text = String(selectedData.consumed)
+            limitNumber.text = String(selectedData.limit)
+            
+            if indexPath.row == selectedDateChart?.row {
+                return
+            } else {
+                selectedDateChart = indexPath
+            }
+            collectionView.reloadData()
         }
-
-        collectionView.reloadData()
+        
     }
 }
 
@@ -411,7 +447,7 @@ extension StatisticViewController: MonthChangeDelegate {
         calendarLogic.updateDay()
         calendarLogic.monthString = "\(month)/\(year)"
         let fullString =  "\(monthTemplate.shortName[Int(month)! - 1]) , \(year) "
-        displayedMonth = monthTemplate.shortName[Int(month)! - 1]
+        displayedMonth = calendarLogic.dateFormatter.monthSymbols[Int(month)! - 1]
         displayedYear = year
                 
         // if selected month dan year nya sama kaya skrng, default date jadi today
@@ -422,7 +458,6 @@ extension StatisticViewController: MonthChangeDelegate {
         calendarLogic.dateFormatter.dateFormat = "YYYY"
         let todayYear = calendarLogic.dateFormatter.string(from: Date.now)
 
-        print(monthToString, todayMonth, year, todayYear)
         if monthToString == todayMonth && year == todayYear {
             let todayDay = calendarLogic.getTodayDay()
             fullDateOfChart.text = "\(todayDay) \(calendarLogic.dateFormatter.monthSymbols[Int(month)! - 1]) \(year)"

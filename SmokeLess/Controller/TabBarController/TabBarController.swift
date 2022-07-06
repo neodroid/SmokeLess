@@ -21,10 +21,10 @@ class TabBarController: UITabBarController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        taperingLogic.updateCigLimit(startDate: "1/7/2022", startLimit: 5)
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        appDelegate.emptyDataStore()
+        taperingLogic.updateCigLimit(startDate: "1/7/2022", startLimit: 5)
         container = appDelegate.persistentContainer
-//        appDelegate.emptyDataStore()
         fetchRequest()
         configureViewControllers()
         
@@ -32,8 +32,8 @@ class TabBarController: UITabBarController {
     //MARK: - Helpers
     
     func configureViewControllers() {
-//        let progress = ProgressViewController()
-        let progress = StatisticViewController()
+        let progress = ProgressViewController()
+//        let progress = StatisticViewController()
 
 //        progress.delegate = self
         let nav1 = navigationController(image: UIImage(systemName: "calendar.badge.minus"),title: "Progress", rootViewController: progress)
@@ -56,6 +56,7 @@ class TabBarController: UITabBarController {
     func fetchRequest() {
         do {
             data = try container.viewContext.fetch(DailyCoreData.fetchRequest())
+            print(data)
         } catch {
             fatalError("Couldn't fetch User Data!!!")
         }

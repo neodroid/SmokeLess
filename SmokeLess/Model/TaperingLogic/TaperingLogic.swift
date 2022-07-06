@@ -61,6 +61,7 @@ struct TaperingLogic {
             }else {
                     newData = DailyCoreData(context: container.viewContext)
                     newData?.limit = Int64(limit)
+                    newData?.consumed = Int64.random(in: Int64(1)...Int64(limit + 2))
                     newData?.date = date
             }
         }

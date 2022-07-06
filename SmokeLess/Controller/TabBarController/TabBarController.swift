@@ -21,7 +21,6 @@ class TabBarController: UITabBarController {
     var startDate: String? = ""
     var cigaretteUse: Int? = 0
     var goals: String? = ""
-    let taperingLogic = TaperingLogic()
     
     // MARK: - Lifecycle
     

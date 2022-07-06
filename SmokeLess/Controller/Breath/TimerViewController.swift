@@ -160,6 +160,7 @@ class TimerViewController: UIViewController {
         
         view.addSubview(labelTimer)
         view.addSubview(pageControl)
+        configureUI()
     }
     
     override func viewDidLayoutSubviews() {
@@ -188,6 +189,10 @@ class TimerViewController: UIViewController {
     func createTimer() {
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(runTimer), userInfo: nil, repeats: true)
         isTimerRunning = true
+    }
+    
+    func configureUI() {
+        navigationController?.navigationBar.tintColor = .white
     }
     
     private func configureScrollView() {

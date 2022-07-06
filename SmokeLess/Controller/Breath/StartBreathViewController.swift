@@ -50,9 +50,8 @@ class StartBreathViewController: UIViewController {
     
     @objc func buttonClicked() {
         print("Button Clicked")
-        let vc = TimerViewController()
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        let controller = TimerViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -75,8 +74,6 @@ class StartBreathViewController: UIViewController {
     }
     
     func configureUI(){
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        
         view.backgroundColor = .white
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 350, height: 50))
         button.configuration = createButton()
@@ -94,6 +91,11 @@ class StartBreathViewController: UIViewController {
         subtitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         image.anchor(top: subtitleLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 50, paddingLeft: 40, paddingRight: 40, width: view.frame.size.width - 100, height: view.frame.size.width - 100)
         button.anchor(left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
+    }
+    
+    func configureNavBar() {
+        navigationController?.navigationBar.backgroundColor = .white
+        navigationController?.navigationBar.tintColor = .smokeLessBlue
     }
     
 }

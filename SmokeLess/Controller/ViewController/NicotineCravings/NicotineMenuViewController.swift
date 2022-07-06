@@ -50,6 +50,16 @@ class NicotineMenuViewController: UIViewController {
     func configureUI() {
         view.backgroundColor = .white
         configureTableView()
+        configureNavBar()
+    }
+    
+    func configureNavBar() {
+        navigationController?.navigationBar.backgroundColor = .white
+        navigationController?.navigationBar.tintColor = .smokeLessBlue
+    }
+    
+    func segueToScreen(controller: UIViewController) {
+        navigationController?.pushViewController(controller, animated: true)
     }
     
 }
@@ -88,23 +98,23 @@ extension NicotineMenuViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(indexPath.section == 1) {
-            print(1)
+            segueToScreen(controller: StartBreathViewController())
         }
         else if(indexPath.section == 2) {
             if(indexPath.row == 0) {
-                print(0)
+                segueToScreen(controller: PlayGamesOrWatchMoviesViewController())
             }
             else if(indexPath.row == 1) {
-                print(1)
+                segueToScreen(controller: YogaExerciseViewController())
             }
             else if(indexPath.row == 2) {
-                print(2)
+                segueToScreen(controller: DrinkingWaterViewController())
             }
             else if(indexPath.row == 3) {
-                print(3)
+                segueToScreen(controller: DoGardeningViewController())
             }
             else if(indexPath.row == 4) {
-                print(4)
+                segueToScreen(controller: TalkWithFriendsOrCommunityViewController())
             }
         }
     }

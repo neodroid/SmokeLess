@@ -55,7 +55,6 @@ class BarChartCollectionViewCell: UICollectionViewCell {
         
         contentView.addSubview(container)
         container.addConstraintsToFillView(contentView)
-        
         container.addSubview(limitBar)
         container.addSubview(consumedBar)
         circleLabelBg.addSubview(dateLabel)

@@ -202,12 +202,13 @@ class StatisticViewController: UIViewController {
     }()
     
     let grid = ChartGrid(frame: .zero, gridSpace: 40)
-    var coreDataFetch = [DailyCoreData]()
     var tabBar: TabBarController?
     var selectedDateChart: IndexPath?
     var calendarLogic = ProgressCalendarLogic()
     var displayedMonth = ""
     var displayedYear = ""
+    var maxDataValue:Int = 0
+    let multiplierForMaxAxis = 3
 
     // MARK: - Lifecycle
     
@@ -219,17 +220,13 @@ class StatisticViewController: UIViewController {
         tabBar = tabBarController as! TabBarController
         selectedDateChart = IndexPath(row: calendarLogic.getTodayDay() - 1, section: 0)
         
+        maxDataValue = tabBar?.getMaxValueFromData() ?? 0
         calendarLogic.getMonthStringToday()
         calendarLogic.updateDateString()
         configureUI()
         setupMonthLabel()
         setUpConsumedAndLimitLabel()
-
-        
-        tabBar?.fetchRequest()
-        if let data = tabBar?.data {
-            coreDataFetch = data
-        }
+        print(maxDataValue)
     }
     
     override func viewDidLayoutSubviews() {
@@ -302,13 +299,15 @@ class StatisticViewController: UIViewController {
         
         chartLegendStack.anchor(top: fullDateOfChart.bottomAnchor, left: fullDateOfChart.leftAnchor, paddingTop: 25)
         
-        collectionView.anchor(top: chartLegendStack.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingRight: 40)
-        collectionView.heightAnchor.constraint(equalToConstant: grid.totalHeight).isActive = true
-        
-        grid.anchor(top: collectionView.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: -20, paddingLeft: 20, paddingRight: 40)
+        grid.anchor(top: chartLegendStack.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingRight: 40)
         grid.heightAnchor.constraint(equalToConstant: grid.totalHeight).isActive = true
-                
-        dayStatusStack.anchor(top: collectionView.bottomAnchor, left: statisticLabel.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 40, paddingRight: 20)
+        
+        
+        collectionView.anchor(top: grid.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 20, paddingRight: 40)
+        collectionView.heightAnchor.constraint(equalToConstant: grid.totalHeight + 20).isActive = true
+//        collectionView.backgroundColor = .yellow
+        
+        dayStatusStack.anchor(top: grid.bottomAnchor, left: statisticLabel.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 40, paddingRight: 20)
         
         cigarettesLimitConsumedView.anchor(top: dayStatusStack.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
@@ -343,11 +342,10 @@ class StatisticViewController: UIViewController {
         
         // For dynamic chart axis
         var axisPoint = collectionView.bounds.maxY
-        var space = collectionView.bounds.height / 4
+        let space = (collectionView.bounds.height - 20) / 4
         var axisNumber = 0
-        var maxNumber = 12
-        var axisSpace = maxNumber / 4
-        
+        let maxAxis = (maxDataValue - (maxDataValue % 4)) * multiplierForMaxAxis
+        let axisSpace = maxAxis / 4
         for i in 0...4 {
             let axisLabel = UILabel()
             axisLabel.text = String(axisNumber)
@@ -355,7 +353,7 @@ class StatisticViewController: UIViewController {
             view.addSubview(axisLabel)
             axisLabel.anchor(left: grid.rightAnchor, bottom: grid.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingLeft: 10, paddingBottom: CGFloat(CGFloat(i) * space))
             axisPoint += 40
-            axisNumber += axisSpace
+            axisNumber += Int(axisSpace)
         }
     }
     
@@ -387,6 +385,7 @@ extension StatisticViewController: UICollectionViewDelegate, UICollectionViewDat
         let date = dateStringForIndexPath(dayInt: indexPath.row)
         tabBar?.loadSelectedDateData(with: date)
         cell.dateLabel.text = String(indexPath.row + 1)
+        
         if indexPath == selectedDateChart {
             cell.dateLabel.textColor = .white
             cell.circleLabelBg.backgroundColor = .smokeLessBlue
@@ -394,13 +393,14 @@ extension StatisticViewController: UICollectionViewDelegate, UICollectionViewDat
             cell.dateLabel.textColor = .black
             cell.circleLabelBg.backgroundColor = .clear
         }
-
+        
+        let maxAxisNumber = (maxDataValue - (maxDataValue % 4)) * multiplierForMaxAxis
+        
         if let data = tabBar?.data.first {
             let collectionViewHeight = collectionView.bounds.height
-            let maxNumber: Float = 12
-            let consumedHeight = CGFloat(Float(data.consumed) / maxNumber) * collectionViewHeight
-            let limitHeight = CGFloat(Float(data.limit) / maxNumber) * collectionViewHeight
-
+            let consumedHeight = CGFloat(Float(data.consumed) / Float(maxAxisNumber)) * collectionViewHeight
+            let limitHeight = CGFloat(Float(data.limit) / Float(maxAxisNumber)) * collectionViewHeight
+                
             cell.limitHeightConstraint.constant = limitHeight
             cell.consumedHeightConstraint.constant = consumedHeight
     
@@ -423,14 +423,13 @@ extension StatisticViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let dateSelected = dateStringForIndexPath(dayInt: indexPath.row)
         tabBar?.loadSelectedDateData(with: dateSelected)
-        print("Selected Data: ")
-        print(tabBar?.data.first)
+//        print("Selected Data: ")
+//        print(tabBar?.data.first)
         if let selectedData = tabBar?.data.first {
             let fullString = "\(indexPath.row + 1) \(displayedMonth) \(displayedYear)"
             fullDateOfChart.text = fullString
             consumedNumber.text = String(selectedData.consumed)
             limitNumber.text = String(selectedData.limit)
-            
             if indexPath.row == selectedDateChart?.row {
                 return
             } else {
@@ -457,14 +456,40 @@ extension StatisticViewController: MonthChangeDelegate {
         
         calendarLogic.dateFormatter.dateFormat = "YYYY"
         let todayYear = calendarLogic.dateFormatter.string(from: Date.now)
-
+        let todayDay = calendarLogic.getTodayDay()
+        
         if monthToString == todayMonth && year == todayYear {
-            let todayDay = calendarLogic.getTodayDay()
-            fullDateOfChart.text = "\(todayDay) \(calendarLogic.dateFormatter.monthSymbols[Int(month)! - 1]) \(year)"
-            selectedDateChart = IndexPath(row: todayDay - 1, section: 0)
+
+            let startDate = dateStringForIndexPath(dayInt: todayDay - 1)
+            
+            tabBar?.loadSelectedDateData(with: startDate)
+            if let data = tabBar?.data.first {
+                fullDateOfChart.text = "\(todayDay) \(calendarLogic.dateFormatter.monthSymbols[Int(month)! - 1]) \(year)"
+                selectedDateChart = IndexPath(row: todayDay - 1, section: 0)
+                limitNumber.text = String(data.limit)
+                consumedNumber.text = String(data.consumed)
+            } else {
+                limitNumber.text = "0"
+                consumedNumber.text = "0"
+            }
+            
         } else {
+            let startDate = dateStringForIndexPath(dayInt: 0)
+            
+            tabBar?.loadSelectedDateData(with: startDate)
             fullDateOfChart.text = "1 \(calendarLogic.dateFormatter.monthSymbols[Int(month)! - 1]) \(year)"
             selectedDateChart = IndexPath(row: 0, section: 0)
+            
+            guard let data = tabBar?.data.first else {
+                limitNumber.text = "0"
+                consumedNumber.text = "0"
+                collectionView.reloadData()
+                return
+            }
+            
+            limitNumber.text = String(data.limit)
+            consumedNumber.text = String(data.consumed)
+            
         }
         changeMonthButton.setTitle(fullString, for: .normal)
         collectionView.reloadData()

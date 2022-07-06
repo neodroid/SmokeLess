@@ -69,6 +69,33 @@ class TabBarController: UITabBarController {
         return nav
     }
     
+    func getMaxValueFromData() -> Int {
+        var maxValue = 0
+        do {
+            let fetchRequest : NSFetchRequest<DailyCoreData> = DailyCoreData.fetchRequest()
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "limit", ascending: false)]
+            let limitSorted = try container.viewContext.fetch(fetchRequest)
+            
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "consumed", ascending: false)]
+            let consumedSorted = try container.viewContext.fetch(fetchRequest)
+            
+            let highestLimit = Int(limitSorted.first?.limit ?? 0)
+            let highestConsumed = Int(consumedSorted.first?.consumed ?? 0)
+            
+            if highestLimit >= highestConsumed {
+                maxValue = highestLimit
+            } else {
+                maxValue = highestConsumed
+            }
+            
+        } catch {
+            print(error)
+            fatalError("Could not get the limit and consumed data for sorting")
+        }
+        
+        return maxValue
+    }
+    
     func fetchRequest() {
         do {
             data = try container.viewContext.fetch(DailyCoreData.fetchRequest())

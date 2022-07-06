@@ -373,6 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				CBBE7C532871CD6000F14B08 /* TaperingLogic */,
+				CB262EE42871AFC7007C8593 /* ProgressLogic */,
 				CB4A25C42868399900CB916C /* Calendar */,
 				CB4A25C22868398C00CB916C /* DailyData.swift */,
 			);

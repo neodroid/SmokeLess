@@ -35,10 +35,10 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        taperingLogic.updateCigLimit(startDate: "1/7/2022", startLimit: 5)
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        appDelegate.emptyDataStore()
+        taperingLogic.updateCigLimit(startDate: "1/7/2022", startLimit: 5)
         container = appDelegate.persistentContainer
-//        appDelegate.emptyDataStore()
         fetchRequest()
         configureViewControllers()
         
@@ -48,7 +48,9 @@ class TabBarController: UITabBarController {
     
     func configureViewControllers() {
         let progress = ProgressViewController()
-        progress.delegate = self
+//        let progress = StatisticViewController()
+
+//        progress.delegate = self
         let nav1 = navigationController(image: UIImage(systemName: "calendar.badge.minus"),title: "Progress", rootViewController: progress)
         let nicotine = NicotineMenuViewController()
         let nav2 = navigationController(image: UIImage(systemName: "cross.fill"), title: "Nicotine Cravings", rootViewController: nicotine)
@@ -66,9 +68,37 @@ class TabBarController: UITabBarController {
         return nav
     }
     
+    func getMaxValueFromData() -> Int {
+        var maxValue = 0
+        do {
+            let fetchRequest : NSFetchRequest<DailyCoreData> = DailyCoreData.fetchRequest()
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "limit", ascending: false)]
+            let limitSorted = try container.viewContext.fetch(fetchRequest)
+            
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "consumed", ascending: false)]
+            let consumedSorted = try container.viewContext.fetch(fetchRequest)
+            
+            let highestLimit = Int(limitSorted.first?.limit ?? 0)
+            let highestConsumed = Int(consumedSorted.first?.consumed ?? 0)
+            
+            if highestLimit >= highestConsumed {
+                maxValue = highestLimit
+            } else {
+                maxValue = highestConsumed
+            }
+            
+        } catch {
+            print(error)
+            fatalError("Could not get the limit and consumed data for sorting")
+        }
+        
+        return maxValue
+    }
+    
     func fetchRequest() {
         do {
             data = try container.viewContext.fetch(DailyCoreData.fetchRequest())
+            print(data)
         } catch {
             fatalError("Couldn't fetch User Data!!!")
         }

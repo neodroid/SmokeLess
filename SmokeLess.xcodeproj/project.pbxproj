@@ -12,11 +12,11 @@
 		06FF274D286B0F91006B5FB9 /* FirstUserPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF274C286B0F91006B5FB9 /* FirstUserPlanViewController.swift */; };
 		06FF274F286B0F9E006B5FB9 /* SecondUserPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF274E286B0F9E006B5FB9 /* SecondUserPlanViewController.swift */; };
 		06FF2751286B0FA9006B5FB9 /* ThirdUserPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF2750286B0FA9006B5FB9 /* ThirdUserPlanViewController.swift */; };
-		6A0850BD286AFE97002C4429 /* MoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0850BC286AFE97002C4429 /* MoviesCollectionViewCell.swift */; };
 		2A097DF62869A05E0082CF87 /* DoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A097DF52869A05E0082CF87 /* DoneViewController.swift */; };
 		2ADA050A2866180300EED3D6 /* StartBreathViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADA05092866180300EED3D6 /* StartBreathViewController.swift */; };
 		2ADA050C2866189C00EED3D6 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADA050B2866189C00EED3D6 /* TimerViewController.swift */; };
 		2AE09C5C2868C82500A793B2 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE09C5B2868C82500A793B2 /* FeedbackViewController.swift */; };
+		6A0850BD286AFE97002C4429 /* MoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0850BC286AFE97002C4429 /* MoviesCollectionViewCell.swift */; };
 		6A60E0DF28606BA000505B9D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E0DE28606BA000505B9D /* Extension.swift */; };
 		6AF73096286C1784005F1100 /* PlayGamesOrWatchMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF73095286C1784005F1100 /* PlayGamesOrWatchMoviesViewController.swift */; };
 		6AF73099286C1853005F1100 /* YogaExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF73098286C1853005F1100 /* YogaExerciseViewController.swift */; };
@@ -66,12 +66,12 @@
 		06FF275D286B51D3006B5FB9 /* StartBreathViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBreathViewController.swift; sourceTree = "<group>"; };
 		06FF275F286B51E9006B5FB9 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		06FF2761286B5202006B5FB9 /* DoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneViewController.swift; sourceTree = "<group>"; };
-		2A8C0F0228631AC60051F828 /* OthersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersTableViewCell.swift; sourceTree = SOURCE_ROOT; };
-		6A0850BC286AFE97002C4429 /* MoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewCell.swift; sourceTree = "<group>"; };
 		2A097DF52869A05E0082CF87 /* DoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneViewController.swift; sourceTree = "<group>"; };
+		2A8C0F0228631AC60051F828 /* OthersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		2ADA05092866180300EED3D6 /* StartBreathViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBreathViewController.swift; sourceTree = "<group>"; };
 		2ADA050B2866189C00EED3D6 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		2AE09C5B2868C82500A793B2 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		6A0850BC286AFE97002C4429 /* MoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A60E0DE28606BA000505B9D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = SOURCE_ROOT; };
 		6AF73095286C1784005F1100 /* PlayGamesOrWatchMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGamesOrWatchMoviesViewController.swift; sourceTree = "<group>"; };
 		6AF73098286C1853005F1100 /* YogaExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogaExerciseViewController.swift; sourceTree = "<group>"; };
@@ -152,6 +152,17 @@
 				06FF2761286B5202006B5FB9 /* DoneViewController.swift */,
 			);
 			path = DeepBreath;
+			sourceTree = "<group>";
+		};
+		2ADA0508286617EC00EED3D6 /* Breath */ = {
+			isa = PBXGroup;
+			children = (
+				2ADA05092866180300EED3D6 /* StartBreathViewController.swift */,
+				2ADA050B2866189C00EED3D6 /* TimerViewController.swift */,
+				2AE09C5B2868C82500A793B2 /* FeedbackViewController.swift */,
+				2A097DF52869A05E0082CF87 /* DoneViewController.swift */,
+			);
+			path = Breath;
 			sourceTree = "<group>";
 		};
 		6A0850B82869ADAA002C4429 /* OtherActivities */ = {
@@ -321,17 +332,6 @@
 				CB4A25E02868C74400CB916C /* TabBarController.swift */,
 			);
 			path = TabBarController;
-			sourceTree = "<group>";
-		};
-		2ADA0508286617EC00EED3D6 /* Breath */ = {
-			isa = PBXGroup;
-			children = (
-				2ADA05092866180300EED3D6 /* StartBreathViewController.swift */,
-				2ADA050B2866189C00EED3D6 /* TimerViewController.swift */,
-				2AE09C5B2868C82500A793B2 /* FeedbackViewController.swift */,
-				2A097DF52869A05E0082CF87 /* DoneViewController.swift */,
-			);
-			path = Breath;
 			sourceTree = "<group>";
 		};
 		CB6832D8284F556000366004 = {

@@ -22,7 +22,6 @@ class OthersTableViewCell: UITableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "Test"
         label.textColor = .black
         return label
     }()

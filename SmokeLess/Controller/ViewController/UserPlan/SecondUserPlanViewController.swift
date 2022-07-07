@@ -14,6 +14,14 @@ class SecondUserPlanViewController: UIPageViewController, UIPickerViewDelegate {
     let userDefaults = UserDefaults.standard
     var startDate: Date = Date.now
     var cigaretteUse: Int = 1
+    var stackView: UIStackView = {
+        let stackview: UIStackView = UIStackView()
+        stackview.axis = .horizontal
+        stackview.distribution = .fillEqually
+        stackview.alignment = .center
+        stackview.spacing = 10
+        return stackview
+    }()
     
     var titleLabel: UILabel = {
         var label: UILabel = UILabel()
@@ -58,7 +66,33 @@ class SecondUserPlanViewController: UIPageViewController, UIPickerViewDelegate {
         view.backgroundColor = .white
         pickerView.delegate = self
         pickerView.dataSource = self
+        
+        let mStackView = UIStackView()
+        mStackView.axis  = .horizontal
+        mStackView.distribution  = .fillEqually
+        mStackView.alignment = .center
+        mStackView.spacing = 10
+
+        let firstLine = createMyView("grayrectangle", bgColor: UIColor.smokeLessLightGray)
+        let secondLine = createMyView("bluerectangle", bgColor: UIColor.smokeLessBlue)
+        let thirdLine = createMyView("grayrectangle", bgColor: UIColor.smokeLessLightGray)
+
+        mStackView.addArrangedSubview(firstLine)
+        mStackView.addArrangedSubview(secondLine)
+        mStackView.addArrangedSubview(thirdLine)
+
+        mStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(mStackView)
+        
+        NSLayoutConstraint.activate([
+            mStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.0),
+            mStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20.0),
+            mStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20.0),
+        ])
+        
         configureUI()
+        
     }
         
     override func viewDidLayoutSubviews() {
@@ -83,7 +117,7 @@ class SecondUserPlanViewController: UIPageViewController, UIPickerViewDelegate {
     func configureUI() {
 
         view.backgroundColor = .white
-
+        
         view.addSubview(titleLabel)
         view.addSubview(pickerView)
         view.addSubview(image)
@@ -91,12 +125,52 @@ class SecondUserPlanViewController: UIPageViewController, UIPickerViewDelegate {
 
         image.anchor(top: view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 120, paddingLeft: 40, paddingRight: 40, width: view.frame.size.width - 100, height: view.frame.size.width - 100)
         
-        titleLabel.anchor(top: image.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 50, paddingLeft: 20, paddingRight: 20)
+        titleLabel.anchor(top: image.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingRight: 20)
         
-        pickerView.anchor(top: titleLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 30, paddingLeft: 80, paddingRight: 80)
+        pickerView.anchor(top: titleLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 80, paddingRight: 80)
         pickerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         button.anchor(left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
+    }
+    
+    func createMyView(_ imageName: String, bgColor: UIColor) -> UIView {
+
+        let myView = UIView()
+        myView.backgroundColor = bgColor
+
+        let vStackView = UIStackView()
+        vStackView.axis  = .vertical
+        vStackView.alignment = .center
+        vStackView.distribution  = .fill
+        vStackView.spacing = 1
+
+        let vImageName = imageName
+        let vImageView = UIImageView()
+
+        if let vImage = UIImage(named: vImageName) {
+            vImageView.image = vImage
+        }
+
+        myView.addSubview(vStackView)
+
+        vStackView.addArrangedSubview(vImageView)
+        
+        myView.translatesAutoresizingMaskIntoConstraints = false
+        vStackView.translatesAutoresizingMaskIntoConstraints = false
+        vImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            vImageView.widthAnchor.constraint(equalTo: myView.widthAnchor),
+            vImageView.heightAnchor.constraint(equalToConstant: 5.0),
+
+            vStackView.topAnchor.constraint(equalTo: myView.topAnchor, constant: 0.0),
+            vStackView.bottomAnchor.constraint(equalTo: myView.bottomAnchor, constant: 0.0),
+            vStackView.leadingAnchor.constraint(equalTo: myView.leadingAnchor, constant: 0.0),
+            vStackView.trailingAnchor.constraint(equalTo: myView.trailingAnchor, constant: 0.0),
+        ])
+
+        return myView
+
     }
 }
 
@@ -110,28 +184,25 @@ class SecondUserPlanViewController: UIPageViewController, UIPickerViewDelegate {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineSpacing = spacingValue
             
-            attributedString.addAttribute(
-                .paragraphStyle,
-                value: paragraphStyle,
-                range: NSRange(location: 0, length: attributedString.length
-                              ))
+            attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
             
             attributedText = attributedString
         }
         
     }
 
-extension SecondUserPlanViewController: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 100
-    }
-    
-    internal func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(row + 1)
+    extension SecondUserPlanViewController: UIPickerViewDataSource {
+        func numberOfComponents(in pickerView: UIPickerView) -> Int {
+            return 1
+        }
+        
+        func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+            return 100
+        }
+        
+        internal func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+            return String(row + 1)
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

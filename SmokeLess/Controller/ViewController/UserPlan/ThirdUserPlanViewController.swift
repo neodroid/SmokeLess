@@ -58,33 +58,38 @@ class ThirdUserPlanViewController: UIPageViewController {
         return button
     }()
     
-    var textField: UITextField = {
-        let textField = UITextField(frame: CGRect(x: 10.0, y: 100.0, width: 10.0, height: 50.0))
-        
-        //Border Hitam di Text Field
-        var bottomLine = CALayer()
-        bottomLine.frame = CGRect(x: 0.0, y: textField.frame.height - 1, width: 385, height: 2.0)
-        bottomLine.backgroundColor = UIColor.black.cgColor
-        textField.backgroundColor = .white
-        textField.borderStyle = .line
-        textField.layer.addSublayer(bottomLine)
-        
-        textField.keyboardAppearance = .default
-        textField.textAlignment = .center
-        textField.keyboardType = .default
-        textField.placeholder = "Enter your goal"
-        textField.font = UIFont.systemFont(ofSize: 16)
-        textField.borderStyle = UITextField.BorderStyle.none
-        
-        return textField
-    }()
-    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        let mStackView = UIStackView()
+        mStackView.axis  = .horizontal
+        mStackView.distribution  = .fillEqually
+        mStackView.alignment = .center
+        mStackView.spacing = 10
+
+        let firstLine = createMyView("grayrectangle", bgColor: UIColor.smokeLessLightGray)
+        let secondLine = createMyView("grayrectangle", bgColor: UIColor.smokeLessLightGray)
+        let thirdLine = createMyView("bluerectangle", bgColor: UIColor.smokeLessBlue)
+
+        mStackView.addArrangedSubview(firstLine)
+        mStackView.addArrangedSubview(secondLine)
+        mStackView.addArrangedSubview(thirdLine)
+
+        mStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(mStackView)
+        
+        NSLayoutConstraint.activate([
+            mStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.0),
+            mStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20.0),
+            mStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20.0),
+        ])
+        
         configureUI()
+        
     }
         
     override func viewDidLayoutSubviews() {
@@ -127,18 +132,34 @@ class ThirdUserPlanViewController: UIPageViewController {
     func configureUI() {
 
         view.backgroundColor = .white
-
+        
+        //TextField for goals
+        let textField = UITextField(frame: CGRect(x: 0, y: 0, width: view.frame.size.width - 80, height: 40))
+        
+        textField.textAlignment = .center
+        textField.placeholder = "Enter your goal"
+        textField.font = UIFont.systemFont(ofSize: 16)
+        textField.backgroundColor = .white
+        textField.borderStyle = .line
+        textField.borderStyle = UITextField.BorderStyle.none
+        
+        //BottomBorder for the TextField
+        var bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0.0, y: textField.frame.size.height - 1, width: textField.frame.size.width, height: 2.0)
+        bottomLine.backgroundColor = UIColor.gray.cgColor
+        textField.layer.addSublayer(bottomLine)
+        
         view.addSubview(titleLabel)
         view.addSubview(textField)
         view.addSubview(image)
         view.addSubview(button)
-
+        
         image.anchor(top: view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 120, paddingLeft: 40, paddingRight: 40, width: view.frame.size.width - 100, height: view.frame.size.width - 100)
         
-        titleLabel.anchor(top: image.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 50, paddingLeft: 20, paddingRight: 20)
+        titleLabel.anchor(top: image.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingRight: 20)
         
-        textField.anchor(top: titleLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 100, paddingLeft: 20, paddingRight: 20)
-        textField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        textField.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 70, paddingLeft: 40, paddingRight: 40)
+        textField.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         
         button.anchor(left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
     }
@@ -149,6 +170,47 @@ class ThirdUserPlanViewController: UIPageViewController {
 //        nav.modalPresentationStyle = .fullScreen
         controller.modalPresentationStyle = .fullScreen
         self.present(controller, animated: true, completion: nil)
+    }
+    
+    func createMyView(_ imageName: String, bgColor: UIColor) -> UIView {
+
+        let myView = UIView()
+        myView.backgroundColor = bgColor
+
+        let vStackView = UIStackView()
+        vStackView.axis  = .vertical
+        vStackView.alignment = .center
+        vStackView.distribution  = .fill
+        vStackView.spacing = 1
+
+        let vImageName = imageName
+        let vImageView = UIImageView()
+
+        if let vImage = UIImage(named: vImageName) {
+            vImageView.image = vImage
+        }
+
+        myView.addSubview(vStackView)
+
+        vStackView.addArrangedSubview(vImageView)
+        
+        myView.translatesAutoresizingMaskIntoConstraints = false
+        vStackView.translatesAutoresizingMaskIntoConstraints = false
+        vImageView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+
+            vImageView.widthAnchor.constraint(equalTo: myView.widthAnchor),
+            vImageView.heightAnchor.constraint(equalToConstant: 5.0),
+
+            vStackView.topAnchor.constraint(equalTo: myView.topAnchor, constant: 0.0),
+            vStackView.bottomAnchor.constraint(equalTo: myView.bottomAnchor, constant: 0.0),
+            vStackView.leadingAnchor.constraint(equalTo: myView.leadingAnchor, constant: 0.0),
+            vStackView.trailingAnchor.constraint(equalTo: myView.trailingAnchor, constant: 0.0),
+        ])
+        
+        return myView
+        
     }
 }
 
@@ -162,11 +224,7 @@ class ThirdUserPlanViewController: UIPageViewController {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineSpacing = spacingValue
             
-            attributedString.addAttribute(
-                .paragraphStyle,
-                value: paragraphStyle,
-                range: NSRange(location: 0, length: attributedString.length
-                              ))
+            attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
             
             attributedText = attributedString
         }

@@ -43,6 +43,7 @@ class NicotineMenuViewController: UIViewController {
         tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 5, paddingRight: 5)
     }
     
+    
     var othersText:[String] = ["Play Games or Watch Movies", "Yoga Exercise", "Drinking a Tall Glass of Water", "Do Gardening", "Talk with Friends or Community"]
     var othersImage:[String] = ["watching.png", "yoga.png", "drink.png", "gardening.png", "talking.png"]
     
@@ -51,6 +52,7 @@ class NicotineMenuViewController: UIViewController {
         view.backgroundColor = .white
         configureTableView()
         configureNavBar()
+        navigationController?.navigationBar.isHidden = true
     }
     
     func configureNavBar() {
@@ -60,6 +62,7 @@ class NicotineMenuViewController: UIViewController {
     
     func segueToScreen(controller: UIViewController) {
         navigationController?.pushViewController(controller, animated: true)
+
     }
     
 }

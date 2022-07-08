@@ -33,6 +33,15 @@ class DoGardeningViewController: UIViewController {
         collectionView?.frame = CGRect(x: 0, y: 60, width: tableView.frame.size.width, height: 400)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+
+    }
+    
     // MARK: - Helpers
     func configureUI() {
         view.backgroundColor = .white
@@ -72,7 +81,7 @@ extension DoGardeningViewController: UITableViewDelegate, UITableViewDataSource,
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -95,7 +104,7 @@ extension DoGardeningViewController: UITableViewDelegate, UITableViewDataSource,
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             let image = UIImage(named: "doGardening")
-            
+            cell.selectionStyle = .none
             cell.backgroundColor = .smokeLessBlue
             cell.imageView?.image = image
             cell.imageView?.anchor(top: cell.topAnchor, left: cell.leftAnchor, bottom: cell.bottomAnchor, right: cell.rightAnchor, paddingTop: 50, paddingLeft: 50, paddingBottom: 50, paddingRight: 50)
@@ -107,6 +116,7 @@ extension DoGardeningViewController: UITableViewDelegate, UITableViewDataSource,
             let titleLabel = UILabel()
             let descriptionLabel = UILabel()
             
+            cell.selectionStyle = .none
             titleLabel.text = "Do Gardening"
             titleLabel.numberOfLines = 0
             titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
@@ -130,7 +140,8 @@ extension DoGardeningViewController: UITableViewDelegate, UITableViewDataSource,
             titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
             cell.addSubview(titleLabel)
             titleLabel.anchor(top: cell.topAnchor, left: cell.leftAnchor, right: cell.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
-            
+            cell.selectionStyle = .none
+        
             let layout = UICollectionViewFlowLayout()
             
             layout.itemSize = CGSize(width: 167, height: 162)

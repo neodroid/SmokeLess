@@ -105,7 +105,7 @@ class ThirdUserPlanViewController: UIPageViewController {
             self.goals = textField.text
             
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "YYYY/MM/dd"
+            dateFormatter.dateFormat = "d/M/yyyy"
             let actualDate = dateFormatter.string(from: startDate)
                         
             userDefaults.set(actualDate, forKey: "startDate")

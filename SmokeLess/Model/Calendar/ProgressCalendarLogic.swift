@@ -36,7 +36,7 @@ struct ProgressCalendarLogic {
     }
     
     func getTodayDate() -> String {
-        dateFormatter.dateFormat = "dd/M/yyyy"
+        dateFormatter.dateFormat = "d/M/yyyy"
         let todayDate = dateFormatter.string(from: Date())
         //contoh return (20)
         return String(todayDate)

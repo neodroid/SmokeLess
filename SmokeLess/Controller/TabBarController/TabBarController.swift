@@ -30,14 +30,16 @@ class TabBarController: UITabBarController {
         goals = userDefaults.string(forKey: "goals")
         if (startDate == nil || cigaretteUse == nil || goals == nil) {
             segueToOnBoarding()
+        }else {
+            taperingLogic.updateCigLimit(startDate: startDate!, startLimit: cigaretteUse!)
         }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         appDelegate.emptyDataStore()
-        taperingLogic.updateCigLimit(startDate: "1/7/2022", startLimit: 5)
         container = appDelegate.persistentContainer
         fetchRequest()
         configureViewControllers()
@@ -50,11 +52,11 @@ class TabBarController: UITabBarController {
         let progress = ProgressViewController()
         progress.delegate = self
         let nav1 = navigationController(image: UIImage(systemName: "calendar.badge.minus"),title: "Progress", rootViewController: progress)
-        let nicotine = NicotineMenuViewController()
-        let nav2 = navigationController(image: UIImage(systemName: "cross.fill"), title: "Nicotine Cravings", rootViewController: nicotine)
+//        let nicotine = NicotineMenuViewController()
+//        let nav2 = navigationController(image: UIImage(systemName: "cross.fill"), title: "Nicotine Cravings", rootViewController: nicotine)
         let statistic = StatisticViewController()
         let nav3 = navigationController(image: UIImage(systemName: "chart.bar.fill"), title: "Statistic", rootViewController: statistic)
-        viewControllers = [nav1,nav2,nav3]
+        viewControllers = [nav1,nav3]
     }
     
     func navigationController(image: UIImage?,title: String, rootViewController: UIViewController) ->

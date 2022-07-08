@@ -43,10 +43,13 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
         calendarLogic.updateDay()
         calendarLogic.getMonthStringToday()
         calendarLogic.updateDateString()
-        configureUI()
+        
+        
         tabBar = tabBarController as! TabBarController
+        delegate?.loadSelectedDateData(with: calendarLogic.getTodayDate())
         dailyCoreData = tabBar?.data ?? dailyCoreData
-
+        configureUI()
+        collectionView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,6 +57,9 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
         scrollToDate()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView.reloadData()
+    }
     //MARK: - Selectors
     
     @objc func advance() {
@@ -68,15 +74,6 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
         self.present(VC, animated: true, completion: nil)
     }
     
-//    @objc func showEdit() {
-//        let VC = EditGoalViewController()
-//        VC.delegate = self
-//        if let sheet = VC.sheetPresentationController {
-//            sheet.detents = [.medium()]
-//        }
-//
-//        self.present(VC, animated: true, completion: nil)
-//    }
     
     //MARK: - Helpers
     
@@ -163,9 +160,7 @@ extension ProgressViewController: UICollectionViewDelegate, UICollectionViewData
             return cell
         }else if indexPath.section == 2{
             let cell = CellBuilder.getLimitCell(collectionView: collectionView, indexPath: indexPath)
-//            cell.delegate = self
             dailyCoreData = tabBar?.data ?? dailyCoreData
-//            cell.delegate = self
             if let data = dailyCoreData.first {
                 cell.subtitleLabel.text = String(data.limit)
             } else {
@@ -178,11 +173,15 @@ extension ProgressViewController: UICollectionViewDelegate, UICollectionViewData
             dailyCoreData = tabBar?.data ?? dailyCoreData
             if let data = dailyCoreData.first {
                 cell.subtitleLabel.text = String(data.consumed)
-                dateFormatter.dateFormat = "dd/M/yyyy"
+                dateFormatter.dateFormat = "d/M/yyyy"
                 let todayDateString = dateFormatter.string(from: Date())
                 if dateFormatter.date(from: calendarLogic.dateString)! > dateFormatter.date(from: todayDateString)!{
                     cell.container.backgroundColor = .smokeLessLightGray
-                }else if data.consumed != 0 && data.consumed <= data.limit{
+                }
+//                else if dateFormatter.date(from: calendarLogic.dateString)! > dateFormatter.date(from: todayDateString)!{
+//                    cell.container.backgroundColor = .smokeLessLightGray
+//                }
+                else if data.consumed != 0 && data.consumed <= data.limit{
                     cell.container.backgroundColor = .smokeLessGreen
                 }else if data.consumed != 0 && data.consumed > data.limit {
                     cell.container.backgroundColor = .smokelessRed
@@ -214,9 +213,7 @@ extension ProgressViewController: UICollectionViewDelegate, UICollectionViewData
             calendarLogic.dateString = pickedDate
             delegate?.loadSelectedDateData(with: pickedDate)
             dailyCoreData = tabBar?.data ?? dailyCoreData
-            //print(dailyCoreData)
             collectionView.reloadData()
-            //print(calendarLogic.dateString)
             configureUI()
         }else if indexPath.section == 4 {
             let VC = EditGoalViewController()

@@ -58,6 +58,31 @@ class SecondUserPlanViewController: UIPageViewController, UIPickerViewDelegate {
         view.backgroundColor = .white
         pickerView.delegate = self
         pickerView.dataSource = self
+        
+        let mStackView = UIStackView()
+        mStackView.axis  = .horizontal
+        mStackView.distribution  = .fillEqually
+        mStackView.alignment = .center
+        mStackView.spacing = 10
+
+        let firstLine = createMyView("grayrectangle", bgColor: UIColor.smokeLessLightGray)
+        let secondLine = createMyView("bluerectangle", bgColor: UIColor.smokeLessBlue)
+        let thirdLine = createMyView("grayrectangle", bgColor: UIColor.smokeLessLightGray)
+
+        mStackView.addArrangedSubview(firstLine)
+        mStackView.addArrangedSubview(secondLine)
+        mStackView.addArrangedSubview(thirdLine)
+
+        mStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(mStackView)
+                
+        NSLayoutConstraint.activate([
+            mStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5.0),
+            mStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20.0),
+            mStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20.0),
+        ])
+        
         configureUI()
     }
         
@@ -93,10 +118,51 @@ class SecondUserPlanViewController: UIPageViewController, UIPickerViewDelegate {
         
         titleLabel.anchor(top: image.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 50, paddingLeft: 20, paddingRight: 20)
         
-        pickerView.anchor(top: titleLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 30, paddingLeft: 80, paddingRight: 80)
+        pickerView.anchor(top: titleLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: button.topAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 10, paddingLeft: 80, paddingBottom: 40, paddingRight: 80)
         pickerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         button.anchor(left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
+    }
+    
+    func createMyView(_ imageName: String, bgColor: UIColor) -> UIView {
+        
+        let myView = UIView()
+        myView.backgroundColor = bgColor
+
+        let vStackView = UIStackView()
+        vStackView.axis  = .vertical
+        vStackView.alignment = .center
+        vStackView.distribution  = .fill
+        vStackView.spacing = 1
+
+        let vImageName = imageName
+        let vImageView = UIImageView()
+
+        if let vImage = UIImage(named: vImageName) {
+            vImageView.image = vImage
+        }
+
+        myView.addSubview(vStackView)
+
+        vStackView.addArrangedSubview(vImageView)
+        
+        myView.translatesAutoresizingMaskIntoConstraints = false
+        vStackView.translatesAutoresizingMaskIntoConstraints = false
+        vImageView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+
+            vImageView.widthAnchor.constraint(equalTo: myView.widthAnchor),
+            vImageView.heightAnchor.constraint(equalToConstant: 5.0),
+
+            vStackView.topAnchor.constraint(equalTo: myView.topAnchor, constant: 0.0),
+            vStackView.bottomAnchor.constraint(equalTo: myView.bottomAnchor, constant: 0.0),
+            vStackView.leadingAnchor.constraint(equalTo: myView.leadingAnchor, constant: 0.0),
+            vStackView.trailingAnchor.constraint(equalTo: myView.trailingAnchor, constant: 0.0),
+        ])
+        
+        return myView
+        
     }
 }
 

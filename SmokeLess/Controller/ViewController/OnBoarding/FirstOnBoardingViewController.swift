@@ -113,12 +113,12 @@ class FirstOnBoardingViewController: UIPageViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
 
         image.anchor(top: view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 150, paddingLeft: 40, paddingRight: 40, width: view.frame.size.width - 100, height: view.frame.size.width - 100)
-        
+
         titleLabel.anchor(top: image.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 50, paddingLeft: 20, paddingRight: 20)
-        
+
         subtitleLabel.anchor(top: titleLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 30, paddingLeft: 20, paddingRight: 20)
         subtitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
+
         pageControl.anchor(left: view.safeAreaLayoutGuide.leftAnchor, bottom: button.topAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingBottom: 10)
         pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         

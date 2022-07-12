@@ -12,7 +12,7 @@ class ThirdUserPlanViewController: UIPageViewController {
     //MARK: - Properties
     
     let userDefaults = UserDefaults.standard
-    var startDate: Date = Date.now
+    var startDate: Date = Date()
     var cigaretteUse: Int? = 1
     var goals: String? = ""
     

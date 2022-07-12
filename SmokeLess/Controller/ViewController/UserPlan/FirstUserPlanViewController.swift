@@ -12,7 +12,7 @@ class FirstUserPlanViewController: UIPageViewController {
     //MARK: - Properties
     
     let userDefaults = UserDefaults.standard
-    var startDate: Date = Date.now
+    var startDate: Date = Date()
     
     var titleLabel: UILabel = {
         var label: UILabel = UILabel()

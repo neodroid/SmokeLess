@@ -45,7 +45,7 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
         calendarLogic.updateDateString()
         
         
-        tabBar = tabBarController as! TabBarController
+        tabBar = tabBarController as? TabBarController
         delegate?.loadSelectedDateData(with: calendarLogic.getTodayDate())
         dailyCoreData = tabBar?.data ?? dailyCoreData
         configureUI()
@@ -65,9 +65,11 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
     @objc func advance() {
         let VC = ProgressChangeMonthController()
         VC.delegate = self
-        if let sheet = VC.sheetPresentationController {
-            sheet.detents = [.medium()]
-        }
+//        if let sheet = VC.sheetPresentationController {
+//            sheet.detents = [.medium()]
+//        }
+        VC.definesPresentationContext = true
+        VC.modalPresentationStyle = .pageSheet
         
         VC.currPickedMonth = calendarLogic.getPickedMonth()
         VC.currPickedYear = calendarLogic.getPickedYear()
@@ -131,9 +133,10 @@ class ProgressViewController: UIViewController, ProgressMonthChangeDelegate{
     // navigasi ke page ChangeMonthController
     func showChangeMonth(){
         let VC = ChangeMonthController()
-        if let sheet = VC.sheetPresentationController {
-            sheet.detents = [.medium()]
-        }
+//        if let sheet = VC.sheetPresentationController {
+//            sheet.detents = [.medium()]
+//        }
+//        VC.modalPresentationStyle = .
         self.present(VC, animated: true, completion: nil)
     }
     

@@ -12,7 +12,7 @@ class SecondUserPlanViewController: UIPageViewController, UIPickerViewDelegate {
     //MARK: - Properties
     
     let userDefaults = UserDefaults.standard
-    var startDate: Date = Date.now
+    var startDate: Date = Date()
     var cigaretteUse: Int = 1
     
     var titleLabel: UILabel = {

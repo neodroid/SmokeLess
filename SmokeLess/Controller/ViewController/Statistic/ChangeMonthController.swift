@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol MonthChangeDelegate: class {
+protocol MonthChangeDelegate: AnyObject {
     func userEnterMonthAndYear(month: String, year:String)
 }
 
@@ -41,20 +41,28 @@ class ChangeMonthController: UIViewController {
         uiPicker.tintColor = .black
         return uiPicker
     }()
+    
+    lazy var whiteView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 15
+        return view
+    }()
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .white
-        
+    
         monthPick.delegate = self
         monthPick.dataSource = self
-        
         yearPick.delegate = self
         yearPick.dataSource = self
         
-        view.addSubview(closeButton)
-        closeButton.anchor(top:view.topAnchor, right: view.rightAnchor,paddingTop: 10, paddingRight: 20)
+        view.addSubview(whiteView)
+        whiteView.anchor(left: view.leftAnchor,bottom: view.bottomAnchor,right: view.rightAnchor)
+        whiteView.setDimensions(width: view.frame.width, height: view.frame.height/2)
+        
+        whiteView.addSubview(closeButton)
+        closeButton.anchor(top:whiteView.topAnchor, right: whiteView.rightAnchor,paddingTop: 10, paddingRight: 20)
         
         let stack = UIStackView()
         stack.axis = NSLayoutConstraint.Axis.horizontal
@@ -66,8 +74,8 @@ class ChangeMonthController: UIViewController {
         stack.addArrangedSubview(yearPick)
         stack.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(stack)
-        stack.anchor(top:view.topAnchor,left: view.leftAnchor,right: view.rightAnchor,paddingTop: 50,paddingLeft: 20,paddingRight: 20)
+        whiteView.addSubview(stack)
+        stack.anchor(top:whiteView.topAnchor,left: whiteView.leftAnchor,right: whiteView.rightAnchor,paddingTop: 50,paddingLeft: 20,paddingRight: 20)
         
         yearPick.selectRow(currPickedYear - 2021, inComponent: 0, animated: true)
         monthPick.selectRow(currPickedMonth - 1, inComponent: 0, animated: true)

@@ -243,10 +243,10 @@ class StatisticViewController: UIViewController {
     @objc func changeMonthPressed() {
         let VC = ChangeMonthController()
         VC.delegate = self
-        if let sheet = VC.sheetPresentationController {
-            sheet.detents = [.medium()]
-        }
-        
+//        if let sheet = VC.sheetPresentationController {
+//            sheet.detents = [.medium()]
+//        }
+//        VC.modalPresentationStyle = .
         VC.currPickedMonth = calendarLogic.getPickedMonth()
         VC.currPickedYear = calendarLogic.getPickedYear()
         self.present(VC, animated: true, completion: nil)
@@ -451,11 +451,11 @@ extension StatisticViewController: MonthChangeDelegate {
                 
         // if selected month dan year nya sama kaya skrng, default date jadi today
         calendarLogic.dateFormatter.dateFormat = "MMMM"
-        let todayMonth = calendarLogic.dateFormatter.string(from: Date.now)
+        let todayMonth = calendarLogic.dateFormatter.string(from: Date())
         let monthToString = calendarLogic.dateFormatter.monthSymbols[Int(month)! - 1]
         
         calendarLogic.dateFormatter.dateFormat = "YYYY"
-        let todayYear = calendarLogic.dateFormatter.string(from: Date.now)
+        let todayYear = calendarLogic.dateFormatter.string(from: Date())
         let todayDay = calendarLogic.getTodayDay()
         
         if monthToString == todayMonth && year == todayYear {

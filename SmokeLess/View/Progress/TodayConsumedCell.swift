@@ -127,10 +127,10 @@ public class TodayConsumedCell: UICollectionViewCell {
             addButton.isHidden = true
             minButton.isHidden = true
         }
-//        else if dateFormatter.date(from: subtitle)! < dateFormatter.date(from: userDefaults.string(forKey: "startDate")!)!{
-//            addButton.isHidden = true
-//            minButton.isHidden = true
-//        }
+        else if dateFormatter.date(from: subtitle)! < dateFormatter.date(from: userDefaults.string(forKey: "startDate") ?? "1/1/2022") ?? Date(){
+            addButton.isHidden = true
+            minButton.isHidden = true
+        }
         else {
             addButton.isHidden = false
             minButton.isHidden = false

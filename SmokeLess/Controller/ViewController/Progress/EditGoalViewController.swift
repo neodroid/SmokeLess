@@ -77,7 +77,6 @@ class EditGoalViewController: UIViewController {
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.autocorrectionType = UITextAutocorrectionType.no
         textField.keyboardType = UIKeyboardType.default
-        textField.returnKeyType = UIReturnKeyType.done
         return textField
     }()
     

@@ -38,12 +38,17 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         appDelegate.emptyDataStore()
         container = appDelegate.persistentContainer
         fetchRequest()
         configureViewControllers()
         
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .darkContent
     }
     
     //MARK: - Helpers

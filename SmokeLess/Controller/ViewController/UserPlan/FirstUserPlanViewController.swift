@@ -50,8 +50,9 @@ class FirstUserPlanViewController: UIPageViewController {
         datePicker.locale = .current
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .wheels
-        datePicker.tintColor = .systemBlue
-        
+        datePicker.tintColor = .black
+        datePicker.backgroundColor = .white
+        datePicker.tintAdjustmentMode = .dimmed
         datePicker.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         return datePicker
     }()

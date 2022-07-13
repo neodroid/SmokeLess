@@ -16,6 +16,7 @@ class ThirdUserPlanViewController: UIPageViewController {
     var cigaretteUse: Int? = 1
     var goals: String? = ""
     
+    
     var titleLabel: UILabel = {
         var label: UILabel = UILabel()
         label.text = "What is your goals to stop smoking?"
@@ -86,7 +87,9 @@ class ThirdUserPlanViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+        textField.delegate = self
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+       view.addGestureRecognizer(tap)
         let mStackView = UIStackView()
         mStackView.axis  = .horizontal
         mStackView.distribution  = .fillEqually
@@ -112,6 +115,7 @@ class ThirdUserPlanViewController: UIPageViewController {
         ])
         
         configureUI()
+        configureNotificationObservers()
     }
         
     override func viewDidLayoutSubviews() {
@@ -126,6 +130,10 @@ class ThirdUserPlanViewController: UIPageViewController {
     }
     
     //MARK: - Selectors
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+
     
     @objc func buttonClicked() {
         if(textField.hasText) {
@@ -146,6 +154,18 @@ class ThirdUserPlanViewController: UIPageViewController {
             let okayButton = UIAlertAction(title: "Okay", style: .default, handler: nil)
             alert.addAction(okayButton)
             self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func keyboardWillShow() {
+        if view.frame.origin.y == 0 {
+            self.view.frame.origin.y -= 88
+        }
+    }
+    
+    @objc func keyboardWillHide() {
+        if view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
         }
     }
 
@@ -212,10 +232,14 @@ class ThirdUserPlanViewController: UIPageViewController {
     
     func segueToTabBar() {
         let controller = TabBarController()
-//        let nav = UINavigationController(rootViewController: controller)
-//        nav.modalPresentationStyle = .fullScreen
         controller.modalPresentationStyle = .fullScreen
         self.present(controller, animated: true, completion: nil)
+    }
+    
+    func configureNotificationObservers() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }
 
@@ -239,3 +263,10 @@ class ThirdUserPlanViewController: UIPageViewController {
         }
         
     }
+
+extension ThirdUserPlanViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // dismiss keyboard
+        return true
+    }
+}

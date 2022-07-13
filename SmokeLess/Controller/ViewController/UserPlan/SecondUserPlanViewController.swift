@@ -193,14 +193,14 @@ extension SecondUserPlanViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 100
+        return 300
     }
     
     internal func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(row + 1)
+        return String(row + 5)
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        cigaretteUse = (row + 1)
+        cigaretteUse = (row + 5)
     }
 }

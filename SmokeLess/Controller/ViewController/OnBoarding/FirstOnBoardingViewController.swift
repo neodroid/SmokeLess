@@ -69,6 +69,10 @@ class FirstOnBoardingViewController: UIPageViewController {
     
     //MARK: - Lifecycle
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .darkContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
